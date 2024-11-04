@@ -1,10 +1,13 @@
+import Header from "@/components/header";
+
+
 import styles from "@/app/page.module.css";
 
 export default function HomePage() {
   return (
     <main className={styles.main}>
       <header>
-        {/* HEADER */}
+        <Header />
       </header>
 
       {/* HERO */}
