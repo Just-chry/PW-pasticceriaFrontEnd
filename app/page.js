@@ -1,9 +1,10 @@
 import Header from "@/components/header";
-
+import Hero from "@/components/hero";
 
 import Footer from '@/components/footer';
 
 import styles from "@/app/page.module.css";
+
 
 export default function HomePage() {
   return (
@@ -11,9 +12,7 @@ export default function HomePage() {
       <header>
         <Header />
       </header>
-
-      {/* HERO */}
-
+      <Hero />
       <section className={styles.body}>
         {/* CONTENUTI DELLA HOME PAGE */}
       </section>

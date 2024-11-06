@@ -1,119 +1,335 @@
-.container {
-    display: flex;
-    flex-direction: column;
+.contactsPage {
+    padding: 3rem 10rem;
+    font-family: 'Quicksand', sans-serif;
 }
 
-.heroSection {
-    width: 100%;
+.hero {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.tabsContainer {
-    margin: 2rem;
+.hero h1 {
+    font-family: 'Raleway';
+    font-weight: 400;
+    font-size: 2.5rem;
+}
+
+.hero p {
+    font-family: 'Quicksand';
+    font-weight: 400;
+    color: #888;
+    font-size: 1.5rem;
+}
+
+.tabs {
+    width: 90%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-}
-
-.tabsHeader {
-    display: flex;
-    gap: 1rem;
+    justify-content: space-around;
     margin-bottom: 1rem;
+    padding: 2rem;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
 }
 
-.tabsHeader button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+.tabs button {
+    font-family: 'Raleway';
+    font-size: 2.5rem;
+    letter-spacing: 0.5rem;
+    color: #333;
+}
+
+.tabButton {
+    padding: 0.75rem 1.5rem;
     border: none;
-    background-color: #f3bc9f;
+    background-color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.tabsHeader button:hover {
-    background-color: #f4a261;
-}
-
 .activeTab {
-    background-color: #e76f51;
-    color: #fff;
-}
-
-.tabsContent {
-    width: 80%;
-    max-width: 800px;
-    text-align: center;
+    border: none;
+    background-color: unset;
+    text-decoration: underline;
+    font-weight: 800;
 }
 
 .tabContent {
+    margin-top: 2rem;
+}
+
+.description {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.infoContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+}
+
+.containerImage {
+    width: 50%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.image {
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.details {
+    width: 50%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 1.3rem;
+    color: #444;
 }
 
-.mapSection {
-    margin-top: 1rem;
+.mapDetails h3 {
+    font-family: 'Raleway';
+    margin-bottom: 0.5rem;
+}
+
+.timeDetails h3 {
+    font-family: 'Raleway';
+    margin-bottom: 0.5rem;
+}
+
+.contactDetails h3 {
+    font-family: 'Raleway';
+    margin-bottom: 0.5rem;
+}
+
+.mapDetails a {
+    color: #d5abc2;
+    text-decoration: underline;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.mapDetails a:hover {
+    color: #c7c1dc;
+}
+
+.containerMap {
     width: 100%;
+    height: 500px;
 }
 
-.formSection {
-    margin: 3rem auto;
-    width: 80%;
+.map {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+.contactFormSection {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.formContainer {
+    flex: 1;
     max-width: 600px;
 }
 
-.contactForm {
+.imageSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem;
 }
 
-.label {
-    font-weight: bold;
-}
-
-.input,
-.textarea {
-    padding: 0.5rem;
+.formGroup label {
     font-size: 1rem;
-    border: 1px solid #ccc;
+    color: #333;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="tel"],
+.formGroup textarea {
+    padding: 0.75rem;
+    border: 1px solid #f3bc9f;
     border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.formGroup input[type="text"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup input[type="tel"]:focus,
+.formGroup textarea:focus {
+    border-color: #c8684d;
+}
+
+.formGroup input[type="checkbox"] {
+    margin-right: 0.5rem;
 }
 
 .submitButton {
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
+    background-color: #c8684d;
+    color: white;
+    padding: 1rem;
     border: none;
-    background-color: #f3bc9f;
+    border-radius: 4px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .submitButton:hover {
-    background-color: #e76f51;
-    color: #fff;
+    background-color: #b8583c;
 }
 
-.followUsSection {
-    display: flex;
-    justify-content: space-around;
-    margin: 2rem;
+.submitButton a {
+    color: #c8684d;
+    text-decoration: underline;
 }
 
-.box {
+.formContainer h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.socialFollowSection {
     text-align: center;
+    margin: 3rem 0;
+    padding: 2rem;
 }
 
-.box h4 {
+.socialFollowSection h2 {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.socialBoxes {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.socialBox {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.socialBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.socialBox img {
     margin-bottom: 1rem;
 }
 
-.box a {
+.socialBox p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.socialBox a {
     display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: #c8684d;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.socialBox a:hover {
+    color: #b8583c;
+}
+
+.faqContainer {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.accordion {
+    margin-top: 1rem;
+    border: 1px solid #e7c3b8;
+    border-radius: 8px;
+}
+
+.accordionItem {
+    border-bottom: 1px solid #e7c3b8;
+}
+
+.accordionItem:last-child {
+    border-bottom: none;
+}
+
+.accordionButton {
+    background-color: #ffffff;
+    color: #333;
+    padding: 1rem;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.accordionButton:hover {
+    background-color: #f8f4ed;
+}
+
+.accordionButton span {
+    font-size: 1.1rem;
+}
+
+.icon {
+    font-size: 1.5rem;
+    color: #a699d6;
+}
+
+.accordionContent {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    color: #666;
+    transition: max-height 0.3s ease;
 }
