@@ -1,0 +1,149 @@
+.footer {
+    color: #ffffff;
+}
+
+.footerContent {
+    background-image: url('/images/footerBackground.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+.section {
+    padding: 0.5rem;
+    text-align: center;
+    width: 300px;
+}
+
+.section h3 {
+    font-family: 'Raleway';
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.section p {
+    font-family: 'Quicksand';
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.sectionBoutique {
+    width: 300px;
+    padding: 0.5rem;
+}
+
+.sectionBoutique h3 {
+    font-family: 'Raleway';
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.hoursContainerBoutique {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.daysColumnBoutique,
+.hoursColumnBoutique {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.daysColumnBoutique p {
+    margin: 0;
+    line-height: 1.5;
+    font-family: "Quicksand";
+    text-align: left;
+}
+
+.hoursColumnBoutique {
+    margin: 0;
+    line-height: 1.5;
+    font-family: "Quicksand";
+    text-align: right;
+}
+
+.sectionLab {
+    width: 300px;
+    padding: 0.5rem;
+}
+
+.sectionLab h3 {
+    font-family: 'Raleway';
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.hoursContainerLab {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.daysColumnLab,
+.hoursColumnLab {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.daysColumnLab {
+    justify-content: space-between;
+}
+
+.daysColumnLab p {
+    margin: 0;
+    line-height: 1.5;
+    font-family: "Quicksand";
+    text-align: left;
+}
+
+.hoursColumnLab {
+    margin: 0;
+    line-height: 1.5;
+    font-family: "Quicksand";
+    text-align: right;
+}
+
+.footerBottom {
+    background-color: #d5abc2;
+    padding: 1rem;
+    text-align: center;
+    color: #000;
+}
+
+.footerLinks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #111;
+    padding: 1rem;
+}
+
+.footerLinks a,
+.footerLinks span {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #b6b6b6;
+    text-decoration: none;
+    margin: 0 0.2rem;
+}
+
+.footerLinks a:hover {
+    text-decoration: underline;
+}

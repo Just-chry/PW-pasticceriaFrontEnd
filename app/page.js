@@ -1,6 +1,8 @@
 import Header from "@/components/header";
 
 
+import Footer from '@/components/footer';
+
 import styles from "@/app/page.module.css";
 
 export default function HomePage() {
@@ -17,7 +19,7 @@ export default function HomePage() {
       </section>
 
       <footer>
-        {/* FOOTER */}
+        <Footer />
       </footer>
 
       {/* SCROLLBUTTON */}

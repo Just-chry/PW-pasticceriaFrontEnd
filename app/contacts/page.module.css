@@ -1,0 +1,119 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.heroSection {
+    width: 100%;
+}
+
+.tabsContainer {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tabsHeader {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tabsHeader button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #f3bc9f;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tabsHeader button:hover {
+    background-color: #f4a261;
+}
+
+.activeTab {
+    background-color: #e76f51;
+    color: #fff;
+}
+
+.tabsContent {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.tabContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mapSection {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.formSection {
+    margin: 3rem auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.input,
+.textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submitButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    background-color: #f3bc9f;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #e76f51;
+    color: #fff;
+}
+
+.followUsSection {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem;
+}
+
+.box {
+    text-align: center;
+}
+
+.box h4 {
+    margin-bottom: 1rem;
+}
+
+.box a {
+    display: inline-block;
+}

@@ -4,23 +4,17 @@
     align-items: center;
     padding: 1rem 2rem;
     background-color: #f3bc9f;
-}
-
-.logo {
-    font-family: 'Raleway', 'sans-serif';
-    width: 175px;
-    height: 75px;
-}
-
-.nav ul {
+  }
+  
+  .nav ul {
     display: flex;
     gap: 2rem;
     list-style: none;
     margin: 0;
     padding: 0;
-}
-
-.nav a {
+  }
+  
+  .link {
     font-family: "Quicksand";
     font-size: 16px; 
     font-style: normal;
@@ -32,9 +26,9 @@
     position: relative;
     padding: 1rem 1rem;
     transition: color 0.3s;
-}
-
-.nav a::after {
+  }
+  
+  .link::after {
     content: '';
     position: absolute;
     top: 0;
@@ -44,59 +38,27 @@
     border: 1px solid #000;
     transition: all 0.3s ease;
     opacity: 0;
-}
-
-.nav a:hover {
-    color: #000;
-}
-
-.nav a:hover::after {
+  }
+  
+  .link:hover::after,
+  .link.active::after {
     opacity: 1;
-}
-
-.authButtons {
+  }
+  
+  .link.active {
+    color: #000;
+  }
+  
+  .authButtons {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     list-style: none;
     margin: 0;
     padding: 0;
-}
-
-.authButtons button {
+  }
+  
+  .authButtons button {
     background-color: unset;
     border: none;
-}
-
-.authButtons a {
-    font-family: "Quicksand";
-    font-size: 16px; 
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0.48px;
-    line-height: 24px;
-    text-decoration: none;
-    color: #000;
-    position: relative;
-    padding: 1rem 1rem;
-    transition: color 0.3s;
-}
-
-.authButtons a::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid #000;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-
-.authButtons a:hover {
-    color: #000;
-}
-
-.authButtons a:hover::after {
-    opacity: 1;
-}
+  }
+  

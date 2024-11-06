@@ -1,0 +1,190 @@
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.formSection {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #fff;
+}
+
+.headerSection {
+    padding: 1rem;
+    width: 60%;
+}
+
+.logoText {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logoText {
+    font-family: 'Quicksand', 'Quicksand Fallback';
+    color: #d5abc2;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+}
+
+.logoText:hover {
+    text-decoration: underline;
+    color: #c7c1dc;
+}
+
+.containerRegister {
+    width: 50%;
+    padding: 3rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.aSvg {
+    width: 10%;
+}
+
+.containerRegister h2 {
+    font-family: 'Raleway';
+    font-weight: 400;
+    color: #888;
+}
+
+.containerRegister h1 {
+    font-family: 'Raleway';
+    font-weight: 400;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #ffffff;
+    padding: 1rem 0;
+    width: 450px;
+    border-radius: 20px;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flexColumn>label {
+    color: #151717;
+    font-weight: 600;
+}
+
+.label {
+    font-size: 16px !important;
+    color: #151717 !important;
+    font-weight: 600 !important;
+}
+
+.inputForm {
+    border: 1.5px solid #ecedec;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.input {
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 85%;
+    height: 100%;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.inputForm:focus-within {
+    border: 1.5px solid #c7c1dc;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.flexRow>div>label {
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+}
+
+.flexPassword {
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+}
+
+.spanPassword {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #d5abc2;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.buttonSubmit {
+    margin: 20px 0 10px 0;
+    background-color: #d5abc2;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.buttonSubmit:hover {
+    font-weight: bold;
+    background-color: #c7c1dc;
+}
+
+.p {
+    text-align: center;
+    color: black;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.span {
+    color: #d5abc2; 
+}
+
+.imageSection {
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .imageSection img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+  }
