@@ -1,10 +1,17 @@
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 
+import UserExperience from "@/components/userExperience";
+import ChiSiamo from "@/components/chiSiamo";
+import ChiSiamoTeam from "@/components/chiSiamoTeam";
+import SliderTorte from "@/components/sliderTorte";
+import Newsletter from "@/components/newsletter";
+import ProductsWall from "@/components/productsWall";
+import VieniATrovarci from "@/components/vieniATrovarci";
+
 import Footer from '@/components/footer';
 
 import styles from "@/app/page.module.css";
-
 
 export default function HomePage() {
   return (
@@ -14,7 +21,13 @@ export default function HomePage() {
       </header>
       <Hero />
       <section className={styles.body}>
-        {/* CONTENUTI DELLA HOME PAGE */}
+        <UserExperience />
+        <ChiSiamo />
+        <ChiSiamoTeam />
+        <SliderTorte />
+        <Newsletter />
+        <ProductsWall />
+        <VieniATrovarci />
       </section>
 
       <footer>

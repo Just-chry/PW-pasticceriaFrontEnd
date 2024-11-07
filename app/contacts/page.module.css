@@ -96,6 +96,7 @@
     width: 400px;
     height: 500px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .details {

@@ -1,0 +1,26 @@
+.userExperienceContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+  }
+  
+  .step {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .icon {
+    font-size: 3rem;
+    color: #f3bc9f;
+  }
+  
+  .stepText {
+    margin: 2rem 0;
+    font-weight: bold;
+    color: #333;
+  }
+  

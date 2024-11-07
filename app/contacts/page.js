@@ -69,7 +69,7 @@ export default function Contacts() {
                     <p>La nostra pasticceria artigianale ti aspetta!</p>
                 </header>
 
-                <div className={styles.tabs}>
+                <div id='#pasticceria' className={styles.tabs}>
                     <button
                         className={activeTab === 'pasticceria' ? styles.activeTab : styles.tabButton}
                         onClick={() => setActiveTab('pasticceria')}>
@@ -104,7 +104,7 @@ export default function Contacts() {
                                         <p>Lun: Chiuso</p>
                                         <p>Mar - Ven: 8:30 - 19:00</p>
                                         <p>Sab: 9:00 - 19:00</p>
-                                        <p>Dom: 8:30 - 19:00 15:00 - 19:00</p>
+                                        <p>Dom: 9:00 - 13:00 / 15:00 - 19:00</p>
                                     </div>
 
                                     <div className={styles.contactsDetails}>
@@ -135,7 +135,7 @@ export default function Contacts() {
                                     <div className={styles.timeDetails}>
                                         <h3>Orari</h3>
                                         <p>Lun: Chiuso</p>
-                                        <p>Mar - Sab: 7:30 - 13:00 14:30 - 16:00</p>
+                                        <p>Mar - Sab: 7:30 - 13:00 / 14:30 - 16:00</p>
                                         <p>Dom: 8:00 - 12:30 </p>
                                     </div>
 
@@ -149,7 +149,7 @@ export default function Contacts() {
                         </>
                     )}
                 </div>
-                <div className={styles.contactFormSection}>
+                <div id='info' className={styles.contactFormSection}>
                     <div className={styles.formContainer}>
                         <h2>Compila il form per informazioni</h2>
                         <form className={styles.form}>

@@ -14,7 +14,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
+        <a href='/'>
         <Image src={logo} alt="Pasticceria C'est la Vie"  width="200" height="80" />
+        </a>
       </div>
       <nav className={styles.nav}>
         <ul>

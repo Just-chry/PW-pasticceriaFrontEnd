@@ -3,14 +3,14 @@ import Image from "next/image";
 
 import sfondo from '@/public/images/imageRegisterLogin.png';
 
-import styles from '@/app/login/page.module.css';
+import styles from '@/app/register/page.module.css';
 
 export default function Register() {
     return (
         <div className={styles.container}>
             <div className={styles.formSection}>
                 <div className={styles.headerSection}>
-                    <Link href="/" className={styles.logoText}>Pasticceria C'Est La Vie</Link>
+                    <Link href="/" className={styles.logoText}>Pasticceria C'est La Vie</Link>
                 </div>
 
                 <div className={styles.containerRegister}>
