@@ -119,6 +119,14 @@
     border: 1.5px solid #c7c1dc;
 }
 
+.inputForm:hover {
+    border-color: #d4d4d4;
+}
+
+.input::placeholder {
+    font-family: 'Quicksand';
+}
+
 .flexRow {
     display: flex;
     flex-direction: row;

@@ -10,7 +10,7 @@ export default function Login() {
         <section className={styles.container}>
             <div className={styles.formSection}>
                 <div className={styles.headerSection}>
-                    <Link href="/" className={styles.logoText}>Pasticceria C'est La Vie</Link>
+                    <Link href="/" className={styles.logoText}>Pasticceria C'Est La Vie</Link>
                 </div>
 
                 <div className={styles.containerRegister}>

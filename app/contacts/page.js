@@ -1,14 +1,17 @@
 'use client'
 
+import { useState } from 'react';
+
 import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
-import { useState } from 'react';
-
 import Image from 'next/image';
 import pasticceria from '@/public/images/pasticceria.png';
 import laboratorio from '@/public/images/laboratorio.png';
+import form from '@/public/images/form.png';
+import facebook from '@/public/images/facebook.png';
+import instagram from '@/public/images/instagram.png';
 
 import styles from '@/app/contacts/page.module.css';
 
@@ -24,23 +27,28 @@ export default function Contacts() {
         },
         {
             question: "Quali sono gli orari di apertura di Pasticceria C'Est La Vie?",
-            answer: "Lunedì: chiuso, Mar-Ven: 8:30 - 19:00, Sab: 9:00 - 19:00, Dom: 9:00 - 13:00, 15:00 - 19:00"
+            answer: "L'orario di apertura di Pasticceria C'Est La Vie è: da Martedì a Domenica: 09:00 - 13:00, da Martedì a Domenica: 14:00 - 19:30"
         },
         {
             question: "Quali sono i servizi che offre Pasticceria C'Est La Vie?",
-            answer: "Pasticceria C'Est La Vie offre una vasta gamma di dolci artigianali, torte personalizzate, e servizi per eventi speciali."
+            answer: "Pasticceria C'Est La Vie offre i seguenti servizi: Torte Personalizzate, Cake Design"
         },
         {
             question: "Quali sono le opinioni degli utenti di Pasticceria C'Est La Vie?",
-            answer: "I nostri clienti ci adorano per la qualità e il gusto dei nostri prodotti!"
+            answer: (
+                <>
+                    Leggi le recensioni di Pasticceria C'Est La Vie oppure lascia la tua opinione su{" "}
+                    <a href="https://www.paginegialle.it/pasticceria-cest-la-vie" target="_blank" rel="noopener noreferrer">Paginegialle.it</a>
+                </>
+            )
         },
         {
             question: "Quali sono le specialità di Pasticceria C'Est La Vie?",
-            answer: "Le specialità includono torte artigianali, croissant freschi e pasticceria mignon."
+            answer: "Pasticceria C'Est La Vie propone le seguenti specialità: Macarons, Cookies"
         },
         {
             question: "Come posso contattare Pasticceria C'Est La Vie?",
-            answer: "Puoi contattarci via email all'indirizzo info@pasticceriacestlavie.it o telefonare al numero +39 327 7380932."
+            answer: "Puoi contattare Pasticceria C'Est La Vie tramite email: info@pasticceriacestlavie.it, telefono: 327 7380932, WhatsApp: 327 7380932"
         },
     ];
 
@@ -145,29 +153,90 @@ export default function Contacts() {
                     <div className={styles.formContainer}>
                         <h2>Compila il form per informazioni</h2>
                         <form className={styles.form}>
-                            <div className={styles.formGroup}>
-                                <label htmlFor="name">* Nome:</label>
-                                <input type="text" id="name" name="name" required />
+                            <div className={styles.flexColumn}>
+                                <label htmlFor="firstName" className={styles.label}>Nome</label>
+                                <div className={styles.inputForm}>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="25"
+                                        height="25"
+                                        fill="#000">
+                                        <path d="m9 10 3-3 3 3-3 3zM4.59 18.5 12 16l7.5 2.5-7.45 2.97-7.46-2.97z" fill="#F3BC9F"></path>
+                                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18.22a8.18 8.18 0 0 1-5.03-1.72 8.18 8.18 0 0 1 10.06 0A8.18 8.18 0 0 1 12 20.22Zm6.32-2.97C16.6 15.84 14.4 15 12 15s-4.6.84-6.32 2.25a8.22 8.22 0 1 1 12.64 0ZM12 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"></path>
+                                    </svg>
+                                    <input type="text" id="firstName" name="fisrtName" className={styles.input} placeholder="Inserisci il tuo Nome" required />
+                                </div>
                             </div>
 
-                            <div className={styles.formGroup}>
-                                <label htmlFor="surname">* Cognome:</label>
-                                <input type="text" id="surname" name="surname" required />
+                            <div className={styles.flexColumn}>
+                                <label htmlFor="LastName" className={styles.label}>Cognome</label>
+                                <div className={styles.inputForm}>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="25"
+                                        height="25"
+                                        fill="#000">
+                                        <path d="m9 10 3-3 3 3-3 3zM4.59 18.5 12 16l7.5 2.5-7.45 2.97-7.46-2.97z" fill="#F3BC9F"></path>
+                                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18.22a8.18 8.18 0 0 1-5.03-1.72 8.18 8.18 0 0 1 10.06 0A8.18 8.18 0 0 1 12 20.22Zm6.32-2.97C16.6 15.84 14.4 15 12 15s-4.6.84-6.32 2.25a8.22 8.22 0 1 1 12.64 0ZM12 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"></path>
+                                    </svg>
+                                    <input type="text" id="lastName" name="lastName" className={styles.input} placeholder="Inserisci il tuo Cognome" required />
+                                </div>
                             </div>
 
-                            <div className={styles.formGroup}>
-                                <label htmlFor="email">* E-mail:</label>
-                                <input type="email" id="email" name="email" required />
+                            <div className={styles.flexColumn}>
+                                <label htmlFor="email" className={styles.label}>Email</label>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="25"
+                                    height="25"
+                                    fill="#000">
+                                    <path d="m3 9 9 4 9.09-4v10.03H3V9z"
+                                        fill="#F3BC9F">
+                                    </path>
+                                    <path d="M19.5 4h-15A2.5 2.5 0 0 0 2 6.5v11A2.5 2.5 0 0 0 4.5 20h15a2.5 2.5 0 0 0 2.5-2.5v-11A2.5 2.5 0 0 0 19.5 4ZM12 12 4 8.67V6.5c0-.28.22-.5.5-.5h15c.28 0 .5.22.5.5v2.17l-8 3.32Zm0 2.16 8-3.31v6.66a.5.5 0 0 1-.5.5h-15a.5.5 0 0 1-.5-.5v-6.66l8 3.31Z">
+                                    </path></svg>
+                                <input type="email" id="email" name="email" className={styles.input} placeholder="Inserisci la tua Email" required />
                             </div>
 
-                            <div className={styles.formGroup}>
-                                <label htmlFor="phone">Telefono:</label>
-                                <input type="tel" id="phone" name="phone" />
+                            <div className={styles.flexColumn}>
+                                <label htmlFor="phone" className={styles.label}>Cellurare</label>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="25"
+                                    height="25"
+                                    fill="#000">
+                                    <path d="m8 2 2 6-2 3 5 5 3-2 6.25 2.33L19 21l-9-2-5-5-2-9 5-3z" fill="#F3BC9F">
+                                    </path>
+                                    <path d="m21.38 14.31-3.47-1.49c-.32-.14-.66-.2-1-.2-.82 0-1.61.4-2.08 1.11L14 15s-1.7-.3-3.2-1.8-1.8-3.2-1.8-3.2l1.27-.85c1-.67 1.39-1.96.91-3.07L9.68 2.61a2.491 2.491 0 0 0-2.3-1.51c-.46 0-.93.13-1.36.4L3.57 3.1c-.6.39-1.05 1-1.25 1.67-.87 3.07.39 8.53 4.38 12.52 3.2 3.2 7.35 4.64 10.44 4.64.77 0 1.47-.09 2.08-.26.69-.2 1.28-.65 1.67-1.25l1.6-2.45c.84-1.3.32-3.05-1.11-3.66Zm-.57 2.57-1.6 2.45c-.14.21-.32.35-.53.41-.43.12-.96.19-1.54.19-2.29 0-6.03-1.06-9.03-4.06-3.69-3.69-4.48-8.4-3.87-10.57.06-.21.21-.4.41-.53l2.45-1.6a.503.503 0 0 1 .73.22l1.49 3.47c.1.22.02.48-.18.61l-1.27.85c-.66.44-1 1.23-.86 2 .04.24.46 2.38 2.36 4.27 1.89 1.89 4.03 2.31 4.27 2.36a2 2 0 0 0 2-.86l.85-1.27c.09-.14.25-.22.42-.22.07 0 .13 0 .2.04l3.47 1.49c.18.08.25.21.28.31s.05.26-.06.42Z">
+                                    </path>
+                                </svg>
+                                <input type="tel" id="phone" name="phone" className={styles.input} placeholder="Inserisci il tuo Telefono" required />
                             </div>
 
-                            <div className={styles.formGroup}>
-                                <label htmlFor="message">* Messaggio:</label>
-                                <textarea id="message" name="message" rows="4" required></textarea>
+                            <div className={styles.flexColumn}>
+                                <label htmlFor="message" className={styles.label}>Messaggio</label>
+                            </div>
+                            <div className={styles.inputFormMessage}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="25"
+                                    height="25"
+                                    fill="#000">
+                                    <path fill="#F3BC9F" d="M21 17H7l-4 4V4.98h18V17z">
+                                    </path>
+                                    <path d="M19.5 4h-15A2.5 2.5 0 0 0 2 6.5V21a1 1 0 0 0 1.71.71L7.42 18h12.09a2.5 2.5 0 0 0 2.5-2.5v-9a2.5 2.5 0 0 0-2.5-2.5Zm.48 11.5a.5.5 0 0 1-.5.5H7c-.27 0-.52.11-.71.29L4 18.58V6.52c0-.28.22-.5.5-.5h15c.28 0 .5.22.5.5l-.02 8.98ZM17 8H7c-.55 0-1 .45-1 1s.45 1 1 1h10c.55 0 1-.45 1-1s-.45-1-1-1ZM13 12H7c-.55 0-1 .45-1 1s.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1Z">
+                                    </path>
+                                </svg>
+                                <textarea id="message" name="message" rows="10" cols="50" className={styles.textArea} placeholder="Inserisci il tuo Messaggio" required />
                             </div>
 
                             <div className={styles.formGroup}>
@@ -177,18 +246,13 @@ export default function Contacts() {
                                 </label>
                             </div>
 
-                            <div className={styles.formGroup}>
-                                <input type="checkbox" id="offers" name="offers" />
-                                <label htmlFor="offers">Ricevi offerte speciali e promozioni dedicate.</label>
-                            </div>
-
-                            <button type="submit" className={styles.submitButton}>INVIA MESSAGGIO</button>
+                            <button type="submit" className={styles.buttonSubmit}>INVIA MESSAGGIO</button>
                         </form>
                     </div>
                     <div className={styles.imageSection}>
                         <Image
-                            src="/images/pasticceriaInterno.jpg"
-                            alt="Pasticceria C'est La Vie Interno"
+                            src={form}
+                            alt="Pasticceria C'est La Vie form"
                             layout="responsive"
                             width={500}
                             height={400}
@@ -199,28 +263,28 @@ export default function Contacts() {
                     <h2>Rimani connesso con noi!</h2>
                     <div className={styles.socialBoxes}>
                         <div className={styles.socialBox}>
-                            <Image
-                                src="/images/facebookLogo.png"
-                                alt="Facebook"
-                                width={50}
-                                height={50}
-                            />
-                            <p>Leggi i nostri ultimi aggiornamenti! Clicca sull'icona e segui la nostra pagina Facebook!</p>
-                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                                Vai a Facebook
+                            <a href="https://www.facebook.com/pasticceriacestlavie" target="_blank" rel="noopener noreferrer" className={styles.facebookA}>
+                                <Image
+                                    src={facebook}
+                                    alt="Facebook"
+                                    width={50}
+                                    height={50}
+                                />
                             </a>
+                            <p>Leggi i nostri ultimi aggiornamenti! Clicca sull'icona e segui la nostra pagina Facebook!</p>
+
                         </div>
                         <div className={styles.socialBox}>
-                            <Image
-                                src="/images/instagramLogo.png"
-                                alt="Instagram"
-                                width={50}
-                                height={50}
-                            />
-                            <p>Non perderti neanche una delle nostre ultime creazioni, seguici!</p>
-                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                                Vai su Instagram
+                            <a href="https://www.instagram.com/pasticceriacestlavie/" target="_blank" rel="noopener noreferrer" className={styles.instagramA}>
+                                <Image
+                                    src={instagram}
+                                    alt="Instagram"
+                                    width={50}
+                                    height={50}
+                                />
                             </a>
+                            <p>Non perderti neanche una delle nostre ultime creazioni, seguici!</p>
+
                         </div>
                     </div>
                 </div>
@@ -228,7 +292,7 @@ export default function Contacts() {
                     {activeTab === 'pasticceria' && (
                         <>
                             <div className={styles.containerMap} id='map'>
-                            <iframe src={'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5561.204278908551!2d8.82432497671759!3d45.81922590968008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47867e27ca55fc29%3A0xd9138dc0ff637221!2sVia%20Carlo%20Croce%2C%204%2C%2021100%20Varese%20VA!5e0!3m2!1sit!2sit!4v1730912667406!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade'} className={styles.map}></iframe>
+                                <iframe src={'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5561.204278908551!2d8.82432497671759!3d45.81922590968008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47867e27ca55fc29%3A0xd9138dc0ff637221!2sVia%20Carlo%20Croce%2C%204%2C%2021100%20Varese%20VA!5e0!3m2!1sit!2sit!4v1730912667406!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade'} className={styles.map}></iframe>
                             </div>
                         </>
                     )}
@@ -237,7 +301,7 @@ export default function Contacts() {
                     {activeTab === 'laboratorio' && (
                         <>
                             <div className={styles.containerMap} id='map'>
-                            <iframe src={'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1390.2484029675452!2d8.832790134626885!3d45.82133512862362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47868082e205363b%3A0x63724b3a01d0062c!2sVia%20Giuseppe%20Garibaldi%2C%205%2C%2021100%20Varese%20VA!5e0!3m2!1sit!2sit!4v1730912231743!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade'} className={styles.map}></iframe>
+                                <iframe src={'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1390.2484029675452!2d8.832790134626885!3d45.82133512862362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47868082e205363b%3A0x63724b3a01d0062c!2sVia%20Giuseppe%20Garibaldi%2C%205%2C%2021100%20Varese%20VA!5e0!3m2!1sit!2sit!4v1730912231743!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade'} className={styles.map}></iframe>
                             </div>
                         </>
                     )}
@@ -247,7 +311,10 @@ export default function Contacts() {
                     <div className={styles.accordion}>
                         {faqData.map((item, index) => (
                             <div key={index} className={styles.accordionItem}>
-                                <button className={styles.accordionButton} onClick={() => handleToggle(index)}>
+                                <button
+                                    className={`${styles.accordionButton} ${activeIndex === index ? styles.active : ''}`}
+                                    onClick={() => handleToggle(index)}
+                                >
                                     <span>{item.question}</span>
                                     <span className={styles.icon}>{activeIndex === index ? '▲' : '▼'}</span>
                                 </button>
