@@ -1,12 +1,13 @@
 .container {
+    margin: 3rem;
     padding: 0 3rem;
     width: 100vw;
-    height: 40vh;
+    height: 70vh;
     position: relative;
     display: flex;
     align-items: center;
     overflow: hidden;
-    gap: 3rem;
+
 }
 
 .newsletterBackground {
@@ -29,7 +30,7 @@
     padding: 2rem;
     display: flex;
     justify-content: flex-start;
-    gap: 3rem;
+    gap: 5rem;
     background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -38,37 +39,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 400px;
+    max-width: 700px;
 }
 
 .title {
     font-family: 'Raleway', sans-serif;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     color: #333;
     margin-bottom: 0.5rem;
     text-align: left;
 }
 
 .subtitle {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #666;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-align: left;
     font-weight: 400;
-}
-
-.emailContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 400px;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     width: 100%;
 }
 
@@ -85,7 +78,7 @@
 
 .label {
     font-family: 'Raleway';
-    font-size: 2.5rem !important;
+    font-size: 3rem !important;
     color: #151717 !important;
     font-weight: 600 !important;
 }
@@ -123,10 +116,12 @@
 
 .input::placeholder {
     font-family: 'Quicksand';
+    font-size: 1rem;
     color: #333;
 }
 
 .formGroup {
+    font-size: 1rem;
     display: flex;
     gap: 0.5rem;
 }
@@ -135,20 +130,58 @@
     background-color: #d5abc2;
     color: white;
     padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 2rem;
     cursor: pointer;
+    font-weight: 100;
     transition: background-color 0.3s ease;
 }
 
 .buttonSubmit:hover {
     background-color: #c7c1dc;
+    font-weight: bold;
 }
 
 .confirmationMessage {
     margin-top: 1rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #888;
     text-align: center;
+}
+
+@media (max-width: 992px) {
+    .container {
+        height: auto;
+        justify-content: center;
+    }
+
+    .newsletterContainer {
+        margin: 2rem;
+        width: auto;
+        height: auto;
+        border-radius: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .label {
+        font-size: 1rem !important;
+    }
+
+    .buttonSubmit {
+        font-size: 1rem;
+    }
 }

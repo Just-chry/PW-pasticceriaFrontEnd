@@ -10,7 +10,7 @@ export default function VieniATrovarci() {
                     <p className={styles.subtitle}>
                         Stai cercando una pasticceria artigianale, ti aspettiamo in Via Carlo Croce 4 a Varese, affrettati!
                     </p>
-                    <a href='/contacts#pasticceria'>
+                    <a href='/contacts#pasticceria' className={styles.buttonSubmitA}>
                         <button type="submit" className={styles.buttonSubmit}>Contattaci</button>
                     </a>
                 </div>

@@ -147,3 +147,48 @@
 .footerLinks a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .footerLinks {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .section,
+    .sectionBoutique,
+    .sectionLab {
+        text-align: left;
+    }
+
+    .section h3,
+    .sectionBoutique h3,
+    .sectionLab h3 {
+        text-align: left;
+    }
+
+    .footerBottom {
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .footerBottom p {
+        text-decoration: none;
+    }
+
+    .noTelLink {
+        pointer-events: none;
+        user-select: none;  
+        color: inherit;     
+        text-decoration: none; 
+    }
+
+    .imageMobile {
+        width: 40px;
+    }
+}

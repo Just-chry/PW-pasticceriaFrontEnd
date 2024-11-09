@@ -1,8 +1,10 @@
 .sliderContainer {
     text-align: center;
     width: 100vw;
+    margin: 2rem;
     padding: 2rem;
     background-color: #f3f3f3;
+    overflow: hidden;
 }
 
 .title {
@@ -20,33 +22,16 @@
 }
 
 .slider {
-    padding: 2rem;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    margin: 0 auto;
+    max-width: 80vw;
 }
 
-.slidesWrapper {
-    overflow: hidden;
-    width: 100%;
-}
-
-.slides {
-    display: flex;
-    gap: 5rem;
-    transition: transform 0.5s ease-in-out;
-}
 
 .slide {
-    margin: 0 1rem;
-    opacity: 0.5;
+    width: 80%;
+    margin: 0 auto;
+    opacity: 0.9;
     transition: opacity 0.3s ease-in-out;
-}
-
-.active {
-    opacity: 1;
 }
 
 .image {
@@ -96,26 +81,35 @@
     background-color: #c7c1dc;
 }
 
-.arrowLeft, .arrowRight {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #333;
-    transition: color 0.3s ease;
+.swiper-button-next {
+    color: #000000;
 }
 
-.arrowLeft:hover, .arrowRight:hover {
-    color: #e67e22;
+.swiper-button-next::after {
+    display: none !important;
 }
 
-.arrowLeft {
-    left: 0;
+@media (max-width: 768px) {
+    .image {
+        width: 400px !important;
+        height: 250px !important;
+    }
 }
 
-.arrowRight {
-    right: 0;
+@media (max-width: 550px) {
+    .image {
+        width: 300px !important;
+        height: 250px !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .image {
+        width: 200px !important;
+        height: 150px !important;
+    }
+
+    .caption {
+        font-size: 1rem;
+    }
 }
