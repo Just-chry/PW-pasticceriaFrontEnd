@@ -39,14 +39,15 @@ export default function Register() {
             });
 
             if (!response.ok) {
-                throw new Error("Errore durante la registrazione. Riprova più tardi.");
+                // Cambia response.text() in response.json() se il backend restituisce un JSON
+                const errorData = await response.text();
+                throw new Error(errorData || "Errore durante la registrazione. Riprova più tardi.");
             }
 
             // Cambia `response.json()` in `response.text()` se la risposta non è JSON
             const data = await response.text();
             alert(data || "Registrazione completata con successo! Controlla il tuo contatto per confermare.");
         } catch (error) {
-            console.error("Errore:", error);
             alert(error.message);
         }
     };
