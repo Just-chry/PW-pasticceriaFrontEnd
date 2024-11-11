@@ -54,7 +54,7 @@ export default function ProductsWall() {
                     </div>
                 ))}
             </div>
-            <a href='/products' className={styles.buttonSubmitA}>
+            <a href='/productsCategory' className={styles.buttonSubmitA}>
                 <button type="submit" className={styles.buttonSubmit}>Scopri tutti i nostri prodotti</button>
             </a>
         </div>

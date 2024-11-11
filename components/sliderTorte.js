@@ -16,37 +16,37 @@ const cakes = [
         src: "/images/tortaTiramisù.png",
         alt: "Tiramisù",
         label: "Tiramisù",
-        link: "/products#tortaTiramisù",
+        link: "/productsCategory#tortaTiramisù",
     },
     {
         src: "/images/CrostataAllaMarmellata.png",
         alt: "Crostata alla Marmellata",
         label: "Crostata alla Marmellata",
-        link: "/products#CrostataAllaMarmellata",
+        link: "/productsCategory#CrostataAllaMarmellata",
     },
     {
         src: "/images/millefoglie.png",
         alt: "Millefoglie",
         label: "Millefoglie",
-        link: "/products#millefoglie",
+        link: "/productsCategory#millefoglie",
     },
     {
         src: "/images/tortaChantilly.png",
         alt: "Torta Chantilly",
         label: "Torta Chantilly",
-        link: "/products#tortaChantilly",
+        link: "/productsCategory#tortaChantilly",
     },
     {
         src: "/images/CrostataAlleFragole.png",
         alt: "Crostata alle Fragole",
         label: "Crostata alle Fragole",
-        link: "/products#CrostataAlleFragole",
+        link: "/productsCategory#CrostataAlleFragole",
     },
     {
         src: "/images/tortaAlLimone.png",
         alt: "Torta al Limone",
         label: "Torta al Limone",
-        link: "/products#tortaAlLimone",
+        link: "/productsCategory#tortaAlLimone",
     }
 ];
 
