@@ -69,6 +69,5 @@ export default function UserExperience() {
         <FaArrowRight />
       </button>
     </div>
-
   );
 }
