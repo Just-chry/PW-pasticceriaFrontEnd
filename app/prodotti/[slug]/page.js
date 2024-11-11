@@ -39,57 +39,46 @@ export default function Prodotto({ params }) {
           slug: 'crostata-di-frutta', 
           nome: 'Crostata di Frutta', 
           prezzo: '28 euro', 
-          descrizione: 'Una crostata fresca e colorata, preparata con una base croccante di pasta frolla fatta in casa e farcita con una crema pasticcera vellutata. Decorata con un mix di frutta di stagione, come fragole, kiwi, mirtilli e pesche, per un sapore fresco e naturale. Ideale per chi cerca un dolce leggero e delizioso, perfetto per ogni occasione. Ingredienti: farina, burro, zucchero, uova, frutta fresca di stagione, crema pasticcera.' 
+          descrizione: 'La **Crostata di Frutta** è un dessert raffinato e fresco, ideale per ogni stagione. La base è una croccante pasta frolla, preparata artigianalmente con burro di alta qualità, farina selezionata e zucchero. La farcitura consiste in una crema pasticcera vellutata, preparata con uova fresche e vaniglia, che bilancia perfettamente la dolcezza della frutta fresca di stagione. Il topping di fragole, kiwi, mirtilli e pesche, scelto per la sua naturalezza e freschezza, arricchisce il piatto con colori vivaci e sapori equilibrati. Perfetta per chi cerca un dolce leggero ma ricco di gusto. **Ingredienti:** farina, burro, zucchero, uova, frutta fresca di stagione, crema pasticcera (latte, uova, zucchero, amido di mais, vaniglia).'
         },
         { 
           slug: 'millefoglie', 
           nome: 'Millefoglie', 
           prezzo: '17.50 euro', 
-          descrizione: 'Un dolce classico e sofisticato, composto da strati croccanti di pasta sfoglia che si alternano a una delicata crema chantilly, realizzata con panna fresca e vaniglia. Questo dessert si distingue per la sua leggerezza e la combinazione di consistenze perfette. Ingredienti: farina, burro, zucchero, panna fresca, vaniglia.' 
+          descrizione: 'La **Millefoglie** è un dolce classico e intramontabile, composto da sottili strati di pasta sfoglia dorata e croccante, alternati a una crema chantilly morbida e vellutata, fatta con panna fresca e vaniglia. La leggera croccantezza della sfoglia si fonde armoniosamente con la delicatezza della crema, creando un\'esperienza gustativa perfetta. Ogni boccone regala una combinazione ideale di consistenze e sapori, reso ancora più irresistibile da un tocco di zucchero a velo. **Ingredienti:** farina, burro, zucchero, panna fresca, vaniglia, amido di mais.'
         },
-
         { 
           slug: 'redtorta', 
           nome: 'Redtorta', 
           prezzo: '21 euro', 
-          descrizione: 'Un dolce classico e sofisticato, composto da strati croccanti di pasta sfoglia che si alternano a una delicata crema chantilly, realizzata con panna fresca e vaniglia. Questo dessert si distingue per la sua leggerezza e la combinazione di consistenze perfette. Ingredienti: farina, burro, zucchero, panna fresca, vaniglia.' 
+          descrizione: 'La **Redtorta** è un dessert sofisticato che unisce la leggerezza della crema chantilly alla croccantezza della pasta sfoglia. La sua caratteristica distintiva è il colore intenso, che proviene dalla presenza di ingredienti freschi e naturali, che esaltano la sua estetica e il suo gusto. La crema chantilly, realizzata con panna fresca e una leggera infusione di vaniglia, si alterna a strati sottili di pasta sfoglia, creando una texture croccante ma delicata al palato. Questo dolce è perfetto per chi cerca un dessert elegante e dal sapore deciso. **Ingredienti:** farina, burro, zucchero, panna fresca, vaniglia, amido di mais.'
         },
-
         { 
           slug: 'tiramisu', 
           nome: 'Tiramisù', 
           prezzo: '24 euro', 
-          descrizione: 'Un dolce classico e sofisticato, composto da strati croccanti di pasta sfoglia che si alternano a una delicata crema chantilly, realizzata con panna fresca e vaniglia. Questo dessert si distingue per la sua leggerezza e la combinazione di consistenze perfette. Ingredienti: farina, burro, zucchero, panna fresca, vaniglia.' 
+          descrizione: 'Il **Tiramisù** è un dolce italiano iconico che unisce la delicatezza del mascarpone e il caffè espresso forte e aromatico. I savoiardi, imbevuti nel caffè e nel liquore, si alternano a una morbida crema di mascarpone e panna fresca, creando un contrasto di sapori e consistenze unico. Il tutto è arricchito da una spolverata di cacao amaro, che dona il tocco finale di raffinatezza e contrasto. La sua consistenza soffice e cremosa e il sapore avvolgente lo rendono perfetto per ogni occasione speciale. **Ingredienti:** savoiardi (farina, zucchero, uova), mascarpone, panna fresca, caffè espresso, zucchero, cacao amaro, liquore (opzionale).'
         },
-
         { 
           slug: 'torta-sacker', 
           nome: 'Torta Sacker', 
           prezzo: '30 euro', 
-          descrizione: 'Un dolce classico e sofisticato, composto da strati croccanti di pasta sfoglia che si alternano a una delicata crema chantilly, realizzata con panna fresca e vaniglia. Questo dessert si distingue per la sua leggerezza e la combinazione di consistenze perfette. Ingredienti: farina, burro, zucchero, panna fresca, vaniglia.' 
+          descrizione: 'La **Torta Sacker** è un capolavoro della pasticceria, ricca di sapori intensi e decisi. La base è composta da un pan di spagna al cioccolato fondente, morbido e umido, che si sposa perfettamente con una crema al cioccolato ricca e vellutata. Un sottile strato di gelatina di albicocca aggiunge una nota fruttata e contrastante, completando il tutto con una copertura di cioccolato fondente che dona una lucentezza e un sapore deciso. Questo dolce è ideale per gli amanti del cioccolato e per chi cerca un dessert ricco e indulgente. **Ingredienti:** farina, burro, zucchero, uova, cioccolato fondente, crema di albicocca, panna fresca.'
         },
-
         { 
           slug: 'torta-margherita', 
           nome: 'Torta Margherita', 
           prezzo: '11 euro', 
-          descrizione: 'Un dolce classico e sofisticato, composto da strati croccanti di pasta sfoglia che si alternano a una delicata crema chantilly, realizzata con panna fresca e vaniglia. Questo dessert si distingue per la sua leggerezza e la combinazione di consistenze perfette. Ingredienti: farina, burro, zucchero, panna fresca, vaniglia.' 
+          descrizione: 'La **Torta Margherita** è un dolce semplice e genuino, ma ricco di sapore. La sua consistenza soffice e umida è il risultato dell\'incontro tra farina, zucchero e uova fresche, che, lavorati con cura, creano una base leggera e fragrante. La torta è arricchita da un delicato profumo di vaniglia, che la rende ideale per accompagnare una tazza di tè o caffè. Perfetta per chi cerca un dolce classico e non troppo dolce, ma altrettanto goloso. **Ingredienti:** farina, burro, zucchero, uova, vaniglia, lievito.'
         },
-
         { 
           slug: 'torta-yogurt', 
           nome: 'Torta Yogurt', 
           prezzo: '15 euro', 
-          descrizione: 'Un dolce classico e sofisticato, composto da strati croccanti di pasta sfoglia che si alternano a una delicata crema chantilly, realizzata con panna fresca e vaniglia. Questo dessert si distingue per la sua leggerezza e la combinazione di consistenze perfette. Ingredienti: farina, burro, zucchero, panna fresca, vaniglia.' 
+          descrizione: 'La **Torta Yogurt** è un dolce fresco e leggero, ideale per chi cerca una dolcezza naturale e non eccessivamente zuccherata. La base soffice di questa torta è preparata con yogurt intero, che dona una consistenza umida e morbida, mentre il suo sapore delicato si esalta con una leggera infusione di vaniglia. Questa torta è perfetta per le occasioni in cui si desidera un dessert semplice ma raffinato, che piacerà a tutti grazie alla sua freschezza. **Ingredienti:** farina, zucchero, yogurt intero, uova, burro, lievito, vaniglia.'
         },
-        
-        
-
-
-
-
-        // altri prodotti...
       ];
+      
 
       const prodottoTrovato = prodotti.find((p) => p.slug === slug);
       setProdotto(prodottoTrovato);
