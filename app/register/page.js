@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -39,20 +39,16 @@ export default function Register() {
             });
 
             if (!response.ok) {
-                // Cambia response.text() in response.json() se il backend restituisce un JSON
                 const errorData = await response.text();
                 throw new Error(errorData || "Errore durante la registrazione. Riprova più tardi.");
             }
 
-            // Cambia `response.json()` in `response.text()` se la risposta non è JSON
             const data = await response.text();
             alert(data || "Registrazione completata con successo! Controlla il tuo contatto per confermare.");
         } catch (error) {
             alert(error.message);
         }
     };
-
-
 
     return (
         <div className={styles.container}>
@@ -153,6 +149,7 @@ export default function Register() {
                                 />
                             </div>
                         </div>
+
                         <button type="submit" className={styles.buttonSubmit}>Registrati</button>
                         <p className={styles.p}>
                             Hai già un account? <Link href="/login" className={styles.span}>Accedi</Link>
