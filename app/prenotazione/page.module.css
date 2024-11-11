@@ -1,0 +1,137 @@
+/* Global settings */
+.main {
+    font-family: 'Garamond', serif;
+    color: #4A4A4A;
+    background-color: #FFF8F0;
+    padding: 20px;
+}
+
+/* Feature Section */
+.featureSection {
+    display: flex;
+    gap: 10px; /* Riduce la distanza tra i box */
+    justify-content: center;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.feature {
+    flex: 1;
+    max-width: 400px; /* Riduce la larghezza massima per avvicinare i box */
+    padding: 15px;
+    background-color: #FFF8F0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.featureIcon {
+    width: 60px; /* Larghezza massima desiderata */
+    height: 60px; /* Altezza massima desiderata */
+    margin-bottom: 10px;
+    object-fit: contain; /* Mantiene le proporzioni senza stirare */
+    object-position: center; /* Centra l'immagine all'interno del box */
+}
+
+
+.feature h3 {
+    font-size: 1.4rem; /* Leggermente più piccolo */
+    color: #4C3A33;
+    margin-bottom: 8px; /* Riduce la spaziatura sotto il titolo */
+}
+
+.feature p {
+    color: #D87B7B;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin: 0; /* Rimuove eventuale margine per compattezza */
+}
+
+/* Best Fresh Items Section */
+.bestItemsSection {
+    margin-top: 80px;
+    text-align: center;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.bestItemsSection h2 {
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #4C3A33;
+}
+
+.items {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: transform 0.3s ease;
+}
+
+.item {
+    flex: 0 1 22%;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    background-color: #FFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 30px;
+    cursor: pointer;
+    position: relative;
+    animation: fadeIn 1s ease-out;
+}
+
+.item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.item img:hover {
+    transform: scale(1.1);
+}
+
+.item p {
+    font-weight: 600;
+    color: #4A4A4A;
+}
+
+.item span {
+    color: #C29F82;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: block;
+    margin: 10px 0;
+}
+
+.itemButton {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #FFF;
+    background-color: #D87B7B;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.itemButton:hover {
+    background-color: #B07F6D;
+}
+
+/* Remove Voucher Section */
+.vouchersSection {
+    display: none;
+}

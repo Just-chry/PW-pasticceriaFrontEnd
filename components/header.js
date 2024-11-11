@@ -34,7 +34,7 @@ export default function Header() {
             <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link}>Home</Link>
           </li>
           <li className={styles.desktopOnly}>
-            <Link href="/products" className={path === "/products" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
+            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
           </li>
           <li className={styles.desktopOnly}>
             <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
@@ -43,7 +43,7 @@ export default function Header() {
             <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link}>Home</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/products" className={path === "/products" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
+            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
           </li>
           <li className={styles.mobileOnly}>
             <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
