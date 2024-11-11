@@ -156,7 +156,7 @@ export default function Prodotto({ params }) {
       <p className={styles.prodottoPrice}><strong>Prezzo:</strong> {prodotto.prezzo}</p>
       <div className={styles.prodottoImageWrapper}>
         {/* Assicurati che il nome dell'immagine sia coerente con il formato delle immagini */}
-        <img src={`/${nomeImmagine}`} alt={prodotto.nome} className={styles.prodottoImage} />
+        <img src={`/images/${nomeImmagine}`} alt={prodotto.nome} className={styles.prodottoImage} />
       </div>
 
       <div className={styles.ritiroSection}>

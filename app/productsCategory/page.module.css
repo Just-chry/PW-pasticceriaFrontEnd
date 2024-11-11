@@ -14,6 +14,7 @@
 }
 
 .textContainer h1 {
+    color: #4C3A33;
     font-family: 'Raleway';
     font-size: 3rem;
     font-weight: 400;
@@ -21,15 +22,20 @@
 }
 
 .textContainer h2{
+    color: #9B7A4F;
     font-family: 'Raleway';
     font-size: 2rem;
     font-weight: 400;
     margin-bottom: 2rem;
 }
 
-.textContainer p{
+.textContainer p {
     font-family: 'Quicksand';
     font-size: 1rem;
+}
+
+.textContainer span {
+    color: #C29F82;
 }
 
 .grid {
