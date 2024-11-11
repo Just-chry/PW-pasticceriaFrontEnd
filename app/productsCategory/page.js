@@ -22,9 +22,9 @@ export default function ProductsCategory() {
             <section>
                 <div className={styles.categorieContainer}>
                     <div className={styles.textContainer}>
-                        <h1>I nostri prodotti</h1>
-                        <h2>Visita e acquista i nostri prodotti</h2>
-                        <p>Scegli tra la selezione di dolci e ordina per il ritiro in negozio</p>
+                        <h2 className={styles.subheading}>Aperti dal martedì alla domenica</h2>
+                        <h1 className={styles.mainHeading}>Pasticceria <span className={styles.highlight}>C'est la Vie</span></h1>
+                        <p className={styles.description}>Scopri le nostre delizie artigianali, preparate con passione e ingredienti di alta qualità.</p>
                     </div>
                     <div className={styles.grid}>
                         {categorie.map((categoria, index) => (
