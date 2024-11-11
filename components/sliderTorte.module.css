@@ -1,0 +1,115 @@
+.sliderContainer {
+    text-align: center;
+    width: 100vw;
+    margin: 2rem;
+    padding: 2rem;
+    background-color: #f3f3f3;
+    overflow: hidden;
+}
+
+.title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 2.5rem;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.slider {
+    margin: 0 auto;
+    max-width: 80vw;
+}
+
+
+.slide {
+    width: 80%;
+    margin: 0 auto;
+    opacity: 0.9;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.caption {
+    font-family: 'Quicksand';
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+.ctaButton {
+    font-family: 'Quicksand';
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #d5abc2;
+    border: none;
+    color: white;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.ctaButton:hover {
+    font-weight: bold;
+    background-color: #c7c1dc;
+}
+
+.buttonSubmit {
+    margin: 20px 0 10px 0;
+    background-color: #d5abc2;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.buttonSubmit:hover {
+    font-weight: bold;
+    background-color: #c7c1dc;
+}
+
+.swiper-button-next {
+    color: #000000;
+}
+
+.swiper-button-next::after {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .image {
+        width: 400px !important;
+        height: 250px !important;
+    }
+}
+
+@media (max-width: 550px) {
+    .image {
+        width: 300px !important;
+        height: 250px !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .image {
+        width: 200px !important;
+        height: 150px !important;
+    }
+
+    .caption {
+        font-size: 1rem;
+    }
+}

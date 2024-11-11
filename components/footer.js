@@ -51,16 +51,16 @@ export default function Footer() {
                 </div>
             </div>
             <div className={styles.footerBottom}>
-                <p>P.I. 03468950120</p>
+                <p>P.I. <span className={styles.noTelLink}>03468950120</span></p>
             </div>
             <div className={styles.footerLinks}>
                 <a href="#">Informazioni Legali</a>
                 <span>|</span>
                 <a href="#">Privacy Policy e Cookie Policy</a>
                 <span>|</span>
-                <span>Designed by italiaonline <a href="https://www.italiaonline.it/"><Image src={italiaOnline} alt="italiaonline" width="70"/></a></span>
+                <span>Designed by italiaonline <a href="https://www.italiaonline.it/"><Image src={italiaOnline} alt="italiaonline" width="70" /></a></span>
                 <span>|</span>
-                <span>Questa azienda è presente anche su <a href="https://www.paginegialle.it/"><Image src={pagineGialle} alt="paginegialle" width="50" /></a> e <a href="https://www.paginebianche.it/"><Image src={pagineBianche} alt="pagineBianche" width="50"/></a></span>
+                <span>Questa azienda è presente anche su <a href="https://www.paginegialle.it/"><Image src={pagineGialle} alt="paginegialle" width="50" className={styles.imageMobile} /></a> e <a href="https://www.paginebianche.it/"><Image src={pagineBianche} alt="pagineBianche" width="50" className={styles.imageMobile} /></a></span>
             </div>
         </footer>
     );
