@@ -1,420 +1,75 @@
-.container {
-  display: flex;
-  padding: 20px;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f2f2f2;
-  color: #444;
-}
-
-.sidebar {
-  width: 20%;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.menuItem {
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 8px;
-  color: #d90000;
-  cursor: pointer;
+.heroContainer {
   position: relative;
-  padding-left: 10px;
-}
-
-.menuItem::before {
-  content: '▶';
-  position: absolute;
-  left: -10px;
-  transition: transform 0.3s ease;
-}
-
-.menuItem:hover {
-  color: #b80000;
-}
-
-.menuItem:hover::before {
-  transform: translateX(3px);
-}
-
-.subMenu div {
-  padding: 12px 16px;
-  margin-top: 8px;
-  border: 1px solid #ddd;
-  background-color: #ffffff;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.subMenu div:hover {
-  background-color: #f7f7f7;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.mainContent {
-  flex: 1;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.mainContent h2,
-.mainContent h3 {
-  margin-top: 0;
-  color: #d90000;
-}
-
-.edit {
-  color: #d90000;
-  cursor: pointer;
-  margin-left: 8px;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.edit:hover {
-  color: #b80000;
-}
-
-.cardContainer {
-  margin-top: 20px;
-  padding: 12px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #fafafa;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-.card {
-  padding: 20px;
-  background-color: #ffe6e6;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.showCardButton {
-  margin-top: 12px;
-  padding: 10px 16px;
-  background-color: #d90000;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.showCardButton:hover {
-  background-color: #b80000;
-  transform: scale(1.05);
-}
-
-.formContainer {
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  max-width: 600px;
-  margin-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.dataForm {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-}
-
-.formGroup label {
-  margin-bottom: 4px;
-  font-weight: bold;
-  color: #444;
-}
-
-.formGroup input,
-.formGroup select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.formGroup input:focus,
-.formGroup select:focus {
-  border-color: #d90000;
-  outline: none;
-  box-shadow: 0 0 4px rgba(217, 0, 0, 0.2);
-}
-
-.modifyButton {
-  grid-column: span 2;
-  padding: 12px;
-  background-color: #d90000;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-top: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.modifyButton:hover {
-  background-color: #b80000;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.ordersContainer {
-  margin-top: 20px;
-}
-
-.orderTabs {
-  display: flex;
-  gap: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.tab {
-  color: #999;
-  cursor: pointer;
-}
-
-.activeTab {
-  color: #000;
-  border-bottom: 2px solid red;
-  padding-bottom: 5px;
-}
-
-.noOrders {
-  color: #333;
-  font-style: italic;
-  margin-top: 10px;
-}
-
-.formContainer {
-  margin-top: 20px;
-}
-
-.formGroup {
-  margin-bottom: 15px;
-}
-
-.passwordField {
-  position: relative;
-}
-
-.passwordField input {
   width: 100%;
-  padding-right: 30px;
-}
-
-.toggleVisibility {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 16px;
-  color: #999;
-}
-
-.modifyButton {
-  background-color: #FF6F91;
-  color: #FFF;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.modifyButton:hover {
-  background-color: #FF5A7A;
-}
-
-/* Ordini */
-.ordersContainer {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #fafafa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Tab per ordini in corso e completati */
-.orderTabs {
-  display: flex;
-  gap: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.tab {
-  color: #999;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.tab:hover {
-  background-color: #f2f2f2;
-}
-
-.activeTab {
-  color: #d90000;
-  border-bottom: 2px solid #d90000;
-  padding-bottom: 5px;
-}
-
-/* Contenuto ordini */
-.orderContent {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.orderContent p {
-  font-size: 16px;
-  margin: 0;
-  color: #444;
-}
-
-.orderContent em {
-  color: #999;
-  font-style: italic;
-}
-
-.noOrders {
-  color: #333;
-  font-style: italic;
-  margin-top: 10px;
-}
-
-/* Sezione per la visualizzazione dei dettagli degli ordini */
-.orderDetailCard {
-  background-color: #ffe6e6;
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.orderDetailCard h3 {
-  font-size: 20px;
-  color: #d90000;
-  margin-bottom: 10px;
-}
-
-.orderDetailCard p {
-  color: #444;
-  margin-bottom: 8px;
-}
-
-.viewOrderDetailsButton {
-  padding: 10px 20px;
-  background-color: #d90000;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.viewOrderDetailsButton:hover {
-  background-color: #b80000;
-  transform: scale(1.05);
-}
-
-/* Adattamento per i dispositivi mobili */
-@media (max-width: 768px) {
-  .orderTabs {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .orderContent {
-    padding: 15px;
-  }
-
-  .orderDetailCard {
-    padding: 12px;
-  }
-
-  .viewOrderDetailsButton {
-    width: 100%;
-    padding: 12px;
-  }
-}
-/* Aggiungi nel file CSS */
-
-/* Pop-up di conferma eliminazione account */
-.deleteConfirmationPopup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  overflow: hidden;
 }
 
-.popupContent {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(5px);
+  z-index: -1;
+  background-image: url('/images/hero.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.logoContainer {
+  z-index: 1;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.popupContent p {
+.profileContainer {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profileSection {
   margin-bottom: 20px;
-  font-size: 1.2rem;
 }
 
-.confirmButton,
-.cancelButton {
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
+.profileField {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.confirmButton {
-  background-color: #d90000;
+.fieldWithButton {
+  display: flex;
+  align-items: center;
+}
+
+.editField {
+  display: flex;
+  align-items: center;
+}
+
+.editField input {
+  margin-right: 10px;
+}
+
+.button {
+  background-color: #0070f3;
   color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.confirmButton:hover {
-  background-color: #b80000;
+.button:hover {
+  background-color: #005bb5;
 }
-
-.cancelButton {
-  background-color: #ccc;
-}
-
-.cancelButton:hover {
-  background-color: #999;
-}
-
