@@ -55,6 +55,15 @@
     }
 }
 
+.featuresContainer {
+    display: flex;
+    gap: 3rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
 .feature {
     width: 50%;
     display: flex;
@@ -110,7 +119,7 @@
 .arrowButtonLeft,
 .arrowButtonRight {
     position: absolute;
-    transform: translateY(70%);
+    transform: translateY(200%);
     background-color: #f3bc9f;
     border: none;
     color: #fff;
@@ -184,6 +193,13 @@
 }
 
 @media (max-width: 500px) {
+    .bestItemsSection h2 {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     .items {
         grid-template-columns: repeat(1, minmax(200px, 1fr));
     }
@@ -244,6 +260,13 @@
     display: block;
 }
 
-.vouchersSection {
-    display: none;
+.loaderContainer {
+    width: 100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

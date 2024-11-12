@@ -66,6 +66,11 @@
     font-size: 2rem;
 }
 
+.svgContainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .form {
     display: flex;
     flex-direction: column;

@@ -1,0 +1,24 @@
+.scrollButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    padding: 0.2rem;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ffffff ;
+    color: #333;
+    background-color: rgba(37, 37, 37, 0.2); 
+    font-size: 0.6rem;
+    font-family: 'Quicksand', 'sans'serif;
+    font-weight: 400;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.scrollButton:hover {
+    font-weight: bold;
+}

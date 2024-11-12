@@ -11,6 +11,8 @@ import VieniATrovarci from "@/components/vieniATrovarci";
 
 import Footer from '@/components/footer';
 
+import ScrollButton from "@/components/scrollButton";
+
 import styles from "@/app/page.module.css";
 
 export default function HomePage() {
@@ -34,7 +36,7 @@ export default function HomePage() {
         <Footer />
       </footer>
 
-      {/* SCROLLBUTTON */}
+      <ScrollButton />
     </main>
   );
 }
