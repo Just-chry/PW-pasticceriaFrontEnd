@@ -1,11 +1,12 @@
 .heroContainer {
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.1));
 }
 
 .heroBackground {
@@ -14,7 +15,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  filter: blur(5px);
+  filter: blur(8px);
   z-index: -1;
   background-image: url('/images/hero.png');
   background-size: cover;
@@ -22,54 +23,76 @@
   background-attachment: fixed;
 }
 
-.logoContainer {
-  z-index: 1;
-  text-align: center;
-}
-
 .profileContainer {
-  padding: 20px;
+  padding: 30px;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  max-width: 650px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .profileSection {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .profileField {
-  margin: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
 }
 
-.fieldWithButton {
-  display: flex;
-  align-items: center;
+.profileField label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
 }
 
-.editField {
+.fieldWithButton, .editField {
   display: flex;
   align-items: center;
+  gap: 15px;
 }
 
 .editField input {
-  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s;
+}
+
+.editField input:focus {
+  border-color: #0070f3;
+  outline: none;
 }
 
 .button {
   background-color: #0070f3;
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 10px 15px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.1s;
 }
 
 .button:hover {
   background-color: #005bb5;
+  transform: scale(1.02);
+}
+
+.button:active {
+  transform: scale(0.98);
 }

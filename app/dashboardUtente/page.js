@@ -6,11 +6,15 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 
 export default function PersonalArea() {
-    const [user, setUser] = useState({
-        name: 'Mario Rossi',
-        surname: 'Rossi',
-        email: 'mario.rossi@example.com',
-        phone: '+39123456789',
+    // Carica i dati utente da Local Storage al primo caricamento della pagina
+    const [user, setUser] = useState(() => {
+        const savedUser = localStorage.getItem('user');
+        return savedUser ? JSON.parse(savedUser) : {
+            name: 'Mario',
+            surname: 'Rossi',
+            email: 'mario.rossi@example.com',
+            phone: '+39123456789',
+        };
     });
 
     const [editMode, setEditMode] = useState({
@@ -23,6 +27,11 @@ export default function PersonalArea() {
     const [newPhone, setNewPhone] = useState(user.phone);
     const [newPassword, setNewPassword] = useState('');
 
+    // Funzione per salvare i dati utente in Local Storage
+    const saveUserToLocalStorage = (updatedUser) => {
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+    };
+
     const handleEditClick = (field) => {
         setEditMode(prev => ({
             ...prev,
@@ -31,16 +40,30 @@ export default function PersonalArea() {
     };
 
     const handleSaveClick = (field) => {
+        const updatedUser = { ...user };
+
         if (field === 'email') {
-            setUser(prev => ({ ...prev, email: newEmail }));
+            updatedUser.email = newEmail;
         } else if (field === 'phone') {
-            setUser(prev => ({ ...prev, phone: newPhone }));
+            updatedUser.phone = newPhone;
         }
+
+        // Aggiorna lo stato dell'utente e salva in Local Storage
+        setUser(updatedUser);
+        saveUserToLocalStorage(updatedUser);
+
+        // Disattiva la modalità di modifica
         setEditMode(prev => ({
             ...prev,
             [field]: false
         }));
     };
+
+    useEffect(() => {
+        // Aggiorna i campi di modifica con i valori attuali quando i dati utente cambiano
+        setNewEmail(user.email);
+        setNewPhone(user.phone);
+    }, [user]);
 
     return (
         <>
