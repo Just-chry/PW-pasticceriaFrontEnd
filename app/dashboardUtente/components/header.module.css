@@ -21,6 +21,7 @@
   }
   
   .link {
+    display: flex;
     font-family: "Quicksand";
     font-size: 16px;
     font-style: normal;

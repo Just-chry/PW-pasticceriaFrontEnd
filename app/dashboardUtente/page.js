@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import styles from './dashboard.module.css';
+
+import Header from '@/app/dashboardUtente/components/header';
 import Footer from '@/components/footer';
-import Header from '@/components/header';
+
+import styles from '@/app/dashboardUtente/page.module.css'
 
 export default function PersonalArea() {
     const [user, setUser] = useState({
