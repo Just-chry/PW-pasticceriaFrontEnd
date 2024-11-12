@@ -47,7 +47,6 @@ export default function Products() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Funzione per ottenere i prodotti dal backend
     const fetchProducts = async () => {
       try {
         setLoading(true);
@@ -73,22 +72,8 @@ export default function Products() {
     fetchProducts();
   }, [slug]);
 
-
-
-  // Funzione per gestire il click del bottone "Ordina ora"
-  const handleOrderClick = (productName) => {
-    const slug = generateSlug(productName); // Genera lo slug
-    router.push(`/product/${slug}`);
-  };
-
-  // Funzione per generare lo slug
-  const generateSlug = (name) => {
-    return name
-      .toLowerCase()
-      .replace(/\s+/g, '-') // Sostituisce gli spazi con trattini
-      .replace(/[^\w\-]+/g, '') // Rimuove caratteri speciali
-      .replace(/\-\-+/g, '-') // Rimuove trattini consecutivi
-      .trim(); // Rimuove spazi extra
+  const handleOrderClick = (productId) => {
+    router.push(`/product/${productId}`);
   };
 
   return (
@@ -143,7 +128,6 @@ export default function Products() {
           {error ? (
             <div>
               <p>Errore durante il caricamento dei prodotti. Riprova più tardi.</p>
-              <button onClick={fetchProducts}>Riprova</button>
             </div>
           ) : loading ? (
             <div>Caricamento in corso...</div>
