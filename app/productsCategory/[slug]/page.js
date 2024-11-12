@@ -51,7 +51,7 @@ export default function Products() {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch(`http://localhost:8080/products/${slug}`, {
+        const response = await fetch(`http://localhost:8080/products?category=${slug}`, {
           method: "GET",
           credentials: 'include',
         });
@@ -73,7 +73,7 @@ export default function Products() {
   }, [slug]);
 
   const handleOrderClick = (productId) => {
-    router.push(`/product/${productId}`);
+    router.push(`/products/${productId}/id`);
   };
 
   return (
