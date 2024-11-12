@@ -1,0 +1,150 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f3bc9f;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .logo {
+    z-index: 3;
+  }
+  
+  .nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .link {
+    font-family: "Quicksand";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.48px;
+    line-height: 24px;
+    text-decoration: none;
+    color: #000;
+    position: relative;
+    padding: 1rem 1rem;
+    transition: color 0.3s;
+  }
+  
+  .link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+    opacity: 0;
+  }
+  
+  .link:hover::after,
+  .link.active::after {
+    opacity: 1;
+  }
+  
+  .link.active {
+    color: #000;
+  }
+  
+  .authButtons {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .authButtons button {
+    background-color: unset;
+    border: none;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 0.3rem;
+    z-index: 3;
+  }
+  
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #000;
+    transition: all 0.3s ease;
+  }
+  
+  .bar.open {
+    transform: rotate(90deg);
+  }
+  
+  .nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(243, 188, 159, 0.95);
+    padding: 2rem;
+    z-index: 2;
+    overflow-y: hidden;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .mobileOnly {
+    display: none;
+  }
+  
+  .desktopOnly {
+    display: flex;
+  }
+  
+  @media (max-width: 768px) {
+    .nav {
+      display: none;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  
+    .authButtons {
+      display: none;
+    }
+  
+    .nav ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .mobileOnly {
+      display: block;
+      padding: 1rem 0;
+    }
+  
+    .desktopOnly {
+      display: none;
+    }
+  }
+  
+  body.menuOpen {
+    overflow-y: hidden;
+  } 
