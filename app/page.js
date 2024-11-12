@@ -31,7 +31,7 @@ const [userData, setUserData] = useState({
 useEffect(() => {
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/users/all', {
+      const response = await fetch('http://localhost:8080/users', {
         method: 'GET',
         credentials: 'include',
         headers: {
