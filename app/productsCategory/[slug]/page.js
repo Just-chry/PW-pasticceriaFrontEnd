@@ -73,7 +73,7 @@ export default function Products() {
   }, [slug]);
 
   const handleOrderClick = (productId) => {
-    router.push(`/products/${productId}/id`);
+    router.push(`/products/${productId}`);
   };
 
   return (
@@ -137,7 +137,7 @@ export default function Products() {
                 <p>Prodotti terminati. Torna presto per nuovi dolci!</p>
               ) : (
                 products.map((product, index) => (
-                  <div key={index} className={styles.item} onClick={() => handleOrderClick(product.name)}>
+                  <div key={index} className={styles.item} onClick={() => handleOrderClick(product.id)}>
                     <img src={product.image} alt={product.name} width='400' height='300' />
                     <div className={styles.itemDetails}>
                       <div className={styles.textDetails}>
