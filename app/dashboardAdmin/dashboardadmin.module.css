@@ -1,0 +1,96 @@
+/* dashboard.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Larghezza massima per il contenitore */
+    padding: 24px;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 16px; /* Bordi più morbidi */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Ombra più ampia e leggera */
+    margin: 20px auto; /* Centrato e con margine superiore per distanziare da altri elementi */
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: translateY(-4px); /* Leggero sollevamento all'hover */
+}
+
+.title {
+    font-size: 2.5rem; /* Font size leggermente ridotto */
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 20px;
+    margin-top: 24px;
+    justify-content: center;
+}
+
+.button {
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0069d9, #005bb5); /* Gradiente più sobrio */
+    border: none;
+    border-radius: 30px; /* Angoli più arrotondati */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    min-width: 180px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Ombra più delicata */
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #005bb5, #004494);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Ombra più ampia durante hover */
+}
+
+.button:active {
+    background: linear-gradient(135deg, #003a7a, #002c5a);
+    transform: translateY(2px);
+}
+
+.heroContainer {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Altezza migliorata per una visualizzazione più equilibrata */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+    box-shadow: inset 0 0 250px rgba(0, 0, 0, 0.15); /* Ombra più diffusa e leggera */
+}
+
+.heroBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(8px); /* Meno blur per un effetto più delicato */
+    opacity: 0.8; /* Maggiore visibilità dell'immagine */
+    z-index: -1;
+    background-image: url('/images/hero.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transition: filter 0.3s ease;
+}
+
+.heroBackground:hover {
+    filter: blur(10px) brightness(0.85); /* Effetto hover più sottile */
+}
