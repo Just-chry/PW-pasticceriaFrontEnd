@@ -99,7 +99,7 @@ export default function Products() {
             <div className={styles.feature}>
               <GiCakeSlice className={styles.featureIcon} />
               <h3>SCELTA PRODOTTO</h3>
-              <p>Scegli tra una selezione di dolci di alta qualità e clicca su "Ordina ora" per procedere con il tuo ordine.</p>
+              <p>Scegli tra una selezione di dolci di alta qualità e clicca sul prodotto per procedere con il tuo ordine.</p>
             </div>
             <div className={styles.feature}>
               <div className={styles.icons}>
@@ -127,14 +127,14 @@ export default function Products() {
           <h2>I nostri prodotti</h2>
           {error ? (
             <div>
-              <p>Errore durante il caricamento dei prodotti. Riprova più tardi.</p>
+              <p className={styles.centerdText}>Errore durante il caricamento dei prodotti. Riprova più tardi.</p>
             </div>
           ) : loading ? (
-            <div>Caricamento in corso...</div>
+            <div className={styles.centerdText}>Caricamento in corso...</div>
           ) : (
             <div className={styles.items}>
               {products.length === 0 ? (
-                <p>Prodotti terminati. Torna presto per nuovi dolci!</p>
+                <p className={styles.centerdText}>Prodotti terminati. Torna presto per nuovi dolci!</p>
               ) : (
                 products.map((product, index) => (
                   <div key={index} className={styles.item} onClick={() => handleOrderClick(product.id)}>

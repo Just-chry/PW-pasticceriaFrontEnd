@@ -54,7 +54,6 @@ export default function CategorySlider() {
                 spaceBetween={10}
                 slidesPerView={2}
                 slidesPerGroup={2}
-                loop={true}
                 navigation={true}
                 autoplay={{ delay: 3000 }}
                 speed={2500}

@@ -43,8 +43,6 @@
 }
 
 .imageContainer {
-  width: 100%;
-  height: auto;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -52,8 +50,6 @@
 }
 
 .image {
-  width: 100%;
-  height: auto;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
@@ -62,12 +58,34 @@
   transform: scale(1.05);
 }
 
+.containerDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
 .productName {
   font-size: 1.25rem;
   font-weight: 600;
   color: #333;
   margin: 0.5rem 0;
   text-align: center;
+}
+
+.productPrice span {
+  font-weight: 800;
+}
+
+.productIngredients span {
+  font-weight: 800;
+}
+
+.productDescription span {
+  font-weight: 800;
+}
+
+.productCategory span {
+  font-weight: 800;
 }
 
 .deleteButton {

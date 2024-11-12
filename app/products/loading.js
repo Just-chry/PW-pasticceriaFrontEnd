@@ -2,9 +2,9 @@ import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Footer from "@/components/footer";
 
-import styles from "@/app/productsCategory/loading.module.css";
+import styles from "@/app/products/loading.module.css";
 
-export default function ProductsCategoryLoading() {
+export default function ProductsLoading() {
     return (
         <div>
             <header className={styles.components}>

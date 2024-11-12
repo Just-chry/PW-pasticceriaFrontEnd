@@ -13,7 +13,7 @@ import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import Link from 'next/link';
 
-import styles from './page.module.css';
+import styles from '@/app/products/[id]/page.module.css';
 
 export default function Product() {
   const [dataRitiro, setDataRitiro] = useState("");
@@ -92,7 +92,7 @@ export default function Product() {
         while (orarioCorrente < chiusura) {
           const nuovoOrario = new Date(orarioCorrente);
           const orarioOccupato = ordiniEsistenti.some((ordine) =>
-              isSameDay(ordine.data, nuovoOrario) && isSameMinute(ordine.data, nuovoOrario)
+            isSameDay(ordine.data, nuovoOrario) && isSameMinute(ordine.data, nuovoOrario)
           );
 
           if (!orarioOccupato) {
@@ -116,65 +116,69 @@ export default function Product() {
     setOrarioRitiro(e.target.value);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error || !product) {
-    return <div>Product not found</div>;
-  }
-
   return (
-      <div>
-        <header>
-          <Header />
-        </header>
-        <Hero />
+    <div>
+      <header>
+        <Header />
+      </header>
+      <Hero />
+      {error ? (
+        <div>
+          <p className={styles.centerdText}>Errore durante il caricamento del prodotto. Riprova più tardi.</p>
+        </div>
+      ) : loading ? (
+        <div className={styles.centerdText}>Caricamento in corso...</div>
+      ) : (
         <div className={styles.productContainer}>
-          <div className={styles.productImageWrapper}>
-            <img src={`${product.image}`} alt={product.name} width={800} height={600} className={styles.productImage} />
-          </div>
-          <div className={styles.productDetails}>
-            <div className={styles.titleAndPrice}>
-              <h1 className={styles.productTitle}>{product.name}</h1>
-              <p className={styles.productPrice}>{product.price}€</p>
-            </div>
-            <div className={styles.ingredientsAndAllergens}>
-              <p className={styles.productIngredients}><span>Ingredienti:</span> {product.ingredients ? product.ingredients.join(', ') : 'Non disponibili'}</p>
-            </div>
-            <div className={styles.quantityDateAndOrder}>
-              <div className={styles.ritiroSection}>
-                <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
-                <input type="date" value={dataRitiro} onChange={handleDataChange} className={styles.ritiroDate} />
+          {product.length === 0 ? (
+            <p className={styles.centerdText}>Prodotto non trovato. Torna presto per nuovi dolci!</p>
+          ) : (
+            <>
+              <div className={styles.productImageWrapper}>
+                <img src={product.image} alt={product.name} width='800' height='600' className={styles.productImage} />
+              </div>
+              <div className={styles.productDetails}>
+                <div className={styles.titleAndPrice}>
+                  <h1 className={styles.productTitle}>{product.name}</h1>
+                  <p className={styles.productPrice}>{product.price}€</p>
+                </div>
+                <div className={styles.descriptionAndingredients}>
+                  <p className={styles.productDescription}><span>Descrizione:</span> {product.description ? product.description : 'Non disponibile'}</p>
+                  <p className={styles.productIngredients}><span>Ingredienti:</span> {product.ingredients ? product.ingredients.join(', ') : 'Non disponibili'}</p>
+                </div>
+                <div className={styles.quantityDateAndOrder}>
+                  <div className={styles.ritiroSection}>
+                    <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
+                    <input type="date" value={dataRitiro} onChange={handleDataChange} className={styles.ritiroDate} />
 
-                {negozioChiuso && (
-                    <p className={styles.negocioClosedMessage}>Il negozio è chiuso il lunedì. Seleziona un altro giorno.</p>
-                )}
+                    {negozioChiuso && (
+                      <p className={styles.negocioClosedMessage}>Il negozio è chiuso il lunedì. Seleziona un altro giorno.</p>
+                    )}
 
-                {dataRitiro && orariDisponibili.length > 0 && !negozioChiuso && (
-                    <>
-                      <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
-                      <select value={orarioRitiro} onChange={handleOrarioChange} className={styles.ritiroTime}>
-                        <option value="">Seleziona un orario</option>
-                        {orariDisponibili.map((orario, index) => (
+                    {dataRitiro && orariDisponibili.length > 0 && !negozioChiuso && (
+                      <>
+                        <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
+                        <select value={orarioRitiro} onChange={handleOrarioChange} className={styles.ritiroTime}>
+                          <option value="">Seleziona un orario</option>
+                          {orariDisponibili.map((orario, index) => (
                             <option key={index} value={orario}>
                               {format(orario, "HH:mm")}
                             </option>
-                        ))}
-                      </select>
-                    </>
-                )}
+                          ))}
+                        </select>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <button className={styles.productButton}>Aggiungi al carrello <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='30' height='30' fill="#000"><path d="M5 8h16l-2 7H7L5 8z" fill="#F3BC9F"></path><path d="M9 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM17 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM21 7H5.75l-.79-2.77A1 1 0 0 0 4 3.5H3c-.55 0-1 .45-1 1s.45 1 1 1h.25l2.48 8.69A2.5 2.5 0 0 0 8.13 16h9.74a2.5 2.5 0 0 0 2.4-1.81l1.69-5.91A1 1 0 0 0 21 7Zm-2.65 6.64a.5.5 0 0 1-.48.36H8.13a.5.5 0 0 1-.48-.36L6.33 9h13.35l-1.33 4.64Z"></path></svg></button>
               </div>
-              <button className={styles.productButton}>Aggiungi al carrello <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='30' height='30' fill="#000"><path d="M5 8h16l-2 7H7L5 8z" fill="#F3BC9F"></path><path d="M9 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM17 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM21 7H5.75l-.79-2.77A1 1 0 0 0 4 3.5H3c-.55 0-1 .45-1 1s.45 1 1 1h.25l2.48 8.69A2.5 2.5 0 0 0 8.13 16h9.74a2.5 2.5 0 0 0 2.4-1.81l1.69-5.91A1 1 0 0 0 21 7Zm-2.65 6.64a.5.5 0 0 1-.48.36H8.13a.5.5 0 0 1-.48-.36L6.33 9h13.35l-1.33 4.64Z"></path></svg></button>
-            </div>
-          </div>
+            </>
+          )}
         </div>
-        <div className={styles.containerDescription}>
-          <p className={styles.productDescription}>{product.description}</p>
-        </div>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
+      )}
+      <footer>
+        <Footer />
+      </footer>
+    </div>
   );
 }

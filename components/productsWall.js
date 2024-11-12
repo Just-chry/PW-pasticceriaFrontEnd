@@ -49,7 +49,7 @@ export default function ProductsWall() {
                 {productImages.map((image, index) => (
                     <div key={index} className={styles.imageContainer}>
                         <a href={image.link}>
-                            <Image src={image.src} alt={`Product ${index + 1}`} className={styles.image} width={600} height={600} />
+                            <Image src={image.src} alt={`Product ${index + 1}`} className={styles.image} width={400} height={400} />
                         </a>
                     </div>
                 ))}
