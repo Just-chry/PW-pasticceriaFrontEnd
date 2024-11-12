@@ -45,7 +45,7 @@ export default function Login() {
             // Cambia `response.json()` in `response.text()` se la risposta non è JSON
             const data = await response.json();
             alert(data.message || "Login avvenuto con successo!");
-            router.push("/dashboard")
+            router.push("/dashboardUtente")
         } catch (error) {
             alert(error.message);
         }

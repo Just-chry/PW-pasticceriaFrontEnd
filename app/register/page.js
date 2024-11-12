@@ -45,6 +45,7 @@ export default function Register() {
 
             const data = await response.text();
             alert(data || "Registrazione completata con successo! Controlla il tuo contatto per confermare.");
+            Router.push("/login")
         } catch (error) {
             alert(error.message);
         }

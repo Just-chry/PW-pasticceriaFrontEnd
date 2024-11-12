@@ -9,51 +9,45 @@ import 'swiper/css/pagination';
 
 import Image from 'next/image';
 
-import styles from '@/components/sliderTorte.module.css';
+import styles from '@/components/sliderCategory.module.css';
 
-const cakes = [
+const categories = [
     {
-        src: "/images/tortaTiramisù.png",
-        alt: "Tiramisù",
-        label: "Tiramisù",
-        link: "/productsCategory#tortaTiramisù",
+        src: "/images/macarons.png",
+        alt: "Macarons",
+        label: "Macarons",
+        link: "/productsCategory/macarons",
     },
     {
-        src: "/images/CrostataAllaMarmellata.png",
-        alt: "Crostata alla Marmellata",
-        label: "Crostata alla Marmellata",
-        link: "/productsCategory#CrostataAllaMarmellata",
+        src: "/images/cookies.png",
+        alt: "Cookies",
+        label: "Cookies",
+        link: "/productsCategory/cookies",
     },
     {
-        src: "/images/millefoglie.png",
-        alt: "Millefoglie",
-        label: "Millefoglie",
-        link: "/productsCategory#millefoglie",
+        src: "/images/jams.png",
+        alt: "Jams",
+        label: "Jams",
+        link: "/productsCategory/jams",
     },
     {
-        src: "/images/tortaChantilly.png",
-        alt: "Torta Chantilly",
-        label: "Torta Chantilly",
-        link: "/productsCategory#tortaChantilly",
+        src: "/images/bars.png",
+        alt: "Bars",
+        label: "Bars",
+        link: "/productsCategory/bars",
     },
     {
-        src: "/images/CrostataAlleFragole.png",
-        alt: "Crostata alle Fragole",
-        label: "Crostata alle Fragole",
-        link: "/productsCategory#CrostataAlleFragole",
-    },
-    {
-        src: "/images/tortaAlLimone.png",
-        alt: "Torta al Limone",
-        label: "Torta al Limone",
-        link: "/productsCategory#tortaAlLimone",
+        src: "/images/cakes.png",
+        alt: "Cakes",
+        label: "Cakes",
+        link: "/productsCategory/cakes",
     }
 ];
 
-export default function TorteSlider() {
+export default function CategorySlider() {
     return (
         <div className={styles.sliderContainer}>
-            <h2 className={styles.title}>Le nostre torte</h2>
+            <h2 className={styles.title}>Le nostre categorie</h2>
             <p className={styles.subtitle}>Dolci esperienze per festeggiare i momenti importanti</p>
             <Swiper
                 modules={[Navigation, Autoplay]}
@@ -79,19 +73,19 @@ export default function TorteSlider() {
                     },
                 }}
             >
-                {cakes.map((cake, index) => (
+                {categories.map((category, index) => (
                     <SwiperSlide key={index}>
                         <div className={styles.slide}>
                             <Image
-                                src={cake.src}
-                                alt={cake.alt}
+                                src={category.src}
+                                alt={category.alt}
                                 width={600}
                                 height={450}
                                 className={styles.image}
                             />
                             <div className={styles.caption}>
-                                <h3>{cake.label}</h3>
-                                <a href={cake.link} className={styles.ctaButton}>Scopri di più</a>
+                                <h3>{category.label}</h3>
+                                <a href={category.link} className={styles.ctaButton}>Scopri di più</a>
                             </div>
                         </div>
                     </SwiperSlide>

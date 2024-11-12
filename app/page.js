@@ -4,7 +4,7 @@ import Hero from "@/components/hero";
 import UserExperience from "@/components/userExperience";
 import ChiSiamo from "@/components/chiSiamo";
 import ChiSiamoTeam from "@/components/chiSiamoTeam";
-import SliderTorte from "@/components/sliderTorte";
+import SliderTorte from "@/components/sliderCategory";
 import Newsletter from "@/components/newsletter";
 import ProductsWall from "@/components/productsWall";
 import VieniATrovarci from "@/components/vieniATrovarci";
