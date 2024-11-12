@@ -51,7 +51,7 @@ export default function Products() {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch(`http://localhost:8080/products?category=${slug}`, {
+        const response = await fetch(`http://localhost:8080/products/category?category=${slug}`, {
           method: "GET",
           credentials: 'include',
         });
