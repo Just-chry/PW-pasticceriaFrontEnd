@@ -1,4 +1,3 @@
-import Header from "@/components/header";
 import Hero from "@/components/hero";
 import Footer from "@/components/footer";
 
@@ -7,9 +6,6 @@ import styles from "@/app/productsCategory/loading.module.css";
 export default function ProductsCategoryLoading() {
     return (
         <div>
-            <header className={styles.components}>
-                <Header />
-            </header>
             <div className={styles.components}>
                 <Hero />
             </div>

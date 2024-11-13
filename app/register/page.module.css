@@ -184,6 +184,13 @@
     filter: blur(5px);
 }
 
+.showPasswordButton {
+    border: none;
+    background-color: unset;
+    color: #f3bc9f;
+    font-size: 1.5rem;
+}
+
 @media (max-width: 1400px) {
     .containerRegister {
         width: 100%;

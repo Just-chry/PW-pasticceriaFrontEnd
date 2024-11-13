@@ -8,10 +8,8 @@ import isSameDay from 'date-fns/isSameDay';
 import isSameMinute from 'date-fns/isSameMinute';
 import getDay from 'date-fns/getDay';
 
-import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
-import Link from 'next/link';
 
 import styles from '@/app/products/[id]/page.module.css';
 
@@ -118,9 +116,6 @@ export default function Product() {
 
   return (
     <div>
-      <header>
-        <Header />
-      </header>
       <Hero />
       {error ? (
         <div>

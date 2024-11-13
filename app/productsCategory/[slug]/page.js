@@ -6,7 +6,6 @@ import { FaArrowLeft, FaArrowRight, FaHandHoldingUsd } from "react-icons/fa";
 import { FaCalendarDays, FaClock } from "react-icons/fa6";
 import { GiCakeSlice } from "react-icons/gi";
 
-import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
@@ -78,9 +77,6 @@ export default function Products() {
 
   return (
     <div>
-      <header>
-        <Header />
-      </header>
       <Hero />
       <main className={styles.main}>
         <div className={styles.textContainer}>

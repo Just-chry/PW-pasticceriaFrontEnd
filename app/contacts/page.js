@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
@@ -59,9 +58,6 @@ export default function Contacts() {
 
     return (
         <section>
-            <header>
-                <Header />
-            </header>
             <Hero />
             <section>
                 <div id='tab' className={styles.contactsPage}>

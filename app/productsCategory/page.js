@@ -1,4 +1,3 @@
-import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Categoria from '@/components/categoria';
 import Footer from '@/components/footer';
@@ -16,9 +15,6 @@ export default function ProductsCategory() {
 
     return (
         <div>
-            <header>
-                <Header />
-            </header>
             <Hero />
             <section>
                 <div className={styles.categorieContainer}>
