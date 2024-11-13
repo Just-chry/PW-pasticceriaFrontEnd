@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import styles from './page.module.css';
 import Image from 'next/image';
+import Footer from "@/components/footer";
 
 export default function Utenti() {
     const [users, setUsers] = useState([]);
@@ -34,22 +35,29 @@ export default function Utenti() {
     }, []);
 
     return (
-        <div className={styles.main}>
-            <h1 className={styles.title}>Gestione Utenti</h1>
-            {error ? (
-                <p className={styles.error}>{error}</p>
-            ) : (
-                <div className={styles.grid}>
-                    {users.map((user, index) => (
-                        <UserCard key={index} user={user} />
-                    ))}
-                </div>
-            )}
-        </div>
-    );
+        <>
+            <div className={styles.main}>
+                <h1 className={styles.title}>Gestione Utenti</h1>
+                {error ? (
+                    <p className={styles.error}>{error}</p>
+                ) : (
+                    <div className={styles.grid}>
+                        {users.map((user, index) => (
+                            <UserCard key={index} user={user}/>
+                        ))}
+                    </div>
+                )}
+
+            </div>
+            <footer>
+                <Footer/>
+            </footer>
+        </>
+    )
+        ;
 }
 
-function UserCard({ user }) {
+function UserCard({user}) {
     if (!user) {
         return null;
     }
