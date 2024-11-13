@@ -5,36 +5,68 @@ import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
+import {useRouter} from "next/navigation";
 
 export default function Ordini() {
+    const router = useRouter();
+    const [userRole, setUserRole] = useState(null);
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchOrders = async () => {
+        const fetchUser = async () => {
             try {
-                setLoading(true);
-                const response = await fetch('http://localhost:8080/orders/all', {
+                const response = await fetch('http://localhost:8080/user', {
                     method: 'GET',
-                    credentials: 'include', // Include cookies for authentication
+                    credentials: 'include',
                 });
 
                 if (!response.ok) {
-                    throw new Error('Errore durante il caricamento degli ordini. Riprova più tardi.');
+                    throw new Error('Errore durante il caricamento dei dati utente.');
                 }
 
-                const data = await response.json();
-                setOrders(data);
+                const userData = await response.json();
+                if (userData.role !== 'admin') {
+                    router.push('/not-found');
+                } else {
+                    setUserRole('admin');
+                }
             } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
+                console.error('Errore:', error.message);
+                router.push('/not-found');
             }
         };
 
-        fetchOrders();
-    }, []);
+        fetchUser();
+    }, [router]);
+
+    useEffect(() => {
+        if (userRole === 'admin') {
+            const fetchOrders = async () => {
+                try {
+                    setLoading(true);
+                    const response = await fetch('http://localhost:8080/orders/all', {
+                        method: 'GET',
+                        credentials: 'include', // Include cookies for authentication
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Errore durante il caricamento degli ordini. Riprova più tardi.');
+                    }
+
+                    const data = await response.json();
+                    setOrders(data);
+                } catch (error) {
+                    setError(error.message);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchOrders();
+        }
+    }, [userRole]);
 
     return (
         <div>

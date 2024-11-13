@@ -28,7 +28,7 @@ export default function Dashboard() {
                         <Link href="/magazzino">
                             <button className={styles.button}>Magazzino</button>
                         </Link>
-                        <Link href="/ordini">
+                        <Link href="/ordiniAdmin">
                             <button className={styles.button}>Ordini</button>
                         </Link>
                     </div>

@@ -18,11 +18,16 @@
 /* Grid container for the order cards */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(1, minmax(200px, 1fr));
+    }
+}
 /* Styling for each individual order card */
 .card {
     background-color: #fff;
