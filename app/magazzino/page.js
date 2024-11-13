@@ -55,49 +55,79 @@ export default function Prodotti() {
     }, []);
 
 
-    const handleAddProduct = async () => {
-        if (newProduct.name && newProduct.image && newProduct.price && newProduct.ingredients && newProduct.description && newProduct.category) {
-            try {
-                // Assuming you've uploaded the image separately and obtained the image path:
-                const imagePath = newProduct.imagePath; // Path returned from image upload
-
-                const ingredientsArray = newProduct.ingredients.split(',').map(ingredient => ingredient.trim());
-
-                const productToAdd = {
-                    ...newProduct,
-                    image: imagePath, // Send the path, not Base64 content
-                    ingredientNames: ingredientsArray,
-                    quantity: parseInt(newProduct.quantity, 10),
-                    price: parseFloat(newProduct.price)
-                };
-
-                const response = await fetch('http://localhost:8080/products/add', {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(productToAdd),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Errore durante l\'aggiunta del prodotto. Verifica di avere i permessi necessari.');
-                }
-
-                const addedProduct = await response.json();
-                setProducts([...products, addedProduct]);
-                setNewProduct({ name: '', image: '', quantity: 1, price: '', ingredients: '', description: '', category: '' });
-                setIsOpen(false);
-                alert('Prodotto aggiunto con successo!');
-            } catch (error) {
-                console.error(error.message);
-                alert(`Errore durante l'aggiunta del prodotto: ${error.message}`);
-            }
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNewProduct((prevState) => ({...prevState, image: file, previewImage: reader.result}));
+            };
+            reader.readAsDataURL(file);
         }
     };
 
 
+    const handleAddProduct = async () => {
+        try {
+            // Convert image file to base64 string
+            if (newProduct.image) {
+                const fileReader = new FileReader();
+                fileReader.onloadend = async () => {
+                    const base64Image = fileReader.result;
 
+                    // Prepare the product data to send to backend
+                    const productData = {
+                        name: newProduct.name,
+                        image: base64Image,
+                        quantity: newProduct.quantity,
+                        price: parseFloat(newProduct.price),
+                        ingredients: newProduct.ingredients.split(",").map(ingredient => ingredient.trim()),
+                        description: newProduct.description,
+                        category: newProduct.category,
+                        isVisible: newProduct.isVisible,
+                    };
+
+                    // Send the request to add product to backend
+                    const response = await fetch('http://localhost:8080/products/add', {
+                        method: 'POST',
+                        credentials: 'include', // Pass cookies for session
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(productData),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Errore durante laggiunta del prodotto. Riprova più tardi.');
+                    }
+
+                    // Reset new product state and close modal
+                    setNewProduct({
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        price: '',
+                        ingredients: '',
+                        description: '',
+                        category: '',
+                        isVisible: true,
+                    });
+                    setIsOpen(false);
+
+                    // Refresh product list after adding new product
+                    const addedProduct = await response.json();
+                    setProducts(prevProducts => [...prevProducts, addedProduct]);
+                };
+
+                fileReader.readAsDataURL(newProduct.image);
+            } else {
+                alert('Seleziona unimmagine per il prodotto.');
+            }
+        } catch (error) {
+            console.error('Errore:', error.message);
+            alert(`Errore durante laggiunta del prodotto: ${error.message}`);
+        }
+    };
 
 
     const handleDeleteProduct = async (id) => {
@@ -126,18 +156,6 @@ export default function Prodotti() {
                 console.error(error.message);
                 alert(`Errore durante l'eliminazione del prodotto: ${error.message}`);
             }
-        }
-    };
-
-
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setNewProduct((prevState) => ({...prevState, image: reader.result}));
-            };
-            reader.readAsDataURL(file);
         }
     };
 
@@ -180,7 +198,7 @@ export default function Prodotti() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ isVisible }), // Aggiorna solo la visibilità del prodotto
+                body: JSON.stringify({isVisible}), // Aggiorna solo la visibilità del prodotto
             });
 
             if (!response.ok) {
@@ -190,7 +208,7 @@ export default function Prodotti() {
             // Se la richiesta ha avuto successo, aggiorna lo stato dei prodotti nel frontend
             setProducts((prevProducts) =>
                 prevProducts.map(product =>
-                    product.id === id ? { ...product, isVisible: isVisible } : product
+                    product.id === id ? {...product, isVisible: isVisible} : product
                 )
             );
 
@@ -200,7 +218,6 @@ export default function Prodotti() {
             alert(`Errore durante l'aggiornamento della visibilità del prodotto: ${error.message}`);
         }
     };
-
 
 
     return (
@@ -259,9 +276,9 @@ export default function Prodotti() {
                 {isOpen && (
                     <div className={styles.modal}>
                         <div className={styles.modalContent}>
-      <span className={styles.close} onClick={() => setIsOpen(false)}>
-        &times;
-      </span>
+          <span className={styles.close} onClick={() => setIsOpen(false)}>
+            &times;
+          </span>
                             <h2>Aggiungi un Nuovo Prodotto</h2>
                             <input
                                 type="text"
@@ -329,17 +346,19 @@ export default function Prodotti() {
                                 className={styles.input}
                             />
 
-                            {newProduct.image && (
-                                <div className={styles.imagePreview}>
-                                    <Image
-                                        src={newProduct.image}
-                                        alt="Anteprima Immagine"
-                                        width={100}
-                                        height={100}
-                                        className={styles.imagePreviewImg}
-                                    />
-                                </div>
+                            {newProduct.previewImage ? (
+                                <Image
+                                    src={newProduct.previewImage}
+                                    alt="Anteprima Immagine"
+                                    width={100}
+                                    height={100}
+                                    className={styles.imagePreviewImg}
+                                />
+                            ) : (
+                                <p>Seleziona un'immagine per vedere l'anteprima</p>
                             )}
+
+
                             <button onClick={handleAddProduct} className={styles.submitButton}>
                                 Aggiungi
                             </button>
@@ -353,21 +372,28 @@ export default function Prodotti() {
         </div>
     );
 }
-function ProductCard({ product, onDelete, onQuantityChange, onVisibilityChange }) {
+
+function ProductCard({product, onDelete, onQuantityChange, onVisibilityChange}) {
     if (!product) {
         return null;
     }
     return (
         <div className={styles.card}>
             <div className={styles.imageContainer}>
-                <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={400}
-                    height={300}
-                    className={styles.image}
-                />
+                {product.image ? (
+                    <Image
+                        src={product.image.startsWith('/') ? product.image : `/${product.image}`}
+                        alt={product.name}
+                        width={400}
+                        height={300}
+                        className={styles.image}
+                    />
+
+                ) : (
+                    <p>Immagine non disponibile</p>
+                )}
             </div>
+
             <div className={styles.containerDetails}>
                 <h2 className={styles.productName}>{product.name}</h2>
                 <p className={styles.productPrice}><span>Prezzo:</span> {product.price}€</p>
@@ -382,7 +408,7 @@ function ProductCard({ product, onDelete, onQuantityChange, onVisibilityChange }
                     <input
                         type="checkbox"
                         checked={product.isVisible}
-                        onChange={() =>  onVisibilityChange(product.id, !product.isVisible)}
+                        onChange={() => onVisibilityChange(product.id, !product.isVisible)}
                         className={styles.checkbox}
                     />
                     <label>Visibile agli utenti</label>
