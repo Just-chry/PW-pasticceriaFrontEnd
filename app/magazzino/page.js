@@ -18,7 +18,7 @@ export default function Prodotti() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:8080/products', {
+        const response = await fetch('http://localhost:8080/products/admin', {
           method: 'GET',
           credentials: 'include',
         });
@@ -48,13 +48,35 @@ export default function Prodotti() {
     }
   };
 
-  const handleDeleteProduct = (id) => {
+  const handleDeleteProduct = async (id) => {
     const confirmDelete = window.confirm('Sei sicuro di voler eliminare il prodotto?');
     if (confirmDelete) {
-      const updatedProducts = products.filter(product => product.id !== id);
-      setProducts(updatedProducts);
+      try {
+        const response = await fetch(`http://localhost:8080/products/${id}`, {
+          method: 'DELETE',
+          credentials: 'include', // Passa i cookie per la sessione
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Errore durante l'eliminazione del prodotto: ${id}`);
+        }
+
+        // Se la richiesta ha avuto successo, aggiorna lo stato del prodotto nel frontend
+        const updatedProducts = products.filter(product => product.id !== id);
+        setProducts(updatedProducts);
+
+        alert(`Prodotto con ID ${id} rimosso con successo`);
+
+      } catch (error) {
+        console.error(error.message);
+        alert(`Errore durante l'eliminazione del prodotto: ${error.message}`);
+      }
     }
   };
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
