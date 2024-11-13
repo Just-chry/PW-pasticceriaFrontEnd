@@ -1,129 +1,188 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react';
-import styles from './page.module.css';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import format from 'date-fns/format';
+import addMinutes from 'date-fns/addMinutes';
+import getDay from 'date-fns/getDay';
 
-export default function Carrello({ onRemoveItem, }) {
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const router = useRouter();
+import styles from '@/app/cart/page.module.css';
 
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch('http://localhost:8080/orders', {
-          method: "GET",
-          credentials: 'include',
-        });
+export default function Cart() {
+    const [cart, setCart] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [dataRitiro, setDataRitiro] = useState("");
+    const [orarioRitiro, setOrarioRitiro] = useState("");
+    const [orariDisponibili, setOrariDisponibili] = useState([]);
+    const [comments, setComments] = useState("");
+    const [dayOfWeek, setDayOfWeek] = useState(null); // Nuovo stato per dayOfWeek
+    const router = useRouter();
 
-        if (!response.ok) {
-          throw new Error("Errore durante il recupero del carrello. Riprova più tardi.");
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                setLoading(true);
+                const response = await fetch('http://localhost:8080/orders/cart', {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+
+                if (!response.ok) {
+                    throw new Error("Errore durante il recupero del carrello. Riprova più tardi.");
+                }
+
+                const data = await response.json();
+                setCart(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCart();
+    }, []);
+
+    useEffect(() => {
+        if (dataRitiro) {
+            const giornoSelezionato = new Date(dataRitiro);
+            const dayOfWeekSelected = getDay(giornoSelezionato); // Ottieni il giorno della settimana (0 = Domenica, 1 = Lunedì, ..., 6 = Sabato)
+            setDayOfWeek(dayOfWeekSelected);
+
+            // Se il giorno selezionato è Lunedì (getDay() restituisce 1 per il lunedì), mostra un messaggio
+            if (dayOfWeekSelected === 1) {
+                setOrariDisponibili([]);
+                return;
+            }
+
+            const orariGenerati = [];
+
+            // Genera fasce orarie per il mattino (9:00 - 13:00)
+            let orarioCorrente = new Date(giornoSelezionato.setHours(9, 0, 0, 0));
+            const orarioChiusuraMattina = new Date(giornoSelezionato.setHours(13, 0, 0, 0));
+
+            while (orarioCorrente < orarioChiusuraMattina) {
+                orariGenerati.push(new Date(orarioCorrente));
+                orarioCorrente = addMinutes(orarioCorrente, 10);
+            }
+
+            // Genera fasce orarie per il pomeriggio (15:00 - 19:00)
+            orarioCorrente = new Date(giornoSelezionato.setHours(15, 0, 0, 0));
+            const orarioChiusuraPomeriggio = new Date(giornoSelezionato.setHours(19, 0, 0, 0));
+
+            while (orarioCorrente < orarioChiusuraPomeriggio) {
+                orariGenerati.push(new Date(orarioCorrente));
+                orarioCorrente = addMinutes(orarioCorrente, 10);
+            }
+
+            setOrariDisponibili(orariGenerati);
         }
+    }, [dataRitiro]);
 
-        const data = await response.json();
-        setCartItems(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
+    const handleDataChange = (e) => {
+        setDataRitiro(e.target.value);
+        setOrarioRitiro("");
     };
 
-    fetchCartItems();
-  }, []);
+    const handleOrarioChange = (e) => {
+        setOrarioRitiro(e.target.value);
+    };
 
-  const handleCreateOrder = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/orders/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          pickupDate: dataRitiro,
-          pickupTime: orarioRitiro,
-        }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Errore durante la creazione dell\'ordine. Riprova più tardi.');
-      }
-  
-      alert('Ordine creato con successo.');
-      router.push('/cart');
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+    const handleCommentsChange = (e) => {
+        setComments(e.target.value);
+    };
 
-  return (
-    <div className={styles.cartContainer}>
-      <div className={styles.cartHeader}>
-        <h1>Carrello</h1>
-      </div>
-      
-      {loading ? (
-        <p className={styles.centeredText}>Caricamento in corso...</p>
-      ) : error ? (
-        <p className={styles.centeredText}>{error}</p>
-      ) : (
-        <div className={styles.cartProducts}>
-          {cartItems.length === 0 ? (
-            <p className={styles.centeredText}>Il carrello è vuoto. Torna alla pagina dei prodotti per aggiungere articoli.</p>
-          ) : (
-            cartItems.map((item, index) => (
-              <div key={index} className={styles.cartProduct}>
-                <img src={item.image} alt={item.name} className={styles.cartProductImage} />
-                <div className={styles.cartProductDetails}>
-                  <h2>{item.name}</h2>
-                  <p>{item.price}€</p>
-                  <div className={styles.productQuantityControl}>
-                    <button className={styles.quantityDecrease} onClick={() => onRemoveItem(item.id, -1)}>-</button>
-                    <span className={styles.quantity}>{item.quantity}</span>
-                    <button className={styles.quantityIncrease} onClick={() => onRemoveItem(item.id, 1)}>+</button>
-                  </div>
-                  <a href="#" className={styles.removeProduct} onClick={() => onRemoveItem(item.id, item.quantity)}>Rimuovi articolo</a>
-                </div>
-                <div className={styles.cartProductTotal}>
-                  <p><strong>{(item.price * item.quantity).toFixed(2)}€</strong></p>
-                </div>
-              </div>
-            ))
-          )}
+    const handleCreateOrder = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/orders/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    pickupDate: dataRitiro,
+                    pickupTime: orarioRitiro,
+                    comments: comments,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Errore durante la creazione dell\'ordine. Riprova più tardi.');
+            }
+
+            alert('Ordine creato con successo.');
+            router.push('/ordiniUtente'); // Redirect alla pagina degli ordini
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    return (
+        <div>
+            <h1 className={styles.cartTitle}>Il Tuo Carrello</h1>
+            {loading ? (
+                <p>Caricamento in corso...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                cart && (
+                    <div className={styles.cartContainer}>
+                        <ul className={styles.cartList}>
+                            {cart.products.map((item) => (
+                                <li key={item.productId} className={styles.cartListItem}>
+                                    <h3>{item.productName}</h3>
+                                    <p>Quantità: {item.quantity}</p>
+                                    <p>Prezzo: {item.price}€</p>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className={styles.orderDetails}>
+                            <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
+                            <input
+                                type="date"
+                                value={dataRitiro}
+                                onChange={handleDataChange}
+                                className={styles.ritiroDate}
+                            />
+
+                            {dataRitiro && orariDisponibili.length > 0 ? (
+                                <>
+                                    <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
+                                    <select
+                                        value={orarioRitiro}
+                                        onChange={handleOrarioChange}
+                                        className={styles.ritiroTime}
+                                    >
+                                        <option value="">Seleziona un orario</option>
+                                        {orariDisponibili.map((orario, index) => (
+                                            <option key={index} value={format(orario, 'HH:mm')}>
+                                                {format(orario, 'HH:mm')}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </>
+                            ) : dayOfWeek === 1 ? (
+                                <p className={styles.negocioClosedMessage}>
+                                    Il negozio è chiuso il lunedì. Seleziona un altro giorno.
+                                </p>
+                            ) : null}
+
+                            <label className={styles.ritiroLabel}>Commenti:</label>
+                            <textarea
+                                value={comments}
+                                onChange={handleCommentsChange}
+                                className={styles.comments}
+                            />
+
+                            <button onClick={handleCreateOrder} className={styles.createOrderButton}>
+                                Crea Ordine
+                            </button>
+                        </div>
+                    </div>
+                )
+            )}
         </div>
-      )}
-
-      {cartItems.length > 0 && !loading && !error && (
-        <div className={styles.cartSummary}>
-          <div className={styles.cartSummaryDetails}>
-            <h2>Totale Carrello</h2>
-            <div className={styles.subtotal}>
-              <p>Subtotal</p>
-              <p><strong>{cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}€</strong></p>
-            </div>
-            <div className={styles.shipping}>
-              <p>Spedizione</p>
-              <p><strong>GRATUITO</strong></p>
-              <p>Ritiro in sede (gratis)</p>
-              <a href="#">Modifica indirizzo</a>
-            </div>
-            <div className={styles.shippingMethod}>
-              <input type="radio" id="pickup" name="shipping-method" defaultChecked />
-              <label htmlFor="pickup">Ritiro in sede (gratis)</label>
-            </div>
-            <div className={styles.total}>
-              <p><strong>Totale</strong></p>
-              <p><strong>{cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}€</strong></p>
-            </div>
-            <button onClick={handleCreateOrder} className={styles.createOrderButton}>Crea Ordine</button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    );
 }

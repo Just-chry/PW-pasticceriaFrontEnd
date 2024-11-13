@@ -47,7 +47,7 @@ export default function Login() {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
+                const errorData = await response.text();
                 throw new Error(errorData.message || "Errore durante l'accesso. Riprova più tardi.");
             }
 
