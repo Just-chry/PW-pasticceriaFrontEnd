@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
@@ -67,7 +67,7 @@ export default function Prodotti() {
             const data = await response.json();
             const productsWithVisibility = data.map(product => ({
                 ...product,
-                isVisible: product.isVisible !== undefined ? product.isVisible : false
+                isVisible: product.is_visible // Modifica per mantenere il valore booleano
             }));
             setProducts(productsWithVisibility);
         } catch (error) {
@@ -77,7 +77,7 @@ export default function Prodotti() {
         }
     };
 
-// useEffect to fetch products when userRole changes
+
     useEffect(() => {
         if (userRole === 'admin') {
             fetchProducts();
@@ -97,13 +97,11 @@ export default function Prodotti() {
 
     const handleAddProduct = async () => {
         try {
-            // Convert image file to base64 string
             if (newProduct.image) {
                 const fileReader = new FileReader();
                 fileReader.onloadend = async () => {
                     const base64Image = fileReader.result;
 
-                    // Prepare the product data to send to backend
                     const productData = {
                         name: newProduct.name,
                         image: base64Image,
@@ -112,13 +110,12 @@ export default function Prodotti() {
                         ingredientNames: newProduct.ingredients.split(",").map(ingredient => ingredient.trim()),
                         description: newProduct.description,
                         category: newProduct.category,
-                        isVisible: newProduct.isVisible,
+                        isVisible: newProduct.isVisible ? 1 : 0,
                     };
 
-                    // Send the request to add product to backend
                     const response = await fetch('http://localhost:8080/products/add', {
                         method: 'POST',
-                        credentials: 'include', // Pass cookies for session
+                        credentials: 'include',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -129,7 +126,6 @@ export default function Prodotti() {
                         throw new Error('Errore durante laggiunta del prodotto. Riprova più tardi.');
                     }
 
-                    // Reset new product state and close modal
                     setNewProduct({
                         name: '',
                         image: '',
@@ -143,7 +139,6 @@ export default function Prodotti() {
                     setIsOpen(false);
 
                     await fetchProducts();
-
                 };
 
                 fileReader.readAsDataURL(newProduct.image);
@@ -155,7 +150,6 @@ export default function Prodotti() {
             alert(`Errore durante laggiunta del prodotto: ${error.message}`);
         }
     };
-
 
     const handleModifyProduct = (product) => {
         setEditProductModal({isOpen: true, product});
@@ -172,15 +166,14 @@ export default function Prodotti() {
         }));
     };
 
-
     const handleEditProductSave = async () => {
         try {
             const {product} = editProductModal;
 
-            // Prepare updated product data including updated ingredients
             const updatedProductData = {
                 ...product,
-                ingredientNames: product.ingredients.split(",").map(ingredient => ingredient.trim())
+                ingredientNames: product.ingredients.split(",").map(ingredient => ingredient.trim()),
+                isVisible: product.isVisible ? 1 : 0
             };
 
             const response = await fetch(`http://localhost:8080/products/${product.id}`, {
@@ -204,7 +197,6 @@ export default function Prodotti() {
             alert(`Errore durante la modifica del prodotto: ${error.message}`);
         }
     };
-
 
     const handleDeleteProduct = async (id) => {
         const confirmDelete = window.confirm('Sei sicuro di voler eliminare il prodotto?');
@@ -273,7 +265,7 @@ export default function Prodotti() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({isVisible}),
+                body: JSON.stringify({is_visible: isVisible}), // Cambiato per inviare `is_visible`
             });
 
             if (!response.ok) {
@@ -291,6 +283,7 @@ export default function Prodotti() {
             alert(`Errore durante l'aggiornamento della visibilità del prodotto: ${error.message}`);
         }
     };
+
 
     return (
         <div>
@@ -384,7 +377,6 @@ export default function Prodotti() {
                                 className={styles.input}
                             />
 
-                            {/* Menù a tendina per selezionare la categoria */}
                             <select
                                 value={newProduct.category}
                                 onChange={(e) => setNewProduct({...newProduct, category: e.target.value})}
@@ -400,10 +392,11 @@ export default function Prodotti() {
                             <div className={styles.checkboxContainer}>
                                 <input
                                     type="checkbox"
-                                    checked={newProduct.isVisible || false} // Assicurati che `newProduct.isVisible` abbia sempre un valore booleano
-                                    onChange={(e) => setNewProduct({...newProduct, isVisible: e.target.checked})}
+                                    checked={Boolean(product.isVisible)}
+                                    onChange={() => onVisibilityChange(product.id, !product.isVisible)}
                                     className={styles.checkbox}
                                 />
+
                                 <label>Rendi visibile il prodotto</label>
                             </div>
 
@@ -499,14 +492,8 @@ export default function Prodotti() {
                             <div className={styles.checkboxContainer}>
                                 <input
                                     type="checkbox"
-                                    name="isVisible"
-                                    checked={editProductModal.product.isVisible}
-                                    onChange={(e) => handleEditProductChange({
-                                        target: {
-                                            name: 'isVisible',
-                                            value: e.target.checked
-                                        }
-                                    })}
+                                    checked={Boolean(product.isVisible)}
+                                    onChange={() => onVisibilityChange(product.id, !product.isVisible)}
                                     className={styles.checkbox}
                                 />
                                 <label>Rendi visibile il prodotto</label>
@@ -563,11 +550,10 @@ function ProductCard({product, onModify, onDelete, onQuantityChange, onVisibilit
                 <p className={styles.productDescription}><span>Descrizione:</span> {product.description}</p>
                 <p className={styles.productCategory}><span>Categoria:</span> {product.category}</p>
 
-                {/* Checkbox per gestire la visibilità del prodotto */}
                 <div className={styles.checkboxContainer}>
                     <input
                         type="checkbox"
-                        checked={product.isVisible}
+                        checked={Boolean(product.isVisible)}
                         onChange={() => onVisibilityChange(product.id, !product.isVisible)}
                         className={styles.checkbox}
                     />
