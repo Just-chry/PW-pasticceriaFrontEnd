@@ -42,7 +42,6 @@ export default function Login() {
                 throw new Error(errorData || "Errore durante l'accesso. Riprova più tardi.");
             }
 
-            // Cambia `response.json()` in `response.text()` se la risposta non è JSON
             const data = await response.json();
             alert(data.message || "Login avvenuto con successo!");
             router.push("/dashboardUtente")

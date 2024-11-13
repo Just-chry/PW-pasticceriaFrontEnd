@@ -6,7 +6,6 @@ import sfondo from '@/public/images/imageRegisterLogin.png';
 import styles from '@/app/register/page.module.css';
 
 export default function Register() {
-    // State per gestire i valori dei campi
     const [formData, setFormData] = useState({
         name: "",
         surname: "",
@@ -14,8 +13,7 @@ export default function Register() {
         phone: "",
         password: ""
     });
-
-    // Funzione per aggiornare i valori dei campi
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({

@@ -1,6 +1,8 @@
 import { Raleway } from 'next/font/google';
 import { Quicksand } from 'next/font/google';
 
+import ScrollButton from "@/components/scrollButton";
+
 import "./globals.css";
 
 const raleway = Raleway({
@@ -28,6 +30,7 @@ export default function RootLayout({ children }) {
       <body className={`${raleway.className} ${quicksand.className}`}>
         <main>
           {children}
+          <ScrollButton />
         </main>
       </body>
     </html>

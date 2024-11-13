@@ -20,26 +20,26 @@ const categories = [
     },
     {
         src: "/images/cookies.png",
-        alt: "Cookies",
-        label: "Cookies",
+        alt: "Biscotti",
+        label: "Biscotti",
         link: "/productsCategory/cookies",
     },
     {
         src: "/images/jams.png",
-        alt: "Jams",
-        label: "Jams",
+        alt: "Confetture o Marmellate",
+        label: "Confetture o Marmellate",
         link: "/productsCategory/jams",
     },
     {
         src: "/images/bars.png",
-        alt: "Bars",
-        label: "Bars",
+        alt: "Tavolette di Cioccolato",
+        label: "Tavolette di Cioccolato",
         link: "/productsCategory/bars",
     },
     {
         src: "/images/cakes.png",
-        alt: "Cakes",
-        label: "Cakes",
+        alt: "Torte",
+        label: "Torte",
         link: "/productsCategory/cakes",
     }
 ];
