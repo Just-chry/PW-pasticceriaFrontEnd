@@ -1,14 +1,43 @@
 "use client";
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import Image from 'next/image';
 import Footer from "@/components/footer";
 
 export default function Utenti() {
+    const router = useRouter();
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const checkUserRole = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/user', {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const userData = await response.json();
+                    if (userData.role !== 'admin') {
+                        router.push('/not-found');
+                        return;
+                    }
+                } else {
+                    router.push('/not-found');
+                    return;
+                }
+            } catch (error) {
+                console.error('Errore durante il controllo del ruolo utente:', error);
+                router.push('/not-found');
+                return;
+            }
+        };
+
         const fetchUsers = async () => {
             try {
                 const response = await fetch('http://localhost:8080/user/all', {
@@ -31,8 +60,10 @@ export default function Utenti() {
             }
         };
 
-        fetchUsers();
-    }, []);
+        checkUserRole().then(() => {
+            fetchUsers();
+        });
+    }, [router]);
 
     return (
         <>
@@ -43,21 +74,19 @@ export default function Utenti() {
                 ) : (
                     <div className={styles.grid}>
                         {users.map((user, index) => (
-                            <UserCard key={index} user={user}/>
+                            <UserCard key={index} user={user} />
                         ))}
                     </div>
                 )}
-
             </div>
             <footer>
-                <Footer/>
+                <Footer />
             </footer>
         </>
-    )
-        ;
+    );
 }
 
-function UserCard({user}) {
+function UserCard({ user }) {
     if (!user) {
         return null;
     }

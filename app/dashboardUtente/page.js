@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import Footer from '@/components/footer';
 import styles from '@/app/dashboardUtente/page.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function PersonalArea() {
+    const router = useRouter();
     const [user, setUser] = useState(null);
     const [editMode, setEditMode] = useState({ password: false });
     const [newPhone, setNewPhone] = useState('');
@@ -24,19 +26,24 @@ export default function PersonalArea() {
 
                 if (response.ok) {
                     const userData = await response.json();
-                    setUser(userData);
-                    setNewPhone(userData.phone || '');
-                    setNewEmail(userData.email || '');
+                    if (userData.role !== 'user') {
+                        router.push('/not-found');
+                    } else {
+                        setUser(userData);
+                        setNewPhone(userData.phone || '');
+                        setNewEmail(userData.email || '');
+                    }
                 } else {
                     throw new Error('Errore durante il recupero dei dati utente');
                 }
             } catch (error) {
                 console.error('Errore durante la richiesta:', error);
+                router.push('/not-found');
             }
         };
 
         fetchUserData();
-    }, []);
+    }, [router]);
 
     const validatePassword = (password) => {
         const hasUpperCase = /[A-Z]/.test(password);
@@ -119,7 +126,6 @@ export default function PersonalArea() {
             setPasswordError(error.message);
         }
     };
-
 
     const handleEditClick = (field) => {
         setEditMode((prev) => ({
