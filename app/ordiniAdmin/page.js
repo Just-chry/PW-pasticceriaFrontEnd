@@ -108,7 +108,7 @@ export default function OrdiniAdmin() {
                 ) : (
                     <div className={styles.grid}>
                         {orders.map((order) => (
-                            <OrderCard key={order.id} order={order}/>
+                            <OrderCard key={order.id} order={order} setOrders={setOrders}/>
                         ))}
                     </div>
                 )}
@@ -124,8 +124,8 @@ function calculateTotalPrice(products) {
     return products.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 }
 
-function OrderCard({order}) {
-    const {user} = order;
+function OrderCard({ order, setOrders }) {
+    const { user } = order;
 
     const displayContactInfo = () => {
         if (user) {
@@ -148,10 +148,17 @@ function OrderCard({order}) {
             });
 
             if (!response.ok) {
-                throw new Error('Errore durante l\'accettazione dell\'ordine.');
+                throw new Error("Errore durante l'accettazione dell'ordine.");
             }
 
             alert('Ordine accettato con successo');
+
+            // Aggiorna lo stato dell'ordine in modo che mostri lo stato aggiornato
+            setOrders((prevOrders) =>
+                prevOrders.map((o) =>
+                    o.id === order.id ? { ...o, status: 'accepted' } : o
+                )
+            );
         } catch (error) {
             console.error('Errore:', error.message);
         }
@@ -165,11 +172,17 @@ function OrderCard({order}) {
             });
 
             if (!response.ok) {
-                throw new Error('Errore durante il rifiuto dell\'ordine.');
+                throw new Error("Errore durante il rifiuto dell'ordine.");
             }
 
             alert('Ordine rifiutato con successo');
-            // Potresti aggiornare lo stato o ricaricare gli ordini qui, in base alle esigenze
+
+            // Aggiorna lo stato dell'ordine in modo che mostri lo stato aggiornato
+            setOrders((prevOrders) =>
+                prevOrders.map((o) =>
+                    o.id === order.id ? { ...o, status: 'rejected' } : o
+                )
+            );
         } catch (error) {
             console.error('Errore:', error.message);
         }
