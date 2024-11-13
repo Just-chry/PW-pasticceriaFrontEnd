@@ -31,6 +31,9 @@ export default function Dashboard() {
                         <Link href="/ordiniAdmin">
                             <button className={styles.button}>Ordini</button>
                         </Link>
+                        <Link href="/utenti">
+                            <button className={styles.button}>Utenti</button>
+                        </Link>
                     </div>
                 </div>
             </div>
