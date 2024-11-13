@@ -22,6 +22,73 @@
     gap: 20px;
     padding: 20px;
 }
+/* Styling for contact information */
+.contactInfo {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Styling for the action buttons container */
+.actionButtons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Styling for the accept button */
+.acceptButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.acceptButton:hover {
+    background-color: #45a049;
+}
+
+/* Styling for the reject button */
+.rejectButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.rejectButton:hover {
+    background-color: #e53935;
+}
+/* Styling for the action buttons container */
+.actionButtons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+/* Styling for the notify button */
+.notifyButton {
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notifyButton:hover {
+    background-color: #ff8c00;
+}
+
 
 @media (max-width: 768px) {
     .grid {
