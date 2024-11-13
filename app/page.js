@@ -14,8 +14,6 @@ import VieniATrovarci from "@/components/vieniATrovarci";
 
 import Footer from '@/components/footer';
 
-import ScrollButton from "@/components/scrollButton";
-
 import styles from "@/app/page.module.css";
 
 export default function HomePage() {
@@ -84,7 +82,6 @@ useEffect(() => {
         <Footer />
       </footer>
 
-      <ScrollButton />
     </main>
   );
 }
