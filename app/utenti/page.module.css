@@ -1,0 +1,74 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+
+.title {
+    font-family: 'Raleway';
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    position: relative;
+}
+
+
+.containerDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.userName {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0.5rem 0;
+}
+
+.userEmail,
+.userPhone,
+.userRole {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #555;
+}
+
+.userEmail span,
+.userPhone span,
+.userRole span {
+    font-weight: 700;
+    color: #333;
+}
+
+.error {
+    font-size: 1.2rem;
+    color: red;
+    margin-top: 2rem;
+}

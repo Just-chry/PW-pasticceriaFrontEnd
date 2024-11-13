@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import format from 'date-fns/format';
 import addMinutes from 'date-fns/addMinutes';
 import getDay from 'date-fns/getDay';
-
 import styles from '@/app/cart/page.module.css';
 
 export default function Cart() {
@@ -16,10 +15,34 @@ export default function Cart() {
     const [orarioRitiro, setOrarioRitiro] = useState("");
     const [orariDisponibili, setOrariDisponibili] = useState([]);
     const [comments, setComments] = useState("");
-    const [dayOfWeek, setDayOfWeek] = useState(null); // Nuovo stato per dayOfWeek
+    const [dayOfWeek, setDayOfWeek] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/user', {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+
+                if (response.ok) {
+                    const userData = await response.json();
+                    if (userData.role !== 'utente') {
+                        router.push('/not-found');
+                    } else {
+                        fetchCart(); // Carica il carrello solo se il ruolo dell'utente è corretto
+                    }
+                } else {
+                    throw new Error('Errore durante il recupero dei dati utente');
+                }
+            } catch (error) {
+                console.error('Errore durante la richiesta:', error);
+                router.push('/not-found');
+            }
+        };
+
         const fetchCart = async () => {
             try {
                 setLoading(true);
@@ -41,24 +64,21 @@ export default function Cart() {
             }
         };
 
-        fetchCart();
-    }, []);
+        fetchUserData();
+    }, [router]);
 
     useEffect(() => {
         if (dataRitiro) {
             const giornoSelezionato = new Date(dataRitiro);
-            const dayOfWeekSelected = getDay(giornoSelezionato); // Ottieni il giorno della settimana (0 = Domenica, 1 = Lunedì, ..., 6 = Sabato)
+            const dayOfWeekSelected = getDay(giornoSelezionato);
             setDayOfWeek(dayOfWeekSelected);
 
-            // Se il giorno selezionato è Lunedì (getDay() restituisce 1 per il lunedì), mostra un messaggio
             if (dayOfWeekSelected === 1) {
                 setOrariDisponibili([]);
                 return;
             }
 
             const orariGenerati = [];
-
-            // Genera fasce orarie per il mattino (9:00 - 13:00)
             let orarioCorrente = new Date(giornoSelezionato.setHours(9, 0, 0, 0));
             const orarioChiusuraMattina = new Date(giornoSelezionato.setHours(13, 0, 0, 0));
 
@@ -67,7 +87,6 @@ export default function Cart() {
                 orarioCorrente = addMinutes(orarioCorrente, 10);
             }
 
-            // Genera fasce orarie per il pomeriggio (15:00 - 19:00)
             orarioCorrente = new Date(giornoSelezionato.setHours(15, 0, 0, 0));
             const orarioChiusuraPomeriggio = new Date(giornoSelezionato.setHours(19, 0, 0, 0));
 
@@ -113,7 +132,7 @@ export default function Cart() {
             }
 
             alert('Ordine creato con successo.');
-            router.push('/ordiniUtente'); // Redirect alla pagina degli ordini
+            router.push('/ordiniUtente');
         } catch (error) {
             alert(error.message);
         }
