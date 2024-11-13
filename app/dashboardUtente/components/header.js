@@ -12,28 +12,28 @@ export default function Header() {
 
   const handleLogout = async () => {
     try {
-        const response = await fetch('http://localhost:8080/auth/logout', {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        console.log('Response:', response);
-
-        if (response.ok) {
-            console.log('Logout successful');
-            window.location.href = '/';
-        } else {
-            console.log(response);
-            const errorMessage = await response.text();
-            console.log('Logout failed', response.status, errorMessage);
+      const response = await fetch('http://localhost:8080/auth/logout', {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
         }
+      });
+
+      console.log('Response:', response);
+
+      if (response.ok) {
+        console.log('Logout successful');
+        window.location.href = '/';
+      } else {
+        console.log(response);
+        const errorMessage = await response.text();
+        console.log('Logout failed', response.status, errorMessage);
+      }
     } catch (error) {
-        console.log('Error:', error);
+      console.log('Error:', error);
     }
-};
+  };
 
   const [menuOpen, setMenuOpen] = useState(false);
   const path = usePathname();
@@ -66,6 +66,9 @@ export default function Header() {
             <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
           </li>
           <li className={styles.desktopOnly}>
+            <Link href="/cart" className={path === "/cart" ? `${styles.link} ${styles.active}` : styles.link}>Carrello</Link>
+          </li>
+          <li className={styles.desktopOnly}>
             <Link href="/ordiniUtente" className={path === "/ordiniUtente" ? `${styles.link} ${styles.active}` : styles.link}>Ordini</Link>
           </li>
           <li className={styles.mobileOnly}>
@@ -76,6 +79,9 @@ export default function Header() {
           </li>
           <li className={styles.mobileOnly}>
             <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
+          </li>
+          <li className={styles.mobileOnly}>
+            <Link href="/cart" className={path === "/cart" ? `${styles.link} ${styles.active}` : styles.link}>Carrello</Link>
           </li>
           <li className={styles.mobileOnly}>
             <Link href="/ordiniUtente" className={path === "/ordiniUtente" ? `${styles.link} ${styles.active}` : styles.link}>Ordini</Link>

@@ -1,6 +1,7 @@
 import { Raleway } from 'next/font/google';
 import { Quicksand } from 'next/font/google';
 import "./globals.css";
+
 import ClientLayout from './ClientLayout';
 
 const raleway = Raleway({
@@ -27,7 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${raleway.className} ${quicksand.className}`}>
         <ClientLayout>
-          {children}
+            {children}
         </ClientLayout>
       </body>
     </html>

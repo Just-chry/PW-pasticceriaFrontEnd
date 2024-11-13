@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+
 import ScrollButton from "@/components/scrollButton";
 
 export default function ClientLayout({ children }) {
