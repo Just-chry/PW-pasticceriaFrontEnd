@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
@@ -95,7 +95,7 @@ export default function OrdiniAdmin() {
 
     return (
         <div>
-            <Hero />
+            <Hero/>
             <main className={styles.main}>
                 <h1 className={styles.title}>Tutti gli Ordini</h1>
 
@@ -106,13 +106,13 @@ export default function OrdiniAdmin() {
                 ) : (
                     <div className={styles.grid}>
                         {orders.map((order) => (
-                            <OrderCard key={order.id} order={order} />
+                            <OrderCard key={order.id} order={order}/>
                         ))}
                     </div>
                 )}
             </main>
             <footer>
-                <Footer />
+                <Footer/>
             </footer>
         </div>
     );
@@ -122,8 +122,8 @@ function calculateTotalPrice(products) {
     return products.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 }
 
-function OrderCard({ order }) {
-    const { user } = order;
+function OrderCard({order}) {
+    const {user} = order;
 
     const displayContactInfo = () => {
         if (user) {
