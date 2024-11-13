@@ -5,7 +5,6 @@ import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 export default function OrdiniUtente() {
     const router = useRouter();

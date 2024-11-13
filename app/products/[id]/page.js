@@ -2,11 +2,6 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import addMinutes from 'date-fns/addMinutes';
-import format from 'date-fns/format';
-import isSameDay from 'date-fns/isSameDay';
-import isSameMinute from 'date-fns/isSameMinute';
-import getDay from 'date-fns/getDay';
 
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
