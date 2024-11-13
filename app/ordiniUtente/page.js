@@ -5,7 +5,6 @@ import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 export default function OrdiniUtente() {
     const router = useRouter();
@@ -102,12 +101,16 @@ export default function OrdiniUtente() {
                     <p>Caricamento in corso...</p>
                 ) : error ? (
                     <p>{error}</p>
-                ) : orders.length === 0 ? (
-                    <p className={styles.centerdText}>Nessun ordine presente!</p>
                 ) : (
-                    orders.map((order) => (
-                        <OrderCard key={order.id} order={order} />
-                    ))
+                    <div className={styles.grid}>
+                        {orders.length === 0 ? (
+                            <p>Non hai ordini al momento.</p>
+                        ) : (
+                            orders.map((order) => (
+                                <OrderCard key={order.id} order={order} onDeleteOrder={handleDeleteOrder} />
+                            ))
+                        )}
+                    </div>
                 )}
             </main>
             <footer>
