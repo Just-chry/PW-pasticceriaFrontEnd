@@ -108,16 +108,18 @@ export default function PersonalArea() {
             });
 
             if (!response.ok) {
-                throw new Error("Errore durante il salvataggio della password");
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
             }
 
             setEditMode((prev) => ({ ...prev, password: false }));
             setOldPassword('');
             setNewPassword('');
         } catch (error) {
-            console.error('Errore durante il salvataggio della password:', error);
+            setPasswordError(error.message);
         }
     };
+
 
     const handleEditClick = (field) => {
         setEditMode((prev) => ({

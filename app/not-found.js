@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
@@ -9,9 +8,6 @@ import styles from '@/app/page.module.css'
 export default function NotFound() {
     return (
         <div>
-            <header>
-                <Header />
-            </header>
             <Hero />
 
         <main className={styles.errorContainer}>

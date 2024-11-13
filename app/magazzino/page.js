@@ -5,8 +5,11 @@ import Image from 'next/image';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
+import {useRouter} from "next/navigation";
 
 export default function Prodotti() {
+    const router = useRouter();
+    const [userRole, setUserRole] = useState(null);
     const [products, setProducts] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [newProduct, setNewProduct] = useState({
@@ -17,41 +20,67 @@ export default function Prodotti() {
         ingredients: '',
         description: '',
         category: '',
-        isVisible: true // Aggiungi questo campo
+        isVisible: true
     });
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchUser = async () => {
             try {
-                setLoading(true);
-                const response = await fetch('http://localhost:8080/products/admin', {
+                const response = await fetch('http://localhost:8080/user', {
                     method: 'GET',
-                    credentials: 'include',
+                    credentials: 'include'
                 });
-
                 if (!response.ok) {
-                    throw new Error('Errore durante il caricamento dei prodotti. Riprova più tardi.');
+                    throw new Error('Errore durante il caricamento dei dati utente.');
                 }
-
-                const data = await response.json();
-                // Assicurati che tutti i prodotti abbiano `isVisible` valorizzato
-                const productsWithVisibility = data.map(product => ({
-                    ...product,
-                    isVisible: product.isVisible !== undefined ? product.isVisible : false
-                }));
-                setProducts(productsWithVisibility);
+                const userData = await response.json();
+                if (userData.role !== 'admin') {
+                    router.push('/not-found');
+                } else {
+                    setUserRole('admin');
+                }
             } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
+                console.error('Errore:', error.message);
+                router.push('/not-found');
             }
         };
 
-        fetchProducts();
-    }, []);
+        fetchUser();
+    }, [router]);
+
+    useEffect(() => {
+        if (userRole === 'admin') {
+            const fetchProducts = async () => {
+                try {
+                    setLoading(true);
+                    const response = await fetch('http://localhost:8080/products/admin', {
+                        method: 'GET',
+                        credentials: 'include',
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Errore durante il caricamento dei prodotti. Riprova più tardi.');
+                    }
+
+                    const data = await response.json();
+                    const productsWithVisibility = data.map(product => ({
+                        ...product,
+                        isVisible: product.isVisible !== undefined ? product.isVisible : false
+                    }));
+                    setProducts(productsWithVisibility);
+                } catch (error) {
+                    setError(error.message);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchProducts();
+        }
+    }, [userRole]);
 
 
     const handleFileChange = (event) => {
