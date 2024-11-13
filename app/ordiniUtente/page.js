@@ -5,6 +5,7 @@ import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
 import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function OrdiniUtente() {
     const router = useRouter();
@@ -47,7 +48,7 @@ export default function OrdiniUtente() {
                     setLoading(true);
                     const response = await fetch('http://localhost:8080/orders', {
                         method: 'GET',
-                        credentials: 'include', // Include cookies for authentication
+                        credentials: 'include',
                     });
 
                     if (!response.ok) {
@@ -66,6 +67,30 @@ export default function OrdiniUtente() {
             fetchUserOrders();
         }
     }, [userRole]);
+
+    const handleDeleteOrder = async (orderId) => {
+        try {
+            console.log("Tentativo di cancellazione ordine con ID:", orderId);
+            const response = await fetch(`http://localhost:8080/orders/cancel/${orderId}`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Errore durante la cancellazione dell'ordine: ${errorText}`);
+            }
+
+            // Aggiorna la lista degli ordini rimuovendo l'ordine cancellato
+            setOrders((prevOrders) => prevOrders.filter((order) => order.id !== orderId));
+
+            alert('Ordine cancellato con successo.');
+        } catch (error) {
+            console.error("Errore nella cancellazione dell'ordine:", error.message);
+            alert(error.message);
+        }
+    };
+
 
     return (
         <div>
@@ -96,12 +121,11 @@ function calculateTotalPrice(products) {
     return products.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 }
 
-function OrderCard({ order }) {
+function OrderCard({ order, onDeleteOrder }) {
     return (
         <div className={styles.card}>
             <h2 className={styles.orderId}>Ordine ID: {order.id}</h2>
-            <p className={styles.orderDate}><strong>Data di
-                Ritiro:</strong> {new Date(order.pickupDateTime).toLocaleString()}</p>
+            <p className={styles.orderDate}><strong>Data di Ritiro:</strong> {new Date(order.pickupDateTime).toLocaleString()}</p>
             <p className={styles.orderStatus}><strong>Stato:</strong> {order.status}</p>
             <div className={styles.orderItems}>
                 <strong>Prodotti:</strong>
@@ -117,6 +141,14 @@ function OrderCard({ order }) {
                 <p className={styles.comments}><strong>Commenti:</strong> {order.comments}</p>
             )}
             <p className={styles.totalPrice}><strong>Totale:</strong> {calculateTotalPrice(order.products)}€</p>
+
+            {(order.status === 'cart' || order.status === 'pending') && (
+                <div className={styles.actionButtons}>
+                    <button onClick={() => onDeleteOrder(order.id)} className={styles.deleteButton}>
+                        Cancella Ordine
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
