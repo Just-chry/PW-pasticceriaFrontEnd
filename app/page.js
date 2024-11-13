@@ -31,7 +31,7 @@ const [userData, setUserData] = useState({
 useEffect(() => {
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/users', {
+      const response = await fetch('http://localhost:8080/user', {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -55,8 +55,10 @@ useEffect(() => {
         throw new Error('Errore nella richiesta dei dati utente');
       }
     } catch (error) {
-      console.error('Errore durante il recupero dei dati utente:', error);
+      const { default: Header } = await import('@/components/header');
+      setHeader(() => Header);
     }
+
   };
 
   fetchUserData();
