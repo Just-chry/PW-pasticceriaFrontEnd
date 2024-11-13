@@ -29,7 +29,7 @@ export default function Cart() {
 
                 if (response.ok) {
                     const userData = await response.json();
-                    if (userData.role !== 'utente') {
+                    if (userData.role !== 'user') {
                         router.push('/not-found');
                     } else {
                         fetchCart(); // Carica il carrello solo se il ruolo dell'utente è corretto
