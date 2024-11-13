@@ -6,7 +6,7 @@ import styles from "@/components/newsletter.module.css";
 
 export default function Newsletter() {
     const [email, setEmail] = useState('');
-    const [confirmationMessage, setConfirmationMessage] = useState(''); // Aggiungi questo stato
+    const [confirmationMessage, setConfirmationMessage] = useState(''); 
 
     const handleSubmit = (e) => {
         e.preventDefault();
