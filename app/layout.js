@@ -1,9 +1,7 @@
 import { Raleway } from 'next/font/google';
 import { Quicksand } from 'next/font/google';
-
-import ScrollButton from "@/components/scrollButton";
-
 import "./globals.css";
+import ClientLayout from './ClientLayout';
 
 const raleway = Raleway({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -28,10 +26,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${raleway.className} ${quicksand.className}`}>
-        <main>
+        <ClientLayout>
           {children}
-          <ScrollButton />
-        </main>
+        </ClientLayout>
       </body>
     </html>
   );

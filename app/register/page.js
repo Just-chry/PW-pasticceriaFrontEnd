@@ -1,11 +1,19 @@
 "use client";
+
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import Link from "next/link";
 import Image from "next/image";
 import sfondo from '@/public/images/imageRegisterLogin.png';
+
 import styles from '@/app/register/page.module.css';
 
 export default function Register() {
+    const router = useRouter();
+
     const [formData, setFormData] = useState({
         name: "",
         surname: "",
@@ -13,7 +21,9 @@ export default function Register() {
         phone: "",
         password: ""
     });
-    
+
+    const [showPassword, setShowPassword] = useState(false);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -22,9 +32,18 @@ export default function Register() {
         });
     };
 
-    // Funzione per gestire il submit del modulo
+    const toggleShowPassword = () => {
+        setShowPassword((prevState) => !prevState);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if (!passwordRegex.test(formData.password)) {
+            alert("La password deve contenere almeno una lettera maiuscola, una lettera minuscola e un minimo di 8 caratteri.");
+            return;
+        }
 
         try {
             const response = await fetch("http://localhost:8080/auth/register", {
@@ -43,7 +62,7 @@ export default function Register() {
 
             const data = await response.text();
             alert(data || "Registrazione completata con successo! Controlla il tuo contatto per confermare.");
-            Router.push("/login")
+            router.push("/login")
         } catch (error) {
             alert(error.message);
         }
@@ -65,7 +84,7 @@ export default function Register() {
                             height="20"
                             fill="#000">
                             <path d="M12 20V4l-8 8 8 8z"
-                                  fill="#F3BC9F">
+                                fill="#F3BC9F">
                             </path>
                             <path d="m2.29 12.71l8 8c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41l-6.29-6.29h15.59c.55 0 1-.45 1-1s-.45-1-1-1H5.41l6.29-6.29c.39-.39.39-1.02 0-1.41-.2-.2-.45-.29-.71-.29s-.51.1-.71.29L2.29 11.29c-.39.39-.39 1.02 0 1.41Z">
                             </path>
@@ -137,7 +156,7 @@ export default function Register() {
                                     height="25"
                                     fill="#000">
                                     <path d="m3 9 9 4 9.09-4v10.03H3V9z"
-                                          fill="#F3BC9F">
+                                        fill="#F3BC9F">
                                     </path>
                                     <path d="M19.5 4h-15A2.5 2.5 0 0 0 2 6.5v11A2.5 2.5 0 0 0 4.5 20h15a2.5 2.5 0 0 0 2.5-2.5v-11A2.5 2.5 0 0 0 19.5 4ZM12 12 4 8.67V6.5c0-.28.22-.5.5-.5h15c.28 0 .5.22.5.5v2.17l-8 3.32Zm0 2.16 8-3.31v6.66a.5.5 0 0 1-.5.5h-15a.5.5 0 0 1-.5-.5v-6.66l8 3.31Z">
                                     </path></svg>
@@ -189,7 +208,7 @@ export default function Register() {
                                     height="25"
                                     fill="#000">
                                     <path d="M5 11h14v10H5z"
-                                          fill="#F3BC9F">
+                                        fill="#F3BC9F">
                                     </path>
                                     <g>
                                         <path d="M17.5 10H17V7A5 5 0 0 0 7 7v3h-.5A2.5 2.5 0 0 0 4 12.5v7A2.5 2.5 0 0 0 6.5 22h11a2.5 2.5 0 0 0 2.5-2.5v-7a2.5 2.5 0 0 0-2.5-2.5ZM9 7c0-1.65 1.35-3 3-3s3 1.35 3 3v3H9V7Zm9 12.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-7c0-.28.22-.5.5-.5h11c.28 0 .5.22.5.5v7Z"></path>
@@ -197,7 +216,7 @@ export default function Register() {
                                     </g>
                                 </svg>
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     id="password"
                                     name="password"
                                     className={styles.input}
@@ -206,6 +225,9 @@ export default function Register() {
                                     onChange={handleChange}
                                     required
                                 />
+                                <button type="button" onClick={toggleShowPassword} className={styles.showPasswordButton}>
+                                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                                </button>
                             </div>
                         </div>
 

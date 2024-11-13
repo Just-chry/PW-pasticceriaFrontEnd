@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
+
 import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
@@ -220,6 +221,11 @@ export default function Prodotti() {
     };
 
 
+  return (
+    <div>
+      <Hero />
+      <main className={styles.main}>
+        <h1 className={styles.title}>Il nostro magazzino</h1>
     return (
         <div>
             <header>
