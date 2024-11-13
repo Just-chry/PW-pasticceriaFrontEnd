@@ -19,6 +19,16 @@ export default function Contacts() {
     const [activeTab, setActiveTab] = useState('pasticceria');
     const [activeIndex, setActiveIndex] = useState(null);
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsSubmitted(true);
+        setTimeout(() => {
+            setIsSubmitted(false); // 
+        }, 4000);
+    };
+
     const faqData = [
         {
             question: "Dove si trova Pasticceria C'Est La Vie?",
@@ -130,7 +140,7 @@ export default function Contacts() {
                                         <div className={styles.mapDetails}>
                                             <h3>Indirizzo</h3>
                                             <p>Via Garibaldi, 5 — 21100 Varese (VA)</p>
-                                            <a href="#map">Come raggiungerci</a>
+                                            <a href="#map"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='24' height='24' fill="#000"><path d="m17 5-5-2-5 2-2 6 7 10 7-10-2-6Zm-3 7h-4V8h4v4Z" fill="#F3BC9F"></path><path d="M12 4a6 6 0 0 1 6 6c0 3.06-3 6.76-6 9.41C9 16.77 6 13.07 6 10a6 6 0 0 1 6-6m0 9c1.65 0 3-1.35 3-3s-1.35-3-3-3-3 1.35-3 3 1.35 3 3 3m0-11a8 8 0 0 0-8 8c0 4.96 5.47 9.93 7.36 11.49.37.3.9.31 1.26 0C14.51 19.93 20 14.96 20 10a8 8 0 0 0-8-8Zm0 9c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1Z"></path></svg>Come raggiungerci</a>
                                         </div>
                                         <div className={styles.timeDetails}>
                                             <h3>Orari</h3>
@@ -155,7 +165,7 @@ export default function Contacts() {
                     <div id='info' className={styles.contactFormSection}>
                         <div className={styles.formContainer}>
                             <h2>Compila il form per informazioni</h2>
-                            <form className={styles.form}>
+                            <form className={styles.form} onSubmit={handleSubmit}>
                                 <div className={styles.flexColumn}>
                                     <label htmlFor="firstName" className={styles.label}>Nome</label>
                                     <div className={styles.inputForm}>
@@ -249,7 +259,9 @@ export default function Contacts() {
                                     </label>
                                 </div>
 
-                                <button type="submit" className={styles.buttonSubmit}>INVIA MESSAGGIO</button>
+                                <button type="submit" className={styles.buttonSubmit}>Invia messaggio</button>
+
+                                {isSubmitted && <p className={styles.confirmationMessage}>Il tuo messaggio è stato inviato correttamente!</p>}
                             </form>
                         </div>
                         <div className={styles.imageSection}>
