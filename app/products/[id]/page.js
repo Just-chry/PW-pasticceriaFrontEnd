@@ -39,16 +39,6 @@ export default function Product() {
     }
   };
 
-  const [dataRitiro, setDataRitiro] = useState("");
-  const [orarioRitiro, setOrarioRitiro] = useState("");
-  const [orariDisponibili, setOrariDisponibili] = useState([]);
-  const [negozioChiuso, setNegozioChiuso] = useState(false);
-
-  const ordiniEsistenti = [
-    { data: new Date(2023, 11, 18, 10, 0) },
-    { data: new Date(2023, 11, 18, 10, 10) }
-  ];
-
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -82,62 +72,38 @@ export default function Product() {
     fetchProduct();
   }, [id]);
 
-  useEffect(() => {
-    if (dataRitiro) {
-      const giornoSelezionato = new Date(dataRitiro);
-      const dayOfWeek = getDay(giornoSelezionato);
-      let orariGenerati = [];
+  const handleQuantityChange = async (id, increment) => {
+    try {
+      const url = increment > 0
+        ? `http://localhost:8080/products/${id}/increment`
+        : `http://localhost:8080/products/${id}/decrement`;
 
-      let orarioApertura;
-      let orarioChiusura;
-
-      if (dayOfWeek === 0) {
-        orarioApertura = [new Date(giornoSelezionato).setHours(9, 0, 0, 0), new Date(giornoSelezionato).setHours(15, 0, 0, 0)];
-        orarioChiusura = [new Date(giornoSelezionato).setHours(13, 0, 0, 0), new Date(giornoSelezionato).setHours(19, 0, 0, 0)];
-      } else if (dayOfWeek >= 2 && dayOfWeek <= 5) {
-        orarioApertura = [new Date(giornoSelezionato).setHours(8, 30, 0, 0)];
-        orarioChiusura = [new Date(giornoSelezionato).setHours(19, 0, 0, 0)];
-      } else if (dayOfWeek === 6) {
-        orarioApertura = [new Date(giornoSelezionato).setHours(9, 0, 0, 0)];
-        orarioChiusura = [new Date(giornoSelezionato).setHours(19, 0, 0, 0)];
-      } else {
-        setOrariDisponibili([]);
-        setNegozioChiuso(true);
-        return;
-      }
-
-      setNegozioChiuso(false);
-
-      orarioApertura.forEach((apertura, index) => {
-        const chiusura = orarioChiusura[index];
-        let orarioCorrente = new Date(apertura);
-
-        while (orarioCorrente < chiusura) {
-          const nuovoOrario = new Date(orarioCorrente);
-          const orarioOccupato = ordiniEsistenti.some((ordine) =>
-            isSameDay(ordine.data, nuovoOrario) && isSameMinute(ordine.data, nuovoOrario)
-          );
-
-          if (!orarioOccupato) {
-            orariGenerati.push(nuovoOrario);
-          }
-
-          orarioCorrente = addMinutes(orarioCorrente, 10);
-        }
+      const response = await fetch(url, {
+        method: increment > 0 ? 'PUT' : 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
-      setOrariDisponibili(orariGenerati);
+      if (!response.ok) {
+        throw new Error('Errore durante aggiornamento della quantità del prodotto.');
+      }
+
+      // Se la richiesta ha avuto successo, aggiorna lo stato del prodotto nel frontend
+      setProducts((prevProducts) =>
+        prevProducts.map(product =>
+          product.id === id
+            ? { ...product, quantity: product.quantity + increment }
+            : product
+        )
+      );
+
+    } catch (error) {
+      console.error(error.message);
     }
-  }, [dataRitiro]);
-
-  const handleDataChange = (e) => {
-    setDataRitiro(e.target.value);
-    setOrarioRitiro("");
   };
 
-  const handleOrarioChange = (e) => {
-    setOrarioRitiro(e.target.value);
-  };
 
   return (
     <div>
@@ -166,45 +132,31 @@ export default function Product() {
                   <p className={styles.productDescription}><span>Descrizione:</span> {product.description ? product.description : 'Non disponibile'}</p>
                   <p className={styles.productIngredients}><span>Ingredienti:</span> {product.ingredients ? product.ingredients.join(', ') : 'Non disponibili'}</p>
                 </div>
-                <div className={styles.quantityDateAndOrder}>
-                  <div className={styles.ritiroSection}>
-                    <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
-                    <input type="date" value={dataRitiro} onChange={handleDataChange} className={styles.ritiroDate} />
-
-                    {negozioChiuso && (
-                      <p className={styles.negocioClosedMessage}>Il negozio è chiuso il lunedì. Seleziona un altro giorno.</p>
-                    )}
-
-                    {dataRitiro && orariDisponibili.length > 0 && !negozioChiuso && (
-                      <>
-                        <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
-                        <select value={orarioRitiro} onChange={handleOrarioChange} className={styles.ritiroTime}>
-                          <option value="">Seleziona un orario</option>
-                          {orariDisponibili.map((orario, index) => (
-                            <option key={index} value={orario}>
-                              {format(orario, "HH:mm")}
-                            </option>
-                          ))}
-                        </select>
-                      </>
-                    )}
-                  </div>
+                <div className={styles.quantityContainer}>
+                  <button onClick={() => handleQuantityChange(-1)} className={styles.quantityButton}>
+                    -
+                  </button>
+                  <span className={styles.quantityDisplay}>{product.quantity}</span>
+                  <button onClick={() => handleQuantityChange(1)} className={styles.quantityButton}>
+                    +
+                  </button>
                 </div>
-                <button onClick={handleAddToCart} className={styles.productButton}>
-                  Aggiungi al carrello
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='30' height='30' fill="#000">
-                    <path d="M5 8h16l-2 7H7L5 8z" fill="#F3BC9F"></path>
-                    <path d="M9 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM17 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM21 7H5.75l-.79-2.77A1 1 0 0 0 4 3.5H3c-.55 0-1 .45-1 1s.45 1 1 1h.25l2.48 8.69A2.5 2.5 0 0 0 8.13 16h9.74a2.5 2.5 0 0 0 2.4-1.81l1.69-5.91A1 1 0 0 0 21 7Zm-2.65 6.64a.5.5 0 0 1-.48.36H8.13a.5.5 0 0 1-.48-.36L6.33 9h13.35l-1.33 4.64Z"></path>
-                  </svg>
-                </button>
               </div>
+              <button onClick={handleAddToCart} className={styles.productButton}>
+                Aggiungi al carrello
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='30' height='30' fill="#000">
+                  <path d="M5 8h16l-2 7H7L5 8z" fill="#F3BC9F"></path>
+                  <path d="M9 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM17 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2ZM21 7H5.75l-.79-2.77A1 1 0 0 0 4 3.5H3c-.55 0-1 .45-1 1s.45 1 1 1h.25l2.48 8.69A2.5 2.5 0 0 0 8.13 16h9.74a2.5 2.5 0 0 0 2.4-1.81l1.69-5.91A1 1 0 0 0 21 7Zm-2.65 6.64a.5.5 0 0 1-.48.36H8.13a.5.5 0 0 1-.48-.36L6.33 9h13.35l-1.33 4.64Z"></path>
+                </svg>
+              </button>
             </>
           )}
         </div>
-      )}
+      )
+      }
       <footer>
         <Footer />
       </footer>
-    </div>
+    </div >
   );
 }

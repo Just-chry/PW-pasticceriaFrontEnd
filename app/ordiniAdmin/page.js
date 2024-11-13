@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function OrdiniAdmin() {
     const router = useRouter();
@@ -103,6 +103,8 @@ export default function OrdiniAdmin() {
                     <p>Caricamento in corso...</p>
                 ) : error ? (
                     <p>{error}</p>
+                ) : orders.length === 0 ? (
+                    <p className={styles.centerdText}>Nessun ordine presente!</p>
                 ) : (
                     <div className={styles.grid}>
                         {orders.map((order) => (
