@@ -24,7 +24,7 @@ export default function Header() {
 
         if (response.ok) {
             console.log('Logout successful');
-            window.location.href = '/login';
+            window.location.href = '/';
         } else {
             console.log(response);
             const errorMessage = await response.text();
