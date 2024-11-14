@@ -13,6 +13,7 @@ export default function Prodotti() {
     const [products, setProducts] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [editProductModal, setEditProductModal] = useState({isOpen: false, product: null});
+    const [selectedCategory, setSelectedCategory] = useState('All');
     const [newProduct, setNewProduct] = useState({
         name: '',
         image: '',
@@ -77,12 +78,41 @@ export default function Prodotti() {
         }
     };
 
+    const fetchProductsByCategory = async (category) => {
+        try {
+            setLoading(true);
+            let url = 'http://localhost:8080/products/admin';
+
+            if (category !== 'All') {
+                url = `http://localhost:8080/products/category/admin?category=${category}`;
+            }
+
+            const response = await fetch(url, {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                throw new Error('Errore durante il caricamento dei prodotti. Riprova più tardi.');
+            }
+
+            const data = await response.json();
+            setProducts(data);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
 
     useEffect(() => {
         if (userRole === 'admin') {
-            fetchProducts();
+            fetchProductsByCategory(selectedCategory);
         }
-    }, [userRole]);
+    }, [userRole, selectedCategory]);
+
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -94,6 +124,11 @@ export default function Prodotti() {
             reader.readAsDataURL(file);
         }
     };
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+    };
+
 
     const handleAddProduct = async () => {
         try {
@@ -138,7 +173,8 @@ export default function Prodotti() {
                     });
                     setIsOpen(false);
 
-                    await fetchProducts();
+                    await fetchProductsByCategory(selectedCategory);
+
                 };
 
                 fileReader.readAsDataURL(newProduct.image);
@@ -292,6 +328,15 @@ export default function Prodotti() {
             <Hero/>
             <main className={styles.main}>
                 <h1 className={styles.title}>Il nostro magazzino</h1>
+                <div className={styles.categoryButtons}>
+                    <button onClick={() => handleCategoryChange('All')}>Tutti</button>
+                    <button onClick={() => handleCategoryChange('Macarons')}>Macarons</button>
+                    <button onClick={() => handleCategoryChange('Cookies')}>Cookies</button>
+                    <button onClick={() => handleCategoryChange('Jams')}>Jams</button>
+                    <button onClick={() => handleCategoryChange('Bars')}>Bars</button>
+                    <button onClick={() => handleCategoryChange('Cakes')}>Cakes</button>
+                </div>
+
 
                 <div className={styles.logoContainer}>
                     <Image

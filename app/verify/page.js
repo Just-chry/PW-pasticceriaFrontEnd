@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 import Footer from "@/components/footer";
 
@@ -11,6 +11,7 @@ export default function VerifyOTP() {
     const router = useRouter();
     const [otp, setOtp] = useState("");
     const [contact] = useState(new URLSearchParams(window.location.search).get("contact"));
+    const [type] = useState(new URLSearchParams(window.location.search).get("type"));
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -30,9 +31,10 @@ export default function VerifyOTP() {
         }
 
         const encodedContact = encodeURIComponent(formattedContact);
+        const encodedType = encodeURIComponent(type);
 
         try {
-            const response = await fetch(`http://localhost:8080/auth/verify?token=${otp}&contact=${encodedContact}`, {
+            const response = await fetch(`http://localhost:8080/auth/verify?token=${otp}&contact=${encodedContact}&type=${encodedType}`, {
                 method: "GET",
                 credentials: 'include'
             });
@@ -42,12 +44,21 @@ export default function VerifyOTP() {
                 throw new Error(errorData || "Errore nella verifica del codice OTP.");
             }
 
-            alert("Verifica completata con successo! Ora puoi accedere.");
-            router.push("/login");
+            alert("Verifica completata con successo!");
+            if (type === "registration") {
+                router.push("/login");
+            } if (type === "password-reset") {
+                setTimeout(() => {
+                    router.push(`/reset-password?contact=${encodeURIComponent(contact)}&token=${otp}`);
+                }, 500);
+                console.log("OTP Token: ", otp);
+            }
+
         } catch (error) {
             alert(error.message);
         }
     };
+
 
 
     return (

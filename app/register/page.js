@@ -65,11 +65,11 @@ export default function Register() {
 
             if (formData.phone && !formData.email) {
                 // Se l'utente ha inserito solo il numero di telefono, reindirizza alla pagina OTP
-                router.push(`/verify?contact=${formData.phone}`);
+                router.push(`/verify?contact=${encodeURIComponent(formData.phone)}&type=registration`);
             } else {
-
                 router.push("/login");
             }
+
         } catch (error) {
             alert(error.message);
         }

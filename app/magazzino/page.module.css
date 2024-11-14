@@ -212,6 +212,25 @@
   font-weight: 400;
 }
 
+.categoryButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.categoryButtons button {
+  padding: 10px 15px;
+  background-color: #f3bc9f;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.categoryButtons button:hover {
+  background-color: #e89c7d;
+}
+
 .modal {
   position: fixed;
   z-index: 1000;
