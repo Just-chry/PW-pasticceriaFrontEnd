@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import format from 'date-fns/format';
 import addMinutes from 'date-fns/addMinutes';
-import getDay from 'date-fns/getDay';
 import isBefore from 'date-fns/isBefore';
+import isToday from 'date-fns/isToday';
+import getDay from 'date-fns/getDay'; // Importiamo getDay per determinare il giorno della settimana
 import styles from '@/app/cart/page.module.css';
 
 export default function Cart() {
@@ -16,7 +17,7 @@ export default function Cart() {
     const [orarioRitiro, setOrarioRitiro] = useState("");
     const [orariDisponibili, setOrariDisponibili] = useState([]);
     const [comments, setComments] = useState("");
-    const [dayOfWeek, setDayOfWeek] = useState(null);
+    const [dayOfWeek, setDayOfWeek] = useState(null);  // Aggiungiamo lo stato per il giorno della settimana
     const router = useRouter();
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export default function Cart() {
                     if (userData.role !== 'user') {
                         router.push('/not-found');
                     } else {
-                        fetchCart(); // Carica il carrello solo se il ruolo dell'utente è corretto
+                        fetchCart();
                     }
                 } else {
                     throw new Error('Errore durante il recupero dei dati utente');
@@ -68,6 +69,12 @@ export default function Cart() {
         fetchUserData();
     }, [router]);
 
+    // Calcoliamo il giorno della settimana e lo impostiamo nello stato
+    useEffect(() => {
+        const currentDay = getDay(new Date()); // Ottieni il giorno della settimana (0 = domenica, 1 = lunedì, ecc.)
+        setDayOfWeek(currentDay);
+    }, []);
+
     useEffect(() => {
         if (dataRitiro) {
             const fetchAvailableSlots = async () => {
@@ -82,19 +89,24 @@ export default function Cart() {
                         throw new Error("Errore durante il recupero degli orari disponibili. Riprova più tardi.");
                     }
 
-                    // Assumendo che l'API restituisca gli slot in formato "HH:mm"
                     const availableSlots = await response.json();
 
-                    // Converte ciascun slot in un oggetto Date con la stessa data di dataRitiro
-                    const convertedSlots = availableSlots.map(slot => {
-                        const [hours, minutes] = slot.split(':');
-                        const date = new Date(dataRitiro);
-                        date.setHours(parseInt(hours, 10));
-                        date.setMinutes(parseInt(minutes, 10));
-                        date.setSeconds(0);
-                        date.setMilliseconds(0);
-                        return date;
-                    });
+                    const now = new Date();
+                    const oneHourFromNow = addMinutes(now, 60);
+                    const selectedDate = new Date(dataRitiro);
+
+                    const convertedSlots = availableSlots
+                        .map(slot => {
+                            const [hours, minutes] = slot.split(':');
+                            const date = new Date(selectedDate);
+                            date.setHours(parseInt(hours, 10));
+                            date.setMinutes(parseInt(minutes, 10));
+                            date.setSeconds(0);
+                            date.setMilliseconds(0);
+                            return date;
+                        })
+                        // Filtro degli orari entro un'ora dall'ora attuale solo se la data di ritiro è oggi
+                        .filter(slot => !isToday(selectedDate) || isBefore(oneHourFromNow, slot));
 
                     setOrariDisponibili(convertedSlots);
                 } catch (error) {
@@ -105,10 +117,6 @@ export default function Cart() {
             fetchAvailableSlots();
         }
     }, [dataRitiro]);
-
-
-
-
 
     const handleDataChange = (e) => {
         const selectedDate = new Date(e.target.value);
