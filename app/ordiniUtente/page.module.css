@@ -71,6 +71,24 @@
     color: #333;
 }
 
+.deleteButton {
+    margin: 20px 0 10px 0;
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    font-weight: bold;
+    background-color: #a50000;
+}
+
 /* Add some responsive styling */
 @media (max-width: 600px) {
     .main {
