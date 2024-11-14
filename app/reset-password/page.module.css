@@ -55,18 +55,42 @@
     margin-bottom: 5px;
 }
 
+.inputForm {
+    border: 1.5px solid #ecedec;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    transition: 0.2s ease-in-out;
+}
+
 .input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: border-color 0.3s;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 85%;
+    height: 100%;
+    background-color: unset;
 }
 
 .input:focus {
-    border-color: #f3bc9f;
     outline: none;
-    box-shadow: 0 0 5px rgba(255, 84, 241, 0.5);
+}
+
+.inputForm:focus-within {
+    border: 1.5px solid #c7c1dc;
+}
+
+.inputForm:hover {
+    border-color: #d4d4d4;
+}
+
+.showPasswordButton {
+    border: none;
+    background-color: unset;
+    color: #f3bc9f;
+    font-size: 1.5rem;
 }
 
 .button {

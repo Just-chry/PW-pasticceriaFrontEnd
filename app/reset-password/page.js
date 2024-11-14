@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import Footer from "@/components/footer";
 
 import styles from "./page.module.css";
@@ -20,6 +22,12 @@ export default function ResetPassword() {
             inputRef.current.focus();
         }
     }, []);
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = () => {
+        setShowPassword((prevState) => !prevState);
+    };
 
     const handlePasswordChange = (e) => setPassword(e.target.value);
     const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
@@ -66,26 +74,36 @@ export default function ResetPassword() {
                     <h1 className={styles.title}>Password dimenticata?</h1>
                     <form className={styles.form} onSubmit={handleResetPasswordSubmit}>
                         <label className={styles.label} htmlFor="password">Nuova password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            className={styles.input}
-                            value={password}
-                            onChange={handlePasswordChange}
-                            ref={inputRef}
-                            required
-                        />
+                        <div className={styles.inputForm}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                name="password"
+                                className={styles.input}
+                                value={password}
+                                onChange={handlePasswordChange}
+                                ref={inputRef}
+                                required
+                            />
+                            <button type="button" onClick={toggleShowPassword} className={styles.showPasswordButton}>
+                                {showPassword ? <FaEye /> : <FaEyeSlash />}
+                            </button>
+                        </div>
                         <label className={styles.label} htmlFor="confirmPassword">Conferma nuova password</label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            className={styles.input}
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            required
-                        />
+                        <div className={styles.inputForm}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                className={styles.input}
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                required
+                            />
+                            <button type="button" onClick={toggleShowPassword} className={styles.showPasswordButton}>
+                                {showPassword ? <FaEye /> : <FaEyeSlash />}
+                            </button>
+                        </div>
                         <button type="submit" className={styles.button}>Reset password</button>
                     </form>
                 </div>
