@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./page.module.css";
+
 import Footer from "@/components/footer";
+
+import styles from "./page.module.css";
 
 export default function ResetPassword() {
     const router = useRouter();
@@ -11,6 +13,13 @@ export default function ResetPassword() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [token] = useState(new URLSearchParams(window.location.search).get("token"));
     const [contact] = useState(new URLSearchParams(window.location.search).get("contact"));
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, []);
 
     const handlePasswordChange = (e) => setPassword(e.target.value);
     const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
@@ -54,9 +63,9 @@ export default function ResetPassword() {
             <div className={styles.heroContainer}>
                 <div className={styles.heroBackground}></div>
                 <div className={styles.formContainer}>
-                    <h1 className={styles.title}>Reset Password</h1>
+                    <h1 className={styles.title}>Password dimenticata?</h1>
                     <form className={styles.form} onSubmit={handleResetPasswordSubmit}>
-                        <label className={styles.label} htmlFor="password">Nuova Password</label>
+                        <label className={styles.label} htmlFor="password">Nuova password</label>
                         <input
                             type="password"
                             id="password"
@@ -64,9 +73,10 @@ export default function ResetPassword() {
                             className={styles.input}
                             value={password}
                             onChange={handlePasswordChange}
+                            ref={inputRef}
                             required
                         />
-                        <label className={styles.label} htmlFor="confirmPassword">Conferma Nuova Password</label>
+                        <label className={styles.label} htmlFor="confirmPassword">Conferma nuova password</label>
                         <input
                             type="password"
                             id="confirmPassword"
@@ -76,7 +86,7 @@ export default function ResetPassword() {
                             onChange={handleConfirmPasswordChange}
                             required
                         />
-                        <button type="submit" className={styles.button}>Reset Password</button>
+                        <button type="submit" className={styles.button}>Reset password</button>
                     </form>
                 </div>
             </div>
