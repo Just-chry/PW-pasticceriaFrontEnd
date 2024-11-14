@@ -1,11 +1,15 @@
 "use client";
 
-import {useEffect, useState} from 'react';
-import Image from 'next/image';
-import Hero from '@/components/hero';
-import Footer from '@/components/footer';
-import styles from './page.module.css';
 import {useRouter} from "next/navigation";
+import {useEffect, useState} from 'react';
+
+import Image from 'next/image';
+
+import Hero from '@/components/hero';
+
+import Footer from '@/components/footer';
+
+import styles from './page.module.css';
 
 export default function Prodotti() {
     const router = useRouter();
@@ -68,7 +72,7 @@ export default function Prodotti() {
             const data = await response.json();
             const productsWithVisibility = data.map(product => ({
                 ...product,
-                isVisible: product.is_visible // Modifica per mantenere il valore booleano
+                isVisible: product.is_visible
             }));
             setProducts(productsWithVisibility);
         } catch (error) {

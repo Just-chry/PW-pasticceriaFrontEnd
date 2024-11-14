@@ -21,7 +21,7 @@
     margin-bottom: 1rem;
 }
 
-.textContainer h2{
+.textContainer h2 {
     color: #9B7A4F;
     font-family: 'Raleway';
     font-size: 2rem;
@@ -66,7 +66,7 @@
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-  }
+}
 
 .feature {
     width: 50%;
@@ -214,7 +214,7 @@
 
 @media (max-width: 700px) {
     .itemDetails {
-        width: 100vw !important; 
+        width: 100vw !important;
         position: relative;
         left: 30%;
     }
@@ -291,4 +291,4 @@
     width: 100vw;
     display: flex;
     justify-content: center;
-  }
+}

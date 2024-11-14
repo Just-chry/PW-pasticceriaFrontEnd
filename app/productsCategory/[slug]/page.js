@@ -7,6 +7,7 @@ import { FaCalendarDays, FaClock } from "react-icons/fa6";
 import { GiCakeSlice } from "react-icons/gi";
 
 import Hero from '@/components/hero';
+
 import Footer from '@/components/footer';
 
 import styles from './page.module.css';

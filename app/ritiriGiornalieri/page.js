@@ -1,10 +1,13 @@
 'use client';
 
-import {useEffect, useState} from 'react';
-import Hero from '@/components/hero';
-import Footer from '@/components/footer';
-import styles from './page.module.css';
 import { useRouter } from "next/navigation";
+import {useEffect, useState} from 'react';
+
+import Hero from '@/components/hero';
+
+import Footer from '@/components/footer';
+
+import styles from './page.module.css';
 
 export default function OrdiniGiornalieri() {
     const router = useRouter();
@@ -102,9 +105,9 @@ export default function OrdiniGiornalieri() {
                 <h1 className={styles.title}>Tutti i ritiri giornalieri</h1>
 
                 {loading ? (
-                    <p>Caricamento in corso...</p>
+                    <p className={styles.centerdText}>Caricamento in corso...</p>
                 ) : error ? (
-                    <p>{error}</p>
+                    <p className={styles.centerdText}>{error}</p>
                 ) : orders.length === 0 ? (
                     <p className={styles.centerdText}>Nessun ritiro presente!</p>
                 ) : (

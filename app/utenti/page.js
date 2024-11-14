@@ -1,13 +1,17 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './page.module.css';
-import Image from 'next/image';
+
+import Hero from '@/components/hero';
+
 import Footer from "@/components/footer";
+
+import styles from './page.module.css';
 
 export default function Utenti() {
     const router = useRouter();
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -40,6 +44,7 @@ export default function Utenti() {
 
         const fetchUsers = async () => {
             try {
+                setLoading(true);
                 const response = await fetch('http://localhost:8080/user/all', {
                     method: 'GET',
                     credentials: 'include',
@@ -57,6 +62,8 @@ export default function Utenti() {
                 }
             } catch (error) {
                 setError('Errore di connessione con il server');
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -67,10 +74,15 @@ export default function Utenti() {
 
     return (
         <>
+            <Hero />
             <div className={styles.main}>
-                <h1 className={styles.title}>Gestione Utenti</h1>
-                {error ? (
-                    <p className={styles.error}>{error}</p>
+                <h1 className={styles.title}>Gestione utenti</h1>
+                {loading ? (
+                    <p className={styles.centerdText}>Caricamento in corso...</p>
+                ) : error ? (
+                    <p className={styles.centerdText}>{error}</p>
+                ) : users.length === 0 ? (
+                    <p className={styles.centerdText}>Nessun utente presente!</p>
                 ) : (
                     <div className={styles.grid}>
                         {users.map((user, index) => (

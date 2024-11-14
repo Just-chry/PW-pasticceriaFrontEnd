@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import Hero from '@/components/hero';
+
 import Footer from '@/components/footer';
 
 import styles from '@/app/products/[id]/page.module.css';
@@ -28,12 +29,12 @@ export default function Product() {
         if (response.ok) {
           const userData = await response.json();
           if (userData.role !== 'user' && userData.role !== 'admin') {
-            router.push('/not-found'); // Se l'utente non è né user né admin, reindirizza a not-found
+            router.push('/not-found'); 
           }
         } else {
-          router.push('/login'); // Se la richiesta non va a buon fine, reindirizza al login
+          router.push('/login'); 
           setTimeout(() => {
-            alert("Devi prima fare il login"); // Mostra l'alert dopo un breve intervallo
+            alert("Devi prima fare il login"); 
           }, 1000);
         }
       } catch (error) {

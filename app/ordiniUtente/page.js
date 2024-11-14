@@ -1,10 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Hero from '@/components/hero';
-import Footer from '@/components/footer';
-import styles from './page.module.css';
 import { useRouter } from "next/navigation";
+
+import Hero from '@/components/hero';
+
+import Footer from '@/components/footer';
+
+import styles from './page.module.css';
 
 export default function OrdiniUtente() {
     const router = useRouter();
@@ -80,7 +83,6 @@ export default function OrdiniUtente() {
                 throw new Error(`Errore durante la cancellazione dell'ordine: ${errorText}`);
             }
 
-            // Aggiorna la lista degli ordini rimuovendo l'ordine cancellato
             setOrders((prevOrders) => prevOrders.filter((order) => order.id !== orderId));
 
             alert('Ordine cancellato con successo.');
@@ -95,10 +97,10 @@ export default function OrdiniUtente() {
         <div>
             <Hero />
             <main className={styles.main}>
-                <h1 className={styles.title}>I tuoi Ordini</h1>
+                <h1 className={styles.title}>I tuoi ordini</h1>
 
                 {loading ? (
-                    <p>Caricamento in corso...</p>
+                    <p className={styles.centerdText}>Caricamento in corso...</p>
                 ) : error ? (
                     <p className={styles.centerdText}>{error}</p>
                 ) : (

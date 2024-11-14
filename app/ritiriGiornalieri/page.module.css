@@ -1,4 +1,3 @@
-/* Main container for the orders page */
 .main {
     padding: 20px;
     max-width: 1200px;
@@ -6,8 +5,8 @@
     background-color: #f9f9f9;
 }
 
-/* Title styling */
 .title {
+    font-family: 'Raleway';
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
@@ -15,14 +14,13 @@
     color: #333;
 }
 
-/* Grid container for the order cards */
 .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
 }
-/* Styling for contact information */
+
 .contactInfo {
     font-size: 1rem;
     color: #444;
@@ -31,6 +29,7 @@
 }
 
 .acceptButton {
+    font-family: 'Quicksand';
     margin: 20px 0 10px 0;
     background-color: rgb(0, 175, 0);
     border: none;
@@ -49,6 +48,7 @@
 }
 
 .rejectButton {
+    font-family: 'Quicksand';
     margin: 20px 0 10px 0;
     background-color: red;
     border: none;
@@ -66,19 +66,24 @@
     background-color: #a50000;
 }
 
-/* Styling for the notify button */
+
 .notifyButton {
-    background-color: #ffa500;
-    color: white;
+    font-family: 'Quicksand';
+    margin: 20px 0 10px 0;
+    background-color: red;
     border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .notifyButton:hover {
     background-color: #ff8c00;
+    font-weight: bold;
 }
 
 
@@ -87,7 +92,7 @@
         grid-template-columns: repeat(1, minmax(200px, 1fr));
     }
 }
-/* Styling for each individual order card */
+
 .card {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -96,14 +101,12 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Order ID styling */
 .orderId {
     font-size: 1.5rem;
     color: #555;
     margin-bottom: 10px;
 }
 
-/* Date and status styling */
 .orderDate,
 .orderStatus {
     font-size: 1rem;
@@ -111,9 +114,17 @@
     color: #777;
 }
 
-/* Order items styling */
+.orderDate strong,
+.orderStatus strong {
+    font-family: 'Raleway';
+}
+
 .orderItems {
     margin-top: 15px;
+}
+
+.orderItems strong {
+    font-family: 'Raleway';
 }
 
 .orderItems ul {
@@ -127,7 +138,6 @@
     color: #555;
 }
 
-/* Total price styling */
 .totalPrice {
     font-size: 1.2rem;
     font-weight: bold;
@@ -135,7 +145,10 @@
     color: #333;
 }
 
-/* Add some responsive styling */
+.totalPrice strong {
+    font-family: 'Raleway';
+}
+
 @media (max-width: 600px) {
     .main {
         padding: 10px;
@@ -159,10 +172,6 @@
 }
 
 .centerdText {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
     display: flex;
     justify-content: center;
   }

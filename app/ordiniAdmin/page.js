@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Hero from '@/components/hero';
-import Footer from '@/components/footer';
-import styles from './page.module.css';
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+
+import Hero from '@/components/hero';
+
+import Footer from '@/components/footer';
+
+import styles from './page.module.css';
 
 export default function OrdiniAdmin() {
     const router = useRouter();
@@ -47,7 +50,7 @@ export default function OrdiniAdmin() {
                     setLoading(true);
                     const response = await fetch('http://localhost:8080/orders/all', {
                         method: 'GET',
-                        credentials: 'include', // Include cookies for authentication
+                        credentials: 'include',
                     });
 
                     if (!response.ok) {
@@ -56,7 +59,6 @@ export default function OrdiniAdmin() {
 
                     const ordersData = await response.json();
 
-                    // For each order, fetch user information
                     const fetchUsers = async (orders) => {
                         const updatedOrders = await Promise.all(
                             orders.map(async (order) => {
@@ -97,12 +99,12 @@ export default function OrdiniAdmin() {
         <div>
             <Hero />
             <main className={styles.main}>
-                <h1 className={styles.title}>Tutti gli Ordini</h1>
+                <h1 className={styles.title}>Tutti gli ordini</h1>
 
                 {loading ? (
-                    <p>Caricamento in corso...</p>
+                    <p className={styles.centerdText}>Caricamento in corso...</p>
                 ) : error ? (
-                    <p>{error}</p>
+                    <p className={styles.centerdText}>{error}</p>
                 ) : orders.length === 0 ? (
                     <p className={styles.centerdText}>Nessun ordine presente!</p>
                 ) : (
@@ -153,7 +155,6 @@ function OrderCard({ order, setOrders }) {
 
             alert('Ordine accettato con successo');
 
-            // Aggiorna lo stato dell'ordine in modo che mostri lo stato aggiornato
             setOrders((prevOrders) =>
                 prevOrders.map((o) =>
                     o.id === order.id ? { ...o, status: 'accepted' } : o
@@ -177,7 +178,6 @@ function OrderCard({ order, setOrders }) {
 
             alert('Ordine rifiutato con successo');
 
-            // Aggiorna lo stato dell'ordine in modo che mostri lo stato aggiornato
             setOrders((prevOrders) =>
                 prevOrders.map((o) =>
                     o.id === order.id ? { ...o, status: 'rejected' } : o

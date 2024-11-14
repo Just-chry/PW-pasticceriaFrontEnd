@@ -21,7 +21,7 @@
 }
 
 .hero p {
-    font-family: 'Quicksand';
+    font-family: 'Raleway';
     font-weight: 400;
     color: #888;
     font-size: 1.5rem;
@@ -286,6 +286,7 @@
 }
 
 .buttonSubmit {
+    font-family: 'Quicksand';
     margin: 20px 0 10px 0;
     background-color: #d5abc2;
     border: none;

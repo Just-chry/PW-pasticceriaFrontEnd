@@ -3,10 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import Link from 'next/link';
 import Image from 'next/image';
+
 import Footer from '@/components/footer';
-import styles from '@/app/dashboardAdmin/page.module.css';
+
+import styles from '@/app/dashboardUtente/page.module.css';
 
 export default function Dashboard() {
     const router = useRouter();
@@ -167,9 +170,10 @@ export default function Dashboard() {
         <>
             <div className={styles.heroContainer}>
                 <div className={styles.heroBackground}></div>
+                
 
                 <div className={styles.profileContainer}>
-                    <h2>Profilo Utente</h2>
+                    <h2 className={styles.textProfile}>Profilo Utente</h2>
                     <div className={styles.profileSection}>
                         <div className={styles.profileField}>
                             <label>Nome:</label>
@@ -241,7 +245,7 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <h2>Modifica Password</h2>
+                    <h2 className={styles.textProfile}>Modifica Password</h2>
                     <div className={styles.profileSection}>
                         {editMode.password && (
                             <>

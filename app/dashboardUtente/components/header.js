@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
-import styles from "@/app/dashboardUtente/components/header.module.css";
 import logo from '@/public/images/logoPasticceria.png';
+
+import styles from "@/app/dashboardUtente/components/header.module.css";
 
 export default function Header() {
 
@@ -42,6 +44,22 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add('menuOpen');
+    } else {
+      document.body.classList.remove('menuOpen');
+    }
+
+    return () => {
+      document.body.classList.remove('menuOpen');
+    };
+  }, [menuOpen]);
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -57,31 +75,31 @@ export default function Header() {
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
         <ul>
           <li className={styles.desktopOnly}>
-            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link}>Home</Link>
+            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Home</Link>
           </li>
           <li className={styles.desktopOnly}>
-            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
+            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Prodotti</Link>
           </li>
           <li className={styles.desktopOnly}>
-            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
+            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Contatti</Link>
           </li>
           <li className={styles.desktopOnly}>
-            <Link href="/cart" className={path === "/cart" ? `${styles.link} ${styles.active}` : styles.link}>Carrello</Link>
+            <Link href="/cart" className={path === "/cart" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Carrello</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link}>Home</Link>
+            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Home</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
+            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Prodotti</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
+            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Contatti</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/cart" className={path === "/cart" ? `${styles.link} ${styles.active}` : styles.link}>Carrello</Link>
+            <Link href="/cart" className={path === "/cart" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Carrello</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/dashboardUtente" className={path === "/dashboardUtente" ? `${styles.link} ${styles.active}` : styles.link}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='40' height='40' fill="#000"><path d="m9 10 3-3 3 3-3 3zM4.59 18.5 12 16l7.5 2.5-7.45 2.97-7.46-2.97z" fill="#F3BC9F"></path><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18.22a8.18 8.18 0 0 1-5.03-1.72 8.18 8.18 0 0 1 10.06 0A8.18 8.18 0 0 1 12 20.22Zm6.32-2.97C16.6 15.84 14.4 15 12 15s-4.6.84-6.32 2.25a8.22 8.22 0 1 1 12.64 0ZM12 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"></path></svg></Link>
+            <Link href="/dashboardUtente" className={path === "/dashboardUtente" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='40' height='40' fill="#000"><path d="m9 10 3-3 3 3-3 3zM4.59 18.5 12 16l7.5 2.5-7.45 2.97-7.46-2.97z" fill="#F3BC9F"></path><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18.22a8.18 8.18 0 0 1-5.03-1.72 8.18 8.18 0 0 1 10.06 0A8.18 8.18 0 0 1 12 20.22Zm6.32-2.97C16.6 15.84 14.4 15 12 15s-4.6.84-6.32 2.25a8.22 8.22 0 1 1 12.64 0ZM12 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"></path></svg></Link>
           </li>
           <li className={styles.mobileOnly}>
             <Link href="" className={path === "" ? `${styles.link} ${styles.active}` : styles.link} onClick={handleLogout}>Logout</Link>

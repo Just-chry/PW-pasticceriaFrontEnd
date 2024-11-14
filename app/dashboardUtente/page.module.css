@@ -39,6 +39,10 @@
   z-index: 1;
 }
 
+.textProfile {
+  font-family: 'Raleway';
+}
+
 .profileSection {
   display: flex;
   flex-direction: column;
@@ -55,6 +59,13 @@
   gap: 1rem;
 }
 
+.profileFieldEmailTel label {
+  font-family: 'Raleway';
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
 .profileField {
   display: flex;
   align-items: flex-start;
@@ -65,6 +76,7 @@
 }
 
 .profileField label {
+  font-family: 'Raleway';
   font-size: 1rem;
   font-weight: 600;
   color: #333;
@@ -134,6 +146,7 @@
 }
 
 .buttonEmailTel {
+  font-family: 'Quicksand';
   background-color: #d5abc2;
   border: none;
   color: white;
@@ -151,6 +164,7 @@
 }
 
 .button {
+  font-family: 'Quicksand';
   margin: 20px 0 10px 0;
   background-color: #d5abc2;
   border: none;
@@ -202,6 +216,7 @@
 }
 
 .currentDate {
+  font-family: 'Raleway';
   font-size: 3rem; 
   font-weight: bold;
   color: #333;
@@ -219,6 +234,7 @@
 }
 
 .ordersDay h2 {
+  font-family: 'Raleway';
   text-align: center;
   font-size: 1.5rem;
 }

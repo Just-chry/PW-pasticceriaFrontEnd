@@ -1,5 +1,6 @@
 import Hero from '@/components/hero';
 import Categoria from '@/components/categoria';
+
 import Footer from '@/components/footer';
 
 import styles from '@/app/productsCategory/page.module.css';
