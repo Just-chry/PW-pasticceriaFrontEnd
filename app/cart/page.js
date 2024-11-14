@@ -139,6 +139,30 @@ export default function Cart() {
         }
     };
 
+    const handleDeleteProduct = async (productId) => {
+        const confirmed = confirm('Sei sicuro di voler rimuovere questo prodotto dal carrello?');
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch(`http://localhost:8080/orders/delete/${productId}`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                throw new Error("Errore durante la rimozione del prodotto dal carrello. Riprova più tardi.");
+            }
+
+            alert('Prodotto rimosso dal carrello con successo.');
+            setCart((prevCart) => ({
+                ...prevCart,
+                products: prevCart.products.filter((item) => item.productId !== productId),
+            }));
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
     return (
         <div>
             <h1 className={styles.cartTitle}>Il Tuo Carrello</h1>
@@ -155,6 +179,12 @@ export default function Cart() {
                                     <h3>{item.productName}</h3>
                                     <p>Quantità: {item.quantity}</p>
                                     <p>Prezzo: {item.price}€</p>
+                                    <button
+                                        onClick={() => handleDeleteProduct(item.productId)}
+                                        className={styles.deleteButton}
+                                    >
+                                        - Rimuovi
+                                    </button>
                                 </li>
                             ))}
                         </ul>
