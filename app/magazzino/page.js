@@ -172,7 +172,9 @@ export default function Prodotti() {
 
             const updatedProductData = {
                 ...product,
-                ingredientNames: product.ingredients.split(",").map(ingredient => ingredient.trim()),
+                ingredientNames: Array.isArray(product.ingredients)
+                    ? product.ingredients
+                    : product.ingredients.split(",").map(ingredient => ingredient.trim()),
                 isVisible: product.isVisible ? 1 : 0
             };
 
