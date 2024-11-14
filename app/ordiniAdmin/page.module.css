@@ -33,60 +33,67 @@
 /* Styling for the action buttons container */
 .actionButtons {
     display: flex;
+    width: 100%;
     gap: 10px;
     margin-top: 15px;
 }
 
 /* Styling for the accept button */
 .acceptButton {
-    background-color: #4caf50;
-    color: white;
+    margin: 20px 0 10px 0;
+    background-color: rgb(0, 175, 0);
     border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 50%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .acceptButton:hover {
-    background-color: #45a049;
+    font-weight: bold;
+    background-color: green;
 }
 
-/* Styling for the reject button */
 .rejectButton {
-    background-color: #f44336;
-    color: white;
+    margin: 20px 0 10px 0;
+    background-color: red;
     border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 50%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .rejectButton:hover {
-    background-color: #e53935;
+    font-weight: bold;
+    background-color: #a50000;
 }
 /* Styling for the action buttons container */
-.actionButtons {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
 
 
 /* Styling for the notify button */
 .notifyButton {
-    background-color: #ffa500;
-    color: white;
+    margin: 20px 0 10px 0;
+    background-color: #f3bc9f;
     border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .notifyButton:hover {
-    background-color: #ff8c00;
+    font-weight: bold;
+    background-color: #c7c1dc;
 }
 
 

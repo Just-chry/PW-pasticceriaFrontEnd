@@ -14,6 +14,13 @@ export default function PersonalArea() {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [currentDate, setCurrentDate] = useState('');
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+
+    const toggleShowOldPassword = () => setShowOldPassword((prev) => !prev);
+    const toggleShowNewPassword = () => setShowNewPassword((prev) => !prev);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -41,6 +48,19 @@ export default function PersonalArea() {
                 router.push('/not-found');
             }
         };
+
+        const capitalize = (text) => {
+            return text.replace(/\b\w/g, (char) => char.toUpperCase());
+        };
+
+        const today = new Date().toLocaleDateString('it-IT', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        setCurrentDate(capitalize(today));
 
         fetchUserData();
     }, [router]);
@@ -180,6 +200,7 @@ export default function PersonalArea() {
                                         value={newPhone}
                                         onChange={(e) => setNewPhone(e.target.value)}
                                         placeholder="Aggiungi telefono"
+                                        className={styles.input}
                                     />
                                     <button className={styles.button} onClick={handleSavePhone}>Aggiungi</button>
                                 </div>

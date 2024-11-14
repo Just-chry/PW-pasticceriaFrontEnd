@@ -128,8 +128,9 @@ function OrderCard({ order, onDeleteOrder }) {
     return (
         <div className={styles.card}>
             <h2 className={styles.orderId}>Ordine ID: {order.id}</h2>
-            <p className={styles.orderDate}><strong>Data di Ritiro:</strong> {new Date(order.pickupDateTime).toLocaleString()}</p>
-            <p className={styles.orderStatus}><strong>Stato:</strong> {order.status}</p>
+            {order.status !== 'cart' && (
+                <p className={styles.orderDate}><strong>Data di Ritiro:</strong> {new Date(order.pickupDateTime).toLocaleString()}</p>
+            )}            <p className={styles.orderStatus}><strong>Stato:</strong> {order.status}</p>
             <div className={styles.orderItems}>
                 <strong>Prodotti:</strong>
                 <ul>

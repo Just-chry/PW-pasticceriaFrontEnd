@@ -1,7 +1,7 @@
 .heroContainer {
     position: relative;
     width: 100%;
-    height: 85vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +45,16 @@
     gap: 20px;
 }
 
+.profileFieldEmailTel {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+    gap: 1rem;
+}
+
 .profileField {
     display: flex;
     align-items: flex-start;
@@ -58,6 +68,18 @@
     font-size: 1rem;
     font-weight: 600;
     color: #333;
+}
+
+.inputFormEmailTel {
+    width: 100%;
+    border: 1.5px solid #ecedec;
+    border-radius: 10px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2px;
+    transition: 0.2s ease-in-out;
 }
 
 .inputForm {
@@ -89,6 +111,43 @@
 .input::placeholder {
     color: #ffffff;
     font-family: 'Quicksand';
+}
+
+.inputEmailTel {
+    background-color: unset;
+    border: unset;
+    margin-left: 2px;
+    border-radius: 10px;
+    border: none;
+    width: 85%;
+    height: 50%;
+}
+
+.inputEmailTel:focus {
+    border: unset;
+    outline: none;
+}
+
+.inputEmailTel::placeholder {
+    color: #ffffff;
+    font-family: 'Quicksand';
+}
+
+.buttonEmailTel {
+    background-color: #d5abc2;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.buttonEmailTel:hover {
+    font-weight: bold;
+    background-color: #c7c1dc;
 }
 
 .button {

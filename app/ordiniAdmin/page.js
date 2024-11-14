@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import styles from './page.module.css';
@@ -95,7 +95,7 @@ export default function OrdiniAdmin() {
 
     return (
         <div>
-            <Hero/>
+            <Hero />
             <main className={styles.main}>
                 <h1 className={styles.title}>Tutti gli Ordini</h1>
 
@@ -108,13 +108,13 @@ export default function OrdiniAdmin() {
                 ) : (
                     <div className={styles.grid}>
                         {orders.map((order) => (
-                            <OrderCard key={order.id} order={order} setOrders={setOrders}/>
+                            <OrderCard key={order.id} order={order} setOrders={setOrders} />
                         ))}
                     </div>
                 )}
             </main>
             <footer>
-                <Footer/>
+                <Footer />
             </footer>
         </div>
     );
@@ -209,8 +209,9 @@ function OrderCard({ order, setOrders }) {
         <div className={styles.card}>
             <h2 className={styles.orderId}>Ordine ID: {order.id}</h2>
             <p className={styles.contactInfo}><strong>Contatto:</strong> {displayContactInfo()}</p>
-            <p className={styles.orderDate}><strong>Data di
-                Ritiro:</strong> {new Date(order.pickupDateTime).toLocaleString()}</p>
+            {order.status !== 'cart' && (
+                <p className={styles.orderDate}><strong>Data di Ritiro:</strong> {new Date(order.pickupDateTime).toLocaleString()}</p>
+            )}
             <p className={styles.orderStatus}><strong>Stato:</strong> {order.status}</p>
             <div className={styles.orderItems}>
                 <strong>Prodotti:</strong>
