@@ -67,7 +67,7 @@ export default function Register() {
                 // Se l'utente ha inserito solo il numero di telefono, reindirizza alla pagina OTP
                 router.push(`/verify?contact=${formData.phone}`);
             } else {
-                // Altrimenti, reindirizza alla pagina di login
+
                 router.push("/login");
             }
         } catch (error) {
