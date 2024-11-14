@@ -14,9 +14,20 @@ export default function Cart() {
     const [dataRitiro, setDataRitiro] = useState("");
     const [orarioRitiro, setOrarioRitiro] = useState("");
     const [orariDisponibili, setOrariDisponibili] = useState([]);
+    const [orariPrenotati, setOrariPrenotati] = useState([]);
     const [comments, setComments] = useState("");
     const [dayOfWeek, setDayOfWeek] = useState(null);
+    const [storeClosedMessage, setStoreClosedMessage] = useState(""); // Nuovo stato per il messaggio
     const router = useRouter();
+
+    const today = format(new Date(), 'yyyy-MM-dd');
+
+    // Funzione per verificare se un orario è valido (cioè non passato)
+    const isTimeValid = (time) => {
+        const now = new Date();
+        now.setSeconds(0, 0); // Resetta i secondi e i millisecondi
+        return time >= now;
+    };
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -74,8 +85,11 @@ export default function Cart() {
             setDayOfWeek(dayOfWeekSelected);
 
             if (dayOfWeekSelected === 1) {
-                setOrariDisponibili([]);
+                setOrariDisponibili([]); // Se è lunedì, non ci sono orari disponibili
+                setStoreClosedMessage("Il negozio è chiuso il lunedì. Seleziona un altro giorno.");
                 return;
+            } else {
+                setStoreClosedMessage(""); // Resetta il messaggio se il giorno selezionato non è lunedì
             }
 
             const orariGenerati = [];
@@ -83,7 +97,9 @@ export default function Cart() {
             const orarioChiusuraMattina = new Date(giornoSelezionato.setHours(13, 0, 0, 0));
 
             while (orarioCorrente < orarioChiusuraMattina) {
-                orariGenerati.push(new Date(orarioCorrente));
+                if (isTimeValid(orarioCorrente)) {
+                    orariGenerati.push(new Date(orarioCorrente));
+                }
                 orarioCorrente = addMinutes(orarioCorrente, 10);
             }
 
@@ -91,13 +107,35 @@ export default function Cart() {
             const orarioChiusuraPomeriggio = new Date(giornoSelezionato.setHours(19, 0, 0, 0));
 
             while (orarioCorrente < orarioChiusuraPomeriggio) {
-                orariGenerati.push(new Date(orarioCorrente));
+                if (isTimeValid(orarioCorrente)) {
+                    orariGenerati.push(new Date(orarioCorrente));
+                }
                 orarioCorrente = addMinutes(orarioCorrente, 10);
             }
 
             setOrariDisponibili(orariGenerati);
+            fetchBookedTimes(giornoSelezionato); // Chiamata per ottenere gli orari prenotati
         }
     }, [dataRitiro]);
+
+    // Funzione per ottenere gli orari prenotati per la data selezionata
+    const fetchBookedTimes = async (selectedDate) => {
+        try {
+            const response = await fetch(`http://localhost:8080/orders/booking-times?date=${format(selectedDate, 'yyyy-MM-dd')}`, {
+                method: 'GET',
+                credentials: 'include',
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setOrariPrenotati(data); // Imposta gli orari prenotati
+            } else {
+                throw new Error("Errore durante il recupero degli orari prenotati");
+            }
+        } catch (error) {
+            console.error('Errore durante la richiesta:', error);
+        }
+    };
 
     const handleDataChange = (e) => {
         setDataRitiro(e.target.value);
@@ -163,8 +201,12 @@ export default function Cart() {
         }
     };
 
+    const isTimeBooked = (time) => {
+        return orariPrenotati.some((bookedTime) => format(bookedTime, 'HH:mm') === time);
+    };
+
     return (
-        <div>
+        <div className={styles.cartWrapper}>
             <h1 className={styles.cartTitle}>Il Tuo Carrello</h1>
             {loading ? (
                 <p>Caricamento in corso...</p>
@@ -189,45 +231,63 @@ export default function Cart() {
                             ))}
                         </ul>
                         <div className={styles.orderDetails}>
-                            <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
-                            <input
-                                type="date"
-                                value={dataRitiro}
-                                onChange={handleDataChange}
-                                className={styles.ritiroDate}
-                            />
+                            <div className={styles.dateBlock}>
+                                <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
+                                <input
+                                    type="date"
+                                    value={dataRitiro}
+                                    onChange={handleDataChange}
+                                    className={styles.ritiroDate}
+                                    min={today} // Impedisce la selezione di date precedenti a oggi
+                                />
+                            </div>
 
-                            {dataRitiro && orariDisponibili.length > 0 ? (
-                                <>
+                            {/* Aggiungi il messaggio per il lunedì */}
+                            {storeClosedMessage && (
+                                <p className={styles.storeClosedMessage}>{storeClosedMessage}</p>
+                            )}
+
+                            {dataRitiro && orariDisponibili.length > 0 && (
+                                <div className={styles.timeBlock}>
                                     <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
                                     <select
                                         value={orarioRitiro}
                                         onChange={handleOrarioChange}
-                                        className={styles.ritiroTime}
+                                        className={styles.ritiroOrario}
                                     >
-                                        <option value="">Seleziona un orario</option>
-                                        {orariDisponibili.map((orario, index) => (
-                                            <option key={index} value={format(orario, 'HH:mm')}>
-                                                {format(orario, 'HH:mm')}
-                                            </option>
-                                        ))}
+                                        <option value="">-- Seleziona orario --</option>
+                                        {orariDisponibili.map((orario, index) => {
+                                            const orarioFormatted = format(orario, 'HH:mm');
+                                            return (
+                                                <option
+                                                    key={index}
+                                                    value={orarioFormatted}
+                                                    disabled={isTimeBooked(orario)}
+                                                >
+                                                    {orarioFormatted} {isTimeBooked(orario) && '(Prenotato)'}
+                                                </option>
+                                            );
+                                        })}
                                     </select>
-                                </>
-                            ) : dayOfWeek === 1 ? (
-                                <p className={styles.negocioClosedMessage}>
-                                    Il negozio è chiuso il lunedì. Seleziona un altro giorno.
-                                </p>
-                            ) : null}
+                                </div>
+                            )}
 
-                            <label className={styles.ritiroLabel}>Commenti:</label>
-                            <textarea
-                                value={comments}
-                                onChange={handleCommentsChange}
-                                className={styles.comments}
-                            />
+                            <div className={styles.commentsBlock}>
+                                <label className={styles.ritiroLabel}>Aggiungi un commento:</label>
+                                <textarea
+                                    value={comments}
+                                    onChange={handleCommentsChange}
+                                    className={styles.commentsTextarea}
+                                    placeholder="Scrivi un commento..."
+                                />
+                            </div>
 
-                            <button onClick={handleCreateOrder} className={styles.createOrderButton}>
-                                Crea Ordine
+                            <button
+                                className={styles.createOrderButton}
+                                onClick={handleCreateOrder}
+                                disabled={!dataRitiro || !orarioRitiro}
+                            >
+                                Crea ordine
                             </button>
                         </div>
                     </div>
