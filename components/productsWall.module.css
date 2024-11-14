@@ -91,7 +91,15 @@
     text-decoration: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .wallContainer {
+        grid-template-columns: repeat(2, 1fr);;
+        padding: 1rem;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
     .wallContainer {
         grid-template-columns: repeat(2, 1fr);;
         padding: 1rem;
