@@ -99,10 +99,9 @@
     }
 }
 
-@media (max-width: 600px) {
-    .wallContainer {
-        grid-template-columns: repeat(2, 1fr);;
-        padding: 1rem;
-        gap: 1rem;
+@media (max-width: 500px) {
+    .image {
+        width: 150px;
+        height: 200px;
     }
 }

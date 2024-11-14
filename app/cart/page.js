@@ -8,6 +8,8 @@ import isBefore from 'date-fns/isBefore';
 import isToday from 'date-fns/isToday';
 import getDay from 'date-fns/getDay'; // Importiamo getDay per determinare il giorno della settimana
 import styles from '@/app/cart/page.module.css';
+import Hero from '@/components/hero';
+import Footer from '@/components/footer';
 
 export default function Cart() {
     const [cart, setCart] = useState(null);
@@ -194,68 +196,74 @@ export default function Cart() {
 
     return (
         <div>
-            <h1 className={styles.cartTitle}>Il Tuo Carrello</h1>
-            {loading ? (
-                <p>Caricamento in corso...</p>
-            ) : error ? (
-                <p>{error}</p>
-            ) : (
-                cart && (
-                    <div className={styles.cartContainer}>
-                        <ul className={styles.cartList}>
-                            {cart.products.map((item) => (
-                                <li key={item.productId} className={styles.cartListItem}>
-                                    <h3>{item.productName}</h3>
-                                    <p>Quantità: {item.quantity}</p>
-                                    <p>Prezzo: {item.price}€</p>
-                                    <button
-                                        onClick={() => handleDeleteProduct(item.productId)}
-                                        className={styles.deleteButton}
-                                    >
-                                        - Rimuovi
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                        <div className={styles.orderDetails}>
-                            <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
-                            <input type="date" value={dataRitiro} onChange={handleDataChange} className={styles.ritiroDate} min={format(new Date(), 'yyyy-MM-dd')}  />
+            <Hero />
+            <main className={styles.main}>
+                <h1 className={styles.cartTitle}>Il Tuo Carrello</h1>
+                {loading ? (
+                    <p>Caricamento in corso...</p>
+                ) : error ? (
+                    <p>{error}</p>
+                ) : (
+                    cart && (
+                        <div className={styles.cartContainer}>
+                            <ul className={styles.cartList}>
+                                {cart.products.map((item) => (
+                                    <li key={item.productId} className={styles.cartListItem}>
+                                        <h3>{item.productName}</h3>
+                                        <p>Quantità: {item.quantity}</p>
+                                        <p>Prezzo: {item.price}€</p>
+                                        <button
+                                            onClick={() => handleDeleteProduct(item.productId)}
+                                            className={styles.deleteButton}
+                                        >
+                                            - Rimuovi
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className={styles.orderDetails}>
+                                <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
+                                <input type="date" value={dataRitiro} onChange={handleDataChange} className={styles.ritiroDate} min={format(new Date(), 'yyyy-MM-dd')} />
 
-                            {dataRitiro && orariDisponibili.length > 0 ? (
-                                <>
-                                    <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
-                                    <select
-                                        value={orarioRitiro}
-                                        onChange={handleOrarioChange}
-                                        className={styles.ritiroTime}
-                                    >
-                                        <option value="">Seleziona un orario</option>
-                                        {orariDisponibili.map((orario, index) => (
-                                            <option key={index} value={format(orario, 'HH:mm')}>
-                                                {format(orario, 'HH:mm')}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </>
-                            ) : dayOfWeek === 1 ? (
-                                <p className={styles.negocioClosedMessage}>
-                                    Il negozio è chiuso il lunedì. Seleziona un altro giorno.
-                                </p>
-                            ) : null}
+                                {dataRitiro && orariDisponibili.length > 0 ? (
+                                    <>
+                                        <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
+                                        <select
+                                            value={orarioRitiro}
+                                            onChange={handleOrarioChange}
+                                            className={styles.ritiroTime}
+                                        >
+                                            <option value="">Seleziona un orario</option>
+                                            {orariDisponibili.map((orario, index) => (
+                                                <option key={index} value={format(orario, 'HH:mm')}>
+                                                    {format(orario, 'HH:mm')}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </>
+                                ) : dayOfWeek === 1 ? (
+                                    <p className={styles.negocioClosedMessage}>
+                                        Il negozio è chiuso il lunedì. Seleziona un altro giorno.
+                                    </p>
+                                ) : null}
 
-                            <label className={styles.ritiroLabel}>Commenti:</label>
-                            <textarea
-                                value={comments}
-                                onChange={handleCommentsChange}
-                                className={styles.comments}
-                            />
-                            <button onClick={handleCreateOrder} className={styles.createOrderButton}>
-                                Crea Ordine
-                            </button>
+                                <label className={styles.ritiroLabel}>Commenti:</label>
+                                <textarea
+                                    value={comments}
+                                    onChange={handleCommentsChange}
+                                    className={styles.comments}
+                                />
+                                <button onClick={handleCreateOrder} className={styles.createOrderButton}>
+                                    Crea Ordine
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )
-            )}
-        </div>
+                    )
+                )}
+            </main>
+            <footer>
+                <Footer />
+            </footer>
+        </div >
     );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,6 +15,22 @@ export default function Header() {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add('menuOpen');
+    } else {
+      document.body.classList.remove('menuOpen');
+    }
+
+    return () => {
+      document.body.classList.remove('menuOpen');
+    };
+  }, [menuOpen]);
 
   return (
     <header className={styles.header}>
@@ -31,28 +47,28 @@ export default function Header() {
       <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
         <ul>
           <li className={styles.desktopOnly}>
-            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link}>Home</Link>
+            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Home</Link>
           </li>
           <li className={styles.desktopOnly}>
-            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
+            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Prodotti</Link>
           </li>
           <li className={styles.desktopOnly}>
-            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
+            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Contatti</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link}>Home</Link>
+            <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Home</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link}>Prodotti</Link>
+            <Link href="/productsCategory" className={path === "/productsCategory" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Prodotti</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
+            <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Contatti</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/login" className={path === "/login" ? `${styles.link} ${styles.active}` : styles.link}>Login</Link>
+            <Link href="/login" className={path === "/login" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Login</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/register" className={path === "/register" ? `${styles.link} ${styles.active}` : styles.link}>Registrati</Link>
+            <Link href="/register" className={path === "/register" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Registrati</Link>
           </li>
         </ul>
       </nav>
