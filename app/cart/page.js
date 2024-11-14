@@ -128,7 +128,8 @@ export default function Cart() {
             });
 
             if (!response.ok) {
-                throw new Error('Errore durante la creazione dell\'ordine. Riprova più tardi.');
+                const errorText = await response.text();
+                throw new Error(errorText);
             }
 
             alert('Ordine creato con successo.');
