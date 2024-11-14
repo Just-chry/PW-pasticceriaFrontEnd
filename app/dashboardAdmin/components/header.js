@@ -67,18 +67,6 @@ export default function Header() {
             <Link href="/contacts"
                   className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
           </li>
-          <li className={styles.desktopOnly}>
-            <Link href="/magazzino"
-                  className={path === "/magazzino" ? `${styles.link} ${styles.active}` : styles.link}>Magazzino</Link>
-          </li>
-          <li className={styles.desktopOnly}>
-            <Link href="/ordiniAdmin"
-                  className={path === "/ordiniAdmin" ? `${styles.link} ${styles.active}` : styles.link}>Ordini</Link>
-          </li>
-          <li className={styles.desktopOnly}>
-            <Link href="/utenti"
-                  className={path === "/utenti" ? `${styles.link} ${styles.active}` : styles.link}>Utenti</Link>
-          </li>
           <li className={styles.mobileOnly}>
             <Link href="/" className={path === "/" ? `${styles.link} ${styles.active}` : styles.link}>Home</Link>
           </li>
@@ -89,14 +77,6 @@ export default function Header() {
           <li className={styles.mobileOnly}>
             <Link href="/contacts"
                   className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link}>Contatti</Link>
-          </li>
-          <li className={styles.mobileOnly}>
-            <Link href="/magazzino"
-                  className={path === "/magazzino" ? `${styles.link} ${styles.active}` : styles.link}>Magazzino</Link>
-          </li>
-          <li className={styles.mobileOnly}>
-            <Link href="/ordiniAdmin"
-                  className={path === "/ordiniAdmin" ? `${styles.link} ${styles.active}` : styles.link}>Ordini</Link>
           </li>
           <li className={styles.mobileOnly}>
             <Link href="/dashboardAdmin"
@@ -111,10 +91,6 @@ export default function Header() {
           <li className={styles.mobileOnly}>
             <Link href="" className={path === "" ? `${styles.link} ${styles.active}` : styles.link}
                   onClick={handleLogout}>Logout</Link>
-          </li>
-          <li className={styles.mobileOnly}>
-            <Link href="/utenti"
-                  className={path === "/utenti" ? `${styles.link} ${styles.active}` : styles.link}>Utenti</Link>
           </li>
         </ul>
       </nav>

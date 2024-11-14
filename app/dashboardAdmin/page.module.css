@@ -1,94 +1,310 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    padding: 24px;
-    background-color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-radius: 16px; 
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    margin: 20px auto; 
-    box-sizing: border-box;
-    transition: transform 0.3s ease-in-out;
-}
-
-.container:hover {
-    transform: translateY(-4px); 
-}
-
-.title {
-    font-size: 2.5rem; 
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: center;
-}
-
-.buttonContainer {
-    display: flex;
-    gap: 20px;
-    margin-top: 24px;
-    justify-content: center;
-}
-
-.button {
-    padding: 12px 32px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-    background: linear-gradient(135deg, #0069d9, #005bb5);
-    border: none;
-    border-radius: 30px; 
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    min-width: 180px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.button:hover {
-    background: linear-gradient(135deg, #005bb5, #004494);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-}
-
-.button:active {
-    background: linear-gradient(135deg, #003a7a, #002c5a);
-    transform: translateY(2px);
-}
-
 .heroContainer {
     position: relative;
     width: 100%;
-    height: 60vh;
+    height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
-    box-shadow: inset 0 0 250px rgba(0, 0, 0, 0.15); 
-}
-
-.heroBackground {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.1));
+  }
+  
+  .heroBackground {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    filter: blur(8px); 
-    opacity: 0.8;
+    filter: blur(8px);
     z-index: -1;
     background-image: url('/images/hero.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    transition: filter 0.3s ease;
+  }
+  
+  .profileContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 400px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.30);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    overflow-y: auto;
+    z-index: 1;
 }
 
-.heroBackground:hover {
-    filter: blur(10px) brightness(0.85);
+.profileSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profileField {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+}
+
+.profileField label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.inputForm {
+    width: 100%;
+    border: 1.5px solid #ecedec;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    transition: 0.2s ease-in-out;
+}
+
+.input {
+    background-color: unset;
+    border: unset;
+    margin-left: 2px;
+    border-radius: 10px;
+    border: none;
+    width: 85%;
+    height: 100%;
+}
+
+.input:focus {
+    border: unset;
+    outline: none;
+}
+
+.input::placeholder {
+    color: #ffffff;
+    font-family: 'Quicksand';
+}
+
+.button {
+    margin: 20px 0 10px 0;
+    background-color: #d5abc2;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.button:hover {
+    font-weight: bold;
+    background-color: #c7c1dc;
+}
+
+
+.showPasswordButton {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: unset;
+    color: #f3bc9f;
+    font-size: 1.5rem;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.dateAndOrders {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 400px);
+    padding: 2rem 5rem;
+    background-color: rgba(255, 255, 255, 0.30);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    height: 200px;
+    gap: 2rem;
+}
+
+.currentDate {
+    font-size: 3rem; 
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    width: 80%;
+}
+
+.ordersDay {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.ordersDay h2 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.dateAndOrders a {
+    text-decoration: none;
+    color: unset;
+}
+
+.dailyOrdersCard:hover {
+    background-color: #005bb5;
+}
+
+.centerSection {
+    height: calc(100% - 200px);
+    width: calc(100% - 400px);
+    transform: translate(200px, 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.logoContainer {
+    margin-bottom: 20px;
+}
+
+.buttonCards {
+    width: 50%;
+    display: flex;
+    gap: 2rem;
+}
+
+.buttonCards a {
+    text-decoration: none;
+    color: unset;
+}
+
+@media (max-width: 1150px) {
+    .dateAndOrders {
+        flex-direction: column;
+        height: 400px;
+    }
+
+    .currentDate {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .ordersDay {
+        width: 100%;
+    }
+
+    .buttonCards {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .centerSection {
+        height: calc(50% - 100px);
+        transform: translate(200px, 200px);
+    }
+}
+
+@media (max-width: 1150px) {
+    .image {
+        width: 400px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 830px) {
+     .heroContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        height: unset;
+        padding: 2rem;
+    }
+
+    .profileContainer {
+        position: static;
+        width: 90%;
+        height: auto;
+        margin-bottom: 20px;
+        border-radius: 2rem;
+    }
+
+    .dateAndOrders {
+        position: static;
+        width: 90%;
+        height: auto;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: none;
+        border-radius: 2rem;
+    }
+
+    .currentDate {
+        font-size: 2rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .ordersDay {
+        width: 100%;
+        text-align: center;
+    }
+
+    .centerSection {
+        width: 90%;
+        height: auto;
+        transform: translate(0, 0);
+        margin-top: 0;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.30);
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+        border-radius: 2rem;
+    }
+
+    .logoContainer {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .buttonCards {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .buttonCards button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 535px) {
+    .image {
+        width: 200px;
+        height: 100px;
+    }
 }
