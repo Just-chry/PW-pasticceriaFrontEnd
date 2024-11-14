@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import format from 'date-fns/format';
+import addMinutes from 'date-fns/addMinutes';
+import getDay from 'date-fns/getDay';
+import isBefore from 'date-fns/isBefore';
 import styles from '@/app/cart/page.module.css';
 
 export default function Cart() {
@@ -66,25 +69,58 @@ export default function Cart() {
     }, [router]);
 
     useEffect(() => {
-        const fetchAvailableTimes = async () => {
-            if (!dataRitiro) return;
+        if (dataRitiro) {
+            const fetchAvailableSlots = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8080/orders/available-slots?date=${dataRitiro}`, {
+                        method: 'GET',
+                        credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                    });
 
-            try {
-                const response = await fetch(`http://localhost:8080/orders/available-times?date=${dataRitiro}`);
-                if (!response.ok) {
-                    throw new Error("Errore durante il recupero degli orari disponibili. Riprova più tardi.");
+                    if (!response.ok) {
+                        throw new Error("Errore durante il recupero degli orari disponibili. Riprova più tardi.");
+                    }
+
+                    // Assumendo che l'API restituisca gli slot in formato "HH:mm"
+                    const availableSlots = await response.json();
+
+                    // Converte ciascun slot in un oggetto Date con la stessa data di dataRitiro
+                    const convertedSlots = availableSlots.map(slot => {
+                        const [hours, minutes] = slot.split(':');
+                        const date = new Date(dataRitiro);
+                        date.setHours(parseInt(hours, 10));
+                        date.setMinutes(parseInt(minutes, 10));
+                        date.setSeconds(0);
+                        date.setMilliseconds(0);
+                        return date;
+                    });
+
+                    setOrariDisponibili(convertedSlots);
+                } catch (error) {
+                    console.error("Errore durante la richiesta:", error);
                 }
-                const times = await response.json();
-                setOrariDisponibili(times.map((time) => new Date(`1970-01-01T${time}:00`)));
-            } catch (error) {
-                console.error('Errore:', error);
-            }
-        };
+            };
 
-        fetchAvailableTimes();
+            fetchAvailableSlots();
+        }
     }, [dataRitiro]);
 
+
+
+
+
     const handleDataChange = (e) => {
+        const selectedDate = new Date(e.target.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (isBefore(selectedDate, today)) {
+            alert("Non puoi selezionare una data precedente a quella odierna.");
+            setDataRitiro("");
+            return;
+        }
+
         setDataRitiro(e.target.value);
         setOrarioRitiro("");
     };
@@ -175,13 +211,8 @@ export default function Cart() {
                         </ul>
                         <div className={styles.orderDetails}>
                             <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
-                            <input
-                                type="date"
-                                value={dataRitiro}
-                                onChange={handleDataChange}
-                                min={new Date().toISOString().split("T")[0]} // Imposta la data minima al giorno corrente
-                                className={styles.ritiroDate}
-                            />
+                            <input type="date" value={dataRitiro} onChange={handleDataChange} className={styles.ritiroDate} min={format(new Date(), 'yyyy-MM-dd')}  />
+
                             {dataRitiro && orariDisponibili.length > 0 ? (
                                 <>
                                     <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
@@ -210,7 +241,6 @@ export default function Cart() {
                                 onChange={handleCommentsChange}
                                 className={styles.comments}
                             />
-
                             <button onClick={handleCreateOrder} className={styles.createOrderButton}>
                                 Crea Ordine
                             </button>
