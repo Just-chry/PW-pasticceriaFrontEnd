@@ -14,6 +14,7 @@ export default function Product() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const checkUserSession = async () => {
@@ -80,7 +81,7 @@ export default function Product() {
         credentials: 'include',
         body: JSON.stringify({
           productId: product.id,
-          quantity: 1,
+          quantity: quantity,
         }),
       });
 
@@ -93,6 +94,18 @@ export default function Product() {
       alert(error.message);
     }
   };
+
+  const handleQuantityChange = (event) => {
+    const value = parseInt(event.target.value, 10);
+    if (value > 0 && value <= product.quantity) {
+      setQuantity(value);
+    } else if (value > product.quantity) {
+      setQuantity(product.quantity);
+    } else {
+      setQuantity(1);
+    }
+  };
+
 
   return (
       <div>
@@ -118,14 +131,19 @@ export default function Product() {
                       <p className={styles.productDescription}><span>Descrizione:</span> {product.description ? product.description : 'Non disponibile'}</p>
                       <p className={styles.productIngredients}><span>Ingredienti:</span> {product.ingredients ? product.ingredients.join(', ') : 'Non disponibili'}</p>
                     </div>
-                    <div className={styles.quantityContainer}>
-                      <button onClick={() => handleQuantityChange(-1)} className={styles.quantityButton}>
-                        -
-                      </button>
-                      <span className={styles.quantityDisplay}>{product.quantity}</span>
-                      <button onClick={() => handleQuantityChange(1)} className={styles.quantityButton}>
-                        +
-                      </button>
+                    <div className={styles.quantityInputContainer}>
+                      <label htmlFor="quantity" className={styles.quantityLabel}>Quantità:</label>
+                      <input
+                          type="number"
+                          id="quantity"
+                          name="quantity"
+                          min="1"
+                          max={product.quantity} // Assicurati che questa sia la quantità disponibile del prodotto
+                          value={quantity}
+                          onChange={handleQuantityChange}
+                          className={styles.quantityInput}
+                      />
+                      <p className={styles.availableQuantity}>Quantità disponibile: {product.quantity}</p>
                     </div>
                   </div>
                   <button onClick={handleAddToCart} className={styles.productButton}>
