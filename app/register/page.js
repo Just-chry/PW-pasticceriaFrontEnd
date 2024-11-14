@@ -61,8 +61,15 @@ export default function Register() {
             }
 
             const data = await response.text();
-            alert(data || "Registrazione completata con successo! Controlla il tuo contatto per confermare.");
-            router.push("/login")
+            alert(data || "Registrazione completata con successo!");
+
+            if (formData.phone && !formData.email) {
+                // Se l'utente ha inserito solo il numero di telefono, reindirizza alla pagina OTP
+                router.push(`/verify?contact=${formData.phone}`);
+            } else {
+                // Altrimenti, reindirizza alla pagina di login
+                router.push("/login");
+            }
         } catch (error) {
             alert(error.message);
         }
