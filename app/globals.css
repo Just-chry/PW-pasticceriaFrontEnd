@@ -19,3 +19,8 @@ body {
 body {
   font-family: 'Raleway', 'Quicksand', sans-serif; 
 }
+
+html.menuOpen,
+body.menuOpen {
+  overflow-y: hidden;
+}
