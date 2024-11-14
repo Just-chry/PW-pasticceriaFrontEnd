@@ -1,186 +1,117 @@
-/* cart.module.css */
-.cartWrapper {
-  font-family: 'Arial', sans-serif;
+/* Styles for the Cart Page */
+
+.cartContainer {
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  max-width: 1200px;
-  background-color: #fef4f4; /* Un rosso pallido */
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-in-out;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cartTitle {
-  font-size: 2.5rem;
   text-align: center;
-  margin-bottom: 30px;
-  color: #c0392b; /* Rosso scuro */
-  font-weight: 700;
-}
-
-.cartContainer {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
 .cartList {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
-  margin: 0;
-  animation: fadeIn 1s ease-in-out;
 }
 
 .cartListItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #f1c6c6; /* Un grigio rosato */
-  transition: background-color 0.3s ease-in-out;
-}
-
-.cartListItem:hover {
-  background-color: #f8d0d0; /* Un colore rosa più chiaro */
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
 }
 
 .cartListItem h3 {
-  font-size: 1.2rem;
-  color: #e74c3c; /* Rosso vivo */
+  font-size: 1.5rem;
   margin: 0;
 }
 
 .cartListItem p {
-  color: #7f8c8d;
   margin: 5px 0;
-}
-
-.deleteButton {
-  padding: 8px 15px;
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.deleteButton:hover {
-  background-color: #c0392b;
 }
 
 .orderDetails {
   margin-top: 30px;
-}
-
-.ritiroLabel {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #c0392b; /* Rosso scuro */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .ritiroDate,
-.ritiroOrario {
+.ritiroTime {
+  display: block;
   width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f7f7f7;
+  padding: 10px;
+  margin-top: 5px;
   margin-bottom: 20px;
-  transition: border-color 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-.ritiroDate:focus,
-.ritiroOrario:focus {
-  border-color: #c0392b; /* Rosso scuro */
-  outline: none;
-}
-
-.commentsTextarea {
+.comments {
   width: 100%;
   height: 100px;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f7f7f7;
+  border-radius: 5px;
   font-size: 1rem;
   margin-bottom: 20px;
-  transition: border-color 0.3s ease;
-}
-
-.commentsTextarea:focus {
-  border-color: #c0392b;
-  outline: none;
 }
 
 .createOrderButton {
   width: 100%;
   padding: 15px;
-  background-color: #e74c3c;
-  color: white;
+  background-color: #ff6347;
+  color: #ffffff;
   font-size: 1.2rem;
+  font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  animation: fadeIn 1.5s ease-in-out;
+  transition: background-color 0.3s;
 }
 
 .createOrderButton:hover {
-  background-color: #c0392b;
+  background-color: #ff7f61;
 }
 
-.createOrderButton:disabled {
-  background-color: #d6a5a5; /* Rosso disabilitato */
-  cursor: not-allowed;
-}
-
-@keyframes fadeIn {
-  0% {
-      opacity: 0;
+@media (min-width: 600px) {
+  .cartContainer {
+    padding: 30px;
   }
-  100% {
-      opacity: 1;
+
+  .orderDetails {
+    padding: 30px;
   }
 }
 
-/* Animazione di transizione per il caricamento */
-@keyframes loading {
-  0% {
-      transform: scale(1);
-  }
-  50% {
-      transform: scale(1.1);
-  }
-  100% {
-      transform: scale(1);
-  }
-}
-
-.loading {
-  font-size: 1.5rem;
-  text-align: center;
-  color: #c0392b; /* Rosso scuro */
-  animation: loading 1s infinite;
-}
-
-/* Modalità errore */
-.error {
-  font-size: 1.2rem;
-  color: #e74c3c; /* Rosso errore */
-  text-align: center;
-}
-
-.storeClosedMessage {
-  font-size: 1.2rem;
-  color: #e74c3c;
-  text-align: center;
+.negocioClosedMessage {
+  color: red;
   font-weight: bold;
   margin-top: 10px;
-  background-color: #f8d0d0; /* Rosa chiaro */
-  padding: 10px;
-  border-radius: 5px;
+}
+
+.ritiroLabel {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+
+.cartItemTitle {
+  font-weight: 600;
+}
+
+.productPrice {
+  font-weight: bold;
+  color: #333;
 }
