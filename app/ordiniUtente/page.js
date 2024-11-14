@@ -100,11 +100,11 @@ export default function OrdiniUtente() {
                 {loading ? (
                     <p>Caricamento in corso...</p>
                 ) : error ? (
-                    <p>{error}</p>
+                    <p className={styles.centerdText}>{error}</p>
                 ) : (
                     <div className={styles.grid}>
                         {orders.length === 0 ? (
-                            <p>Non hai ordini al momento.</p>
+                            <p className={styles.centerdText}>Non hai ordini al momento.</p>
                         ) : (
                             orders.map((order) => (
                                 <OrderCard key={order.id} order={order} onDeleteOrder={handleDeleteOrder} />

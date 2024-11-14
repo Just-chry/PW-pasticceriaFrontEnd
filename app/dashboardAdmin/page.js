@@ -319,10 +319,10 @@ export default function Dashboard() {
                 <div className={styles.dateAndOrders}>
                     <p className={styles.currentDate}>{currentDate}</p>
                     <div className={styles.ordersDay}>
-                        <h2>Scopri gli ordini di oggi: </h2>
+                        <h2>Scopri i ritiri di oggi: </h2>
                         <button className={styles.button}>
-                            <Link href="/ordiniGiornalieri">
-                                <p>Ordini giornalieri</p>
+                            <Link href="/ritiriGiornalieri">
+                                <p>Ritiri giornalieri</p>
                             </Link>
                         </button>
                     </div>

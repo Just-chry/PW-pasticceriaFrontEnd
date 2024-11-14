@@ -1,7 +1,7 @@
 .heroContainer {
   position: relative;
   width: 100%;
-  height: 75vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,15 +24,19 @@
 }
 
 .profileContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 400px;
   padding: 30px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  max-width: 650px;
-  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   gap: 25px;
+  overflow-y: auto;
+  z-index: 1;
 }
 
 .profileSection {
@@ -41,9 +45,19 @@
   gap: 20px;
 }
 
+.profileFieldEmailTel {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+  gap: 1rem;
+}
+
 .profileField {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
@@ -56,43 +70,300 @@
   color: #333;
 }
 
-.fieldWithButton, .editField {
+.inputFormEmailTel {
+  width: 100%;
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2px;
+  transition: 0.2s ease-in-out;
+}
+
+.inputForm {
+  width: 100%;
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 50px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  padding: 2px;
+  transition: 0.2s ease-in-out;
 }
 
-.editField input {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-  transition: border-color 0.3s;
+.input {
+  background-color: unset;
+  border: unset;
+  margin-left: 2px;
+  border-radius: 10px;
+  border: none;
+  width: 85%;
+  height: 100%;
 }
 
-.editField input:focus {
-  border-color: #0070f3;
+.input:focus {
+  border: unset;
   outline: none;
 }
 
-.button {
-  background-color: #0070f3;
-  color: white;
+.input::placeholder {
+  color: #ffffff;
+  font-family: 'Quicksand';
+}
+
+.inputEmailTel {
+  background-color: unset;
+  border: unset;
+  margin-left: 2px;
+  border-radius: 10px;
   border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
+  width: 85%;
+  height: 50%;
+}
+
+.inputEmailTel:focus {
+  border: unset;
+  outline: none;
+}
+
+.inputEmailTel::placeholder {
+  color: #ffffff;
+  font-family: 'Quicksand';
+}
+
+.buttonEmailTel {
+  background-color: #d5abc2;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 100;
+  border-radius: 2rem;
+  height: 50px;
+  width: 100%;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background-color 0.3s, transform 0.1s;
+}
+
+.buttonEmailTel:hover {
+  font-weight: bold;
+  background-color: #c7c1dc;
+}
+
+.button {
+  margin: 20px 0 10px 0;
+  background-color: #d5abc2;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 100;
+  border-radius: 2rem;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
 }
 
 .button:hover {
-  background-color: #005bb5;
-  transform: scale(1.02);
+  font-weight: bold;
+  background-color: #c7c1dc;
 }
 
-.button:active {
-  transform: scale(0.98);
+
+.showPasswordButton {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: unset;
+  color: #f3bc9f;
+  font-size: 1.5rem;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.dateAndOrders {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - 400px);
+  padding: 2rem 5rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  height: 200px;
+  gap: 2rem;
+}
+
+.currentDate {
+  font-size: 3rem; 
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  width: 80%;
+}
+
+.ordersDay {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.ordersDay h2 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.dateAndOrders a {
+  text-decoration: none;
+  color: unset;
+}
+
+.dailyOrdersCard:hover {
+  background-color: #005bb5;
+}
+
+.centerSection {
+  height: calc(100% - 200px);
+  width: calc(100% - 400px);
+  transform: translate(200px, 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.logoContainer {
+  margin-bottom: 20px;
+}
+
+.buttonCards {
+  width: 50%;
+  display: flex;
+  gap: 2rem;
+}
+
+.buttonCards a {
+  text-decoration: none;
+  color: unset;
+}
+
+@media (max-width: 1150px) {
+  .dateAndOrders {
+      flex-direction: column;
+      height: 400px;
+  }
+
+  .currentDate {
+      text-align: center;
+      width: 100%;
+  }
+  
+  .ordersDay {
+      width: 100%;
+  }
+
+  .buttonCards {
+      width: 100%;
+      padding: 2rem;
+  }
+
+  .centerSection {
+      height: calc(50% - 100px);
+      transform: translate(200px, 200px);
+  }
+}
+
+@media (max-width: 1150px) {
+  .image {
+      width: 400px;
+      height: 150px;
+  }
+}
+
+@media (max-width: 830px) {
+   .heroContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      height: unset;
+      padding: 2rem;
+  }
+
+  .profileContainer {
+      position: static;
+      width: 90%;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 2rem;
+  }
+
+  .dateAndOrders {
+      position: static;
+      width: 90%;
+      height: auto;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: none;
+      border-radius: 2rem;
+  }
+
+  .currentDate {
+      font-size: 2rem;
+      text-align: center;
+      width: 100%;
+  }
+
+  .ordersDay {
+      width: 100%;
+      text-align: center;
+  }
+
+  .centerSection {
+      width: 90%;
+      height: auto;
+      transform: translate(0, 0);
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.30);
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+      border-radius: 2rem;
+  }
+
+  .logoContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+  }
+
+  .buttonCards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+  }
+
+  .buttonCards button {
+      width: 100%;
+  }
+}
+
+@media (max-width: 535px) {
+  .image {
+      width: 200px;
+      height: 100px;
+  }
 }

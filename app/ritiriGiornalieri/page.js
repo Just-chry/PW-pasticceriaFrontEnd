@@ -99,14 +99,14 @@ export default function OrdiniGiornalieri() {
         <div>
             <Hero/>
             <main className={styles.main}>
-                <h1 className={styles.title}>Tutti gli Ordini Giornalieri</h1>
+                <h1 className={styles.title}>Tutti i ritiri giornalieri</h1>
 
                 {loading ? (
                     <p>Caricamento in corso...</p>
                 ) : error ? (
                     <p>{error}</p>
                 ) : orders.length === 0 ? (
-                    <p className={styles.centerdText}>Nessun ordine presente!</p>
+                    <p className={styles.centerdText}>Nessun ritiro presente!</p>
                 ) : (
                     <div className={styles.grid}>
                         {orders.map((order) => (
