@@ -1,13 +1,23 @@
 "use client"
-import {useState} from "react";
-import {useRouter} from 'next/navigation';
-import styles from "./page.module.css";
+
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+
 import Footer from "@/components/footer";
+
+import styles from "./page.module.css";
 
 export default function VerifyOTP() {
     const router = useRouter();
     const [otp, setOtp] = useState("");
     const [contact] = useState(new URLSearchParams(window.location.search).get("contact"));
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, []);
 
     const handleOtpChange = (e) => setOtp(e.target.value);
 
@@ -55,6 +65,7 @@ export default function VerifyOTP() {
                             className={styles.input}
                             value={otp}
                             onChange={handleOtpChange}
+                            ref={inputRef}
                             required
                         />
                         <button type="submit" className={styles.button}>Verifica</button>
@@ -62,7 +73,7 @@ export default function VerifyOTP() {
                 </div>
             </div>
             <footer>
-                <Footer/>
+                <Footer />
             </footer>
         </>
     );

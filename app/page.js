@@ -26,11 +26,9 @@ export default function HomePage() {
         <ProductsWall />
         <VieniATrovarci />
       </section>
-
       <footer>
         <Footer />
       </footer>
-
     </main>
   );
 }

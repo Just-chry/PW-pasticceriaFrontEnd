@@ -42,48 +42,8 @@
     margin-bottom: 20px;
 }
 
-.form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.label {
+.paragraph {
+    font-family: 'Quicksand';
     font-size: 16px;
     color: #888;
-    margin-bottom: 5px;
-}
-
-.input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: border-color 0.3s;
-}
-
-.input:focus {
-    border-color: #f3bc9f;
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 84, 241, 0.5);
-}
-
-.button {
-    font-family: 'Quicksand';
-    margin: 20px 0 10px 0;
-    background-color: #d5abc2;
-    border: none;
-    color: white;
-    font-size: 16px;
-    font-weight: 100;
-    border-radius: 2rem;
-    height: 50px;
-    width: 100%;
-    cursor: pointer;
-}
-
-.button:hover {
-    font-weight: bold;
-    background-color: #c7c1dc;
 }
