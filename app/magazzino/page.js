@@ -168,12 +168,17 @@ export default function Prodotti() {
 
     const handleEditProductSave = async () => {
         try {
-            const {product} = editProductModal;
+            const { product } = editProductModal;
+
+            const ingredients =
+                typeof product.ingredients === 'string'
+                    ? product.ingredients.split(",").map(ingredient => ingredient.trim())
+                    : product.ingredients;
 
             const updatedProductData = {
                 ...product,
-                ingredientNames: product.ingredients.split(",").map(ingredient => ingredient.trim()),
-                isVisible: product.isVisible ? 1 : 0
+                ingredientNames: ingredients,
+                isVisible: product.isVisible ? 1 : 0 // Assicurati che venga passato correttamente.
             };
 
             const response = await fetch(`http://localhost:8080/products/${product.id}`, {
@@ -191,12 +196,14 @@ export default function Prodotti() {
 
             await fetchProducts();
 
-            setEditProductModal({isOpen: false, product: null});
+            setEditProductModal({ isOpen: false, product: null });
         } catch (error) {
             console.error('Errore:', error.message);
             alert(`Errore durante la modifica del prodotto: ${error.message}`);
         }
     };
+
+
 
     const handleDeleteProduct = async (id) => {
         const confirmDelete = window.confirm('Sei sicuro di voler eliminare il prodotto?');
@@ -259,22 +266,26 @@ export default function Prodotti() {
 
     const handleVisibilityChange = async (id, isVisible) => {
         try {
+            console.log("Updating visibility for ID:", id, "to:", isVisible);
+            // Call API to update the visibility of the product
             const response = await fetch(`http://localhost:8080/products/${id}`, {
                 method: 'PUT',
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({is_visible: isVisible}), // Cambiato per inviare `is_visible`
+                body: JSON.stringify({ isVisible }), // Send correct boolean value as 1 or 0
             });
 
+            // If response is not ok, throw an error to handle it properly
             if (!response.ok) {
                 throw new Error(`Errore durante l'aggiornamento della visibilità del prodotto con ID ${id}`);
             }
 
+            // Update the product visibility state in the UI only if the request was successful
             setProducts((prevProducts) =>
                 prevProducts.map(product =>
-                    product.id === id ? {...product, isVisible: isVisible} : product
+                    product.id === id ? { ...product, isVisible: isVisible } : product
                 )
             );
 
@@ -283,6 +294,8 @@ export default function Prodotti() {
             alert(`Errore durante l'aggiornamento della visibilità del prodotto: ${error.message}`);
         }
     };
+
+
 
 
     return (
@@ -489,15 +502,6 @@ export default function Prodotti() {
                                 <option value="Bars">Bars</option>
                                 <option value="Cakes">Cakes</option>
                             </select>
-                            <div className={styles.checkboxContainer}>
-                                <input
-                                    type="checkbox"
-                                    checked={Boolean(product.isVisible)}
-                                    onChange={() => onVisibilityChange(product.id, !product.isVisible)}
-                                    className={styles.checkbox}
-                                />
-                                <label>Rendi visibile il prodotto</label>
-                            </div>
                             <input
                                 type="number"
                                 name="quantity"
