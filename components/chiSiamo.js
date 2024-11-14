@@ -13,7 +13,7 @@ export default function ChiSiamo() {
                 <p className={styles.paragraph}>
                     Mi chiamo Giacomo Aceti e sono il titolare di C’est la Vie. La mia pasticceria nasce nel 2015 come laboratorio artigianale in via Garibaldi, 5 a Varese e nel 2020 apro un punto vendita espositivo per la vendita diretta in Via Carlo Croce, 4.
                     Nel laboratorio produciamo tutti i prodotti messi a disposizione del pubblico nella boutique, con una continua ricerca di materie prime di alta qualità e una lavorazione che unisce tradizione e innovazione.
-                    A fare la differenza è anche la location di Via Carlo Croce. Già dall’esterno è possibile ammirare una grande vetrata da cui poter apprezzare i nostri deliziosi prodotti. Una location elegante e raffinata. Una volta entrati vi perderete in meravigliosi profumi e colori capaci di sorprendere ed incuriosire. 
+                    A fare la differenza è anche la location di Via Carlo Croce. Già dall’esterno è possibile ammirare una grande vetrata da cui poter apprezzare i nostri deliziosi prodotti. Una location elegante e raffinata. Una volta entrati vi perderete in meravigliosi profumi e colori capaci di sorprendere ed incuriosire.
                 </p>
             </div>
             <div className={styles.imageContainer}>

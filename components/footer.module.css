@@ -183,9 +183,9 @@
 
     .noTelLink {
         pointer-events: none;
-        user-select: none;  
-        color: inherit;     
-        text-decoration: none; 
+        user-select: none;
+        color: inherit;
+        text-decoration: none;
     }
 
     .imageMobile {

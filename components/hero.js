@@ -1,6 +1,8 @@
 import Image from 'next/image';
-import styles from '@/components/hero.module.css';
+
 import logoImage from '@/public/images/logoPasticceria.png';
+
+import styles from '@/components/hero.module.css';
 
 export default function Hero() {
   return (

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react";
+
 import styles from "@/components/scrollButton.module.css";
 
 export default function ScrollButton() {

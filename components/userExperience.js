@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect } from "react";
-
 import { FaArrowLeft, FaSearch, FaUser, FaConciergeBell, FaShoppingCart, FaStore, FaArrowRight } from "react-icons/fa";
+
 import styles from "@/components/userExperience.module.css";
 
 export default function UserExperience() {

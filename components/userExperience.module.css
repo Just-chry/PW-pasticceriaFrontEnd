@@ -50,7 +50,8 @@
   right: 10px;
 }
 
-.arrowButtonLeft:disabled, .arrowButtonRight:disabled {
+.arrowButtonLeft:disabled,
+.arrowButtonRight:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }

@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .title {
@@ -46,25 +45,8 @@
     transform: scale(1.05);
 }
 
-.ctaButton {
-    font-family: 'Quicksand';
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: #d5abc2;
-    border: none;
-    color: white;
-    border-radius: 2rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.ctaButton:hover {
-    font-weight: bold;
-    background-color: #c7c1dc;
-}
-
 .buttonSubmit {
+    font-family: 'Quicksand';
     margin: 20px 0 10px 0;
     background-color: #d5abc2;
     border: none;
@@ -93,7 +75,8 @@
 
 @media (max-width: 1024px) {
     .wallContainer {
-        grid-template-columns: repeat(2, 1fr);;
+        grid-template-columns: repeat(2, 1fr);
+        ;
         padding: 1rem;
         gap: 1rem;
     }

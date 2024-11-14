@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+
 import styles from '@/components/categoria.module.css';
 
 export default function Categoria({ titolo, immagine, link }) {
