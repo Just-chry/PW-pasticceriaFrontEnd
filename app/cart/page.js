@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import format from 'date-fns/format';
-import addMinutes from 'date-fns/addMinutes';
-import getDay from 'date-fns/getDay';
 import styles from '@/app/cart/page.module.css';
 
 export default function Cart() {
@@ -68,35 +66,22 @@ export default function Cart() {
     }, [router]);
 
     useEffect(() => {
-        if (dataRitiro) {
-            const giornoSelezionato = new Date(dataRitiro);
-            const dayOfWeekSelected = getDay(giornoSelezionato);
-            setDayOfWeek(dayOfWeekSelected);
+        const fetchAvailableTimes = async () => {
+            if (!dataRitiro) return;
 
-            if (dayOfWeekSelected === 1) {
-                setOrariDisponibili([]);
-                return;
+            try {
+                const response = await fetch(`http://localhost:8080/orders/available-times?date=${dataRitiro}`);
+                if (!response.ok) {
+                    throw new Error("Errore durante il recupero degli orari disponibili. Riprova più tardi.");
+                }
+                const times = await response.json();
+                setOrariDisponibili(times.map((time) => new Date(`1970-01-01T${time}:00`)));
+            } catch (error) {
+                console.error('Errore:', error);
             }
+        };
 
-            const orariGenerati = [];
-            let orarioCorrente = new Date(giornoSelezionato.setHours(9, 0, 0, 0));
-            const orarioChiusuraMattina = new Date(giornoSelezionato.setHours(13, 0, 0, 0));
-
-            while (orarioCorrente < orarioChiusuraMattina) {
-                orariGenerati.push(new Date(orarioCorrente));
-                orarioCorrente = addMinutes(orarioCorrente, 10);
-            }
-
-            orarioCorrente = new Date(giornoSelezionato.setHours(15, 0, 0, 0));
-            const orarioChiusuraPomeriggio = new Date(giornoSelezionato.setHours(19, 0, 0, 0));
-
-            while (orarioCorrente < orarioChiusuraPomeriggio) {
-                orariGenerati.push(new Date(orarioCorrente));
-                orarioCorrente = addMinutes(orarioCorrente, 10);
-            }
-
-            setOrariDisponibili(orariGenerati);
-        }
+        fetchAvailableTimes();
     }, [dataRitiro]);
 
     const handleDataChange = (e) => {
@@ -194,9 +179,9 @@ export default function Cart() {
                                 type="date"
                                 value={dataRitiro}
                                 onChange={handleDataChange}
+                                min={new Date().toISOString().split("T")[0]} // Imposta la data minima al giorno corrente
                                 className={styles.ritiroDate}
                             />
-
                             {dataRitiro && orariDisponibili.length > 0 ? (
                                 <>
                                     <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
