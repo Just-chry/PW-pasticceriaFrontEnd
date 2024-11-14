@@ -16,7 +16,7 @@ export default function VerificaEmail() {
 
     useEffect(() => {
         if (token && contact) {
-            fetch(`http://localhost:8080/auth/verify?token=${token}&contact=${contact}`)
+            fetch(`http://localhost:8080/auth/verify?token=${token}&contact=${contact}&type=registration`)
                 .then((response) => {
                     if (!response.ok) {
                         return response.text().then((data) => {
