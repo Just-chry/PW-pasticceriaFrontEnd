@@ -14,7 +14,7 @@ const VerificaEmail = () => {
     useEffect(() => {
         if (token && contact) {
             // Chiamata al backend usando fetch
-            fetch(`http://localhost:8080/auth/verify?token=${token}&contact=${contact}`)
+            fetch(`http://localhost:8080/auth/verify?token=${token}&contact=${contact}&type=registration`)
                 .then((response) => {
                     if (!response.ok) {
                         // Se la risposta non è ok, restituiamo un messaggio di errore

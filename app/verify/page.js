@@ -1,6 +1,7 @@
-"use client"
-import {useState} from "react";
-import {useRouter} from 'next/navigation';
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Footer from "@/components/footer";
 
@@ -8,6 +9,7 @@ export default function VerifyOTP() {
     const router = useRouter();
     const [otp, setOtp] = useState("");
     const [contact] = useState(new URLSearchParams(window.location.search).get("contact"));
+    const [type] = useState(new URLSearchParams(window.location.search).get("type"));
 
     const handleOtpChange = (e) => setOtp(e.target.value);
 
@@ -20,9 +22,10 @@ export default function VerifyOTP() {
         }
 
         const encodedContact = encodeURIComponent(formattedContact);
+        const encodedType = encodeURIComponent(type); // aggiungi questo
 
         try {
-            const response = await fetch(`http://localhost:8080/auth/verify?token=${otp}&contact=${encodedContact}`, {
+            const response = await fetch(`http://localhost:8080/auth/verify?token=${otp}&contact=${encodedContact}&type=${encodedType}`, {
                 method: "GET",
                 credentials: 'include'
             });
@@ -32,12 +35,21 @@ export default function VerifyOTP() {
                 throw new Error(errorData || "Errore nella verifica del codice OTP.");
             }
 
-            alert("Verifica completata con successo! Ora puoi accedere.");
-            router.push("/login");
+            alert("Verifica completata con successo!");
+            if (type === "registration") {
+                router.push("/login");
+            } if (type === "password-reset") {
+                setTimeout(() => {
+                    router.push(`/reset-password?contact=${encodeURIComponent(contact)}&token=${otp}`);
+                }, 500); // Ritardo di 500ms prima del reindirizzamento
+                console.log("OTP Token: ", otp);
+            }
+
         } catch (error) {
             alert(error.message);
         }
     };
+
 
 
     return (
@@ -62,7 +74,7 @@ export default function VerifyOTP() {
                 </div>
             </div>
             <footer>
-                <Footer/>
+                <Footer />
             </footer>
         </>
     );
