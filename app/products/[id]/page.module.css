@@ -3,79 +3,79 @@
     padding: 5rem 3rem 3rem 3rem;
     display: flex;
     gap: 2rem;
-  }
+}
 
-  .productImageWrapper {
+.productImageWrapper {
     width: 50%;
     display: flex;
     justify-content: center;
     margin-bottom: 2.5rem;
-  }
-  
-  .productImage {
+}
+
+.productImage {
     object-fit: cover;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .productDetails {
+.productDetails {
     width: 50%;
     display: flex;
     flex-direction: column;
     padding: 2rem;
     gap: 2rem;
-  }
+}
 
-  .titleAndPrice {
+.titleAndPrice {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-  }
+}
 
-  .productTitle {
+.productTitle {
     font-family: 'Quicksand';
     font-size: 3rem;
     font-weight: bold;
     text-transform: uppercase;
-  }
+}
 
-  .productPrice {
+.productPrice {
     font-family: 'Quicksand';
     font-size: 2rem;
     font-weight: 600;
-  }
+}
 
-  .descriptionAndingredients {
+.descriptionAndingredients {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-  }
+}
 
-  .productDescription span {
+.productDescription span {
     font-family: 'Quicksand';
     font-size: 1.7rem;
     font-weight: 700;
-  }
+}
 
-  .productDescription {
+.productDescription {
     font-family: 'Quicksand';
     font-size: 1.2rem;
     font-weight: 500;
-  }
+}
 
-  .productIngredients span {
+.productIngredients span {
     font-family: 'Quicksand';
     font-size: 1.7rem;
     font-weight: 700;
-  }
+}
 
-  .productIngredients {
+.productIngredients {
     font-family: 'Quicksand';
     font-size: 1.2rem;
     font-weight: 500;
-  }
+}
 
-  .productButton {
+.productButton {
     margin: 20px 0 10px 0;
     background-color: #d5abc2;
     border: none;
@@ -96,9 +96,53 @@
     font-weight: bold;
     background-color: #c7c1dc;
 }
+.quantityInputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.quantityLabel {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.quantityInput {
+    width: 100px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.availableQuantity {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.productButton {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #f3bc9f;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.productButton:hover {
+    background-color: #e3a88e;
+}
+
+.productButton svg {
+    margin-left: 0.5rem;
+}
 
 
-  .centerdText {
+.centerdText {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -107,4 +151,4 @@
     display: flex;
     justify-content: center;
     text-align: center;
-  }
+}
