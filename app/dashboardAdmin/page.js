@@ -89,7 +89,7 @@ export default function Dashboard() {
             const updatedUser = await response.json();
             setUser(updatedUser);
         } catch (error) {
-            console.error('Errore durante il salvataggio:', error);
+            alert(error.message);
         }
     };
 
@@ -109,7 +109,7 @@ export default function Dashboard() {
             const updatedUser = await response.json();
             setUser(updatedUser);
         } catch (error) {
-            console.error('Errore durante il salvataggio:', error);
+            alert(error.message);
         }
     };
 
