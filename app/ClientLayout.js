@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from "react";
-
 import ScrollButton from "@/components/scrollButton";
+import Loading from "@/components/loading";
 
 export default function ClientLayout({ children }) {
     const [Header, setHeader] = useState(null);
@@ -12,6 +12,7 @@ export default function ClientLayout({ children }) {
         email: "",
         role: ""
     });
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -42,11 +43,17 @@ export default function ClientLayout({ children }) {
             } catch (error) {
                 const { default: Header } = await import('@/components/header');
                 setHeader(() => Header);
+            } finally {
+                setLoading(false); 
             }
         };
 
         fetchUserData();
     }, []);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div>

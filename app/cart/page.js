@@ -2,14 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+
 import format from 'date-fns/format';
 import addMinutes from 'date-fns/addMinutes';
 import isBefore from 'date-fns/isBefore';
 import isToday from 'date-fns/isToday';
-import getDay from 'date-fns/getDay'; // Importiamo getDay per determinare il giorno della settimana
-import styles from '@/app/cart/page.module.css';
+import getDay from 'date-fns/getDay'; 
+
 import Hero from '@/components/hero';
+
 import Footer from '@/components/footer';
+
+import styles from '@/app/cart/page.module.css';
 
 export default function Cart() {
     const [cart, setCart] = useState(null);
@@ -19,7 +23,7 @@ export default function Cart() {
     const [orarioRitiro, setOrarioRitiro] = useState("");
     const [orariDisponibili, setOrariDisponibili] = useState([]);
     const [comments, setComments] = useState("");
-    const [dayOfWeek, setDayOfWeek] = useState(null);  // Aggiungiamo lo stato per il giorno della settimana
+    const [dayOfWeek, setDayOfWeek] = useState(null);  
     const router = useRouter();
 
     useEffect(() => {
@@ -71,9 +75,8 @@ export default function Cart() {
         fetchUserData();
     }, [router]);
 
-    // Calcoliamo il giorno della settimana e lo impostiamo nello stato
     useEffect(() => {
-        const currentDay = getDay(new Date()); // Ottieni il giorno della settimana (0 = domenica, 1 = lunedì, ecc.)
+        const currentDay = getDay(new Date());
         setDayOfWeek(currentDay);
     }, []);
 
@@ -107,7 +110,6 @@ export default function Cart() {
                             date.setMilliseconds(0);
                             return date;
                         })
-                        // Filtro degli orari entro un'ora dall'ora attuale solo se la data di ritiro è oggi
                         .filter(slot => !isToday(selectedDate) || isBefore(oneHourFromNow, slot));
 
                     setOrariDisponibili(convertedSlots);
@@ -198,13 +200,13 @@ export default function Cart() {
         <div>
             <Hero />
             <main className={styles.main}>
-                <h1 className={styles.cartTitle}>Il Tuo Carrello</h1>
+                <h1 className={styles.cartTitle}>Il tuo carrello</h1>
                 {loading ? (
-                    <p>Caricamento in corso...</p>
+                    <p className={styles.centerdText}>Caricamento in corso...</p>
                 ) : error ? (
-                    <p>{error}</p>
+                    <p className={styles.centerdText}>{error}</p>
                 ) : (
-                    cart && (
+                    cart && cart.products.length > 0 ? (
                         <div className={styles.cartContainer}>
                             <ul className={styles.cartList}>
                                 {cart.products.map((item) => (
@@ -216,15 +218,21 @@ export default function Cart() {
                                             onClick={() => handleDeleteProduct(item.productId)}
                                             className={styles.deleteButton}
                                         >
-                                            - Rimuovi
+                                            Rimuovi
                                         </button>
                                     </li>
                                 ))}
                             </ul>
                             <div className={styles.orderDetails}>
                                 <label className={styles.ritiroLabel}>Seleziona data di ritiro:</label>
-                                <input type="date" value={dataRitiro} onChange={handleDataChange} className={styles.ritiroDate} min={format(new Date(), 'yyyy-MM-dd')} />
-
+                                <input
+                                    type="date"
+                                    value={dataRitiro}
+                                    onChange={handleDataChange}
+                                    className={styles.ritiroDate}
+                                    min={format(new Date(), 'yyyy-MM-dd')}
+                                />
+    
                                 {dataRitiro && orariDisponibili.length > 0 ? (
                                     <>
                                         <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
@@ -242,11 +250,11 @@ export default function Cart() {
                                         </select>
                                     </>
                                 ) : dayOfWeek === 1 ? (
-                                    <p className={styles.negocioClosedMessage}>
+                                    <p className={styles.negozioClosedMessage}>
                                         Il negozio è chiuso il lunedì. Seleziona un altro giorno.
                                     </p>
                                 ) : null}
-
+    
                                 <label className={styles.ritiroLabel}>Commenti:</label>
                                 <textarea
                                     value={comments}
@@ -258,12 +266,14 @@ export default function Cart() {
                                 </button>
                             </div>
                         </div>
+                    ) : (
+                        <p className={styles.centerdText}>Il tuo carrello è vuoto.</p>
                     )
                 )}
             </main>
             <footer>
                 <Footer />
             </footer>
-        </div >
+        </div>
     );
-}
+}    

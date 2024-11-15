@@ -92,6 +92,8 @@ export default function OrdiniUtente() {
         }
     };
 
+    const filteredOrders = orders.filter(order => order.products.length > 0);
+
 
     return (
         <div>
@@ -105,12 +107,14 @@ export default function OrdiniUtente() {
                     <p className={styles.centerdText}>{error}</p>
                 ) : (
                     <div className={styles.grid}>
-                        {orders.length === 0 ? (
+                        {filteredOrders.length === 0 ? (
                             <p className={styles.centerdText}>Non hai ordini al momento.</p>
                         ) : (
-                            orders.map((order) => (
-                                <OrderCard key={order.id} order={order} onDeleteOrder={handleDeleteOrder} />
-                            ))
+                            orders
+                                .filter(order => order.products.length > 0) 
+                                .map((order) => (
+                                    <OrderCard key={order.id} order={order} onDeleteOrder={handleDeleteOrder} />
+                                ))
                         )}
                     </div>
                 )}

@@ -7,6 +7,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from 'next/link';
 import Image from 'next/image';
 
+import Loading from '@/components/loading';
+
 import Footer from '@/components/footer';
 
 import styles from '@/app/dashboardUtente/page.module.css';
@@ -163,8 +165,9 @@ export default function Dashboard() {
     };
 
     if (!user) {
-        return <p>Caricamento in corso...</p>;
+        return <Loading />;
     }
+
 
     return (
         <>
