@@ -527,8 +527,8 @@ export default function Prodotti() {
                             <div className={styles.checkboxContainer}>
                                 <input
                                     type="checkbox"
-                                    checked={Boolean(product.isVisible)}
-                                    onChange={() => onVisibilityChange(product.id, !product.isVisible)}
+                                    checked={Boolean(newProduct.isVisible)}
+                                    onChange={() => setNewProduct({...newProduct, isVisible: !newProduct.isVisible})}
                                     className={styles.checkbox}
                                 />
                                 <label>Rendi visibile il prodotto</label>
