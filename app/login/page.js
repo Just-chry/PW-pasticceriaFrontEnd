@@ -47,8 +47,8 @@ export default function Login() {
             });
 
             if (!response.ok) {
-                const errorData = await response.text();
-                throw new Error(errorData.message || "Errore, Per accedere verifica il contatto.");
+                const errorMessage = await response.text();
+                throw new Error(errorMessage || "Errore, Per accedere verifica il contatto.");
             }
 
             const userResponse = await fetch('http://localhost:8080/user', {
