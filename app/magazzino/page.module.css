@@ -68,6 +68,7 @@
 }
 
 .productName {
+  font-family: 'Raleway';
   font-size: 1.25rem;
   font-weight: 600;
   color: #333;
@@ -76,18 +77,22 @@
 }
 
 .productPrice span {
+  font-family: 'Raleway';
   font-weight: 800;
 }
 
 .productIngredients span {
+  font-family: 'Raleway';
   font-weight: 800;
 }
 
 .productDescription span {
+  font-family: 'Raleway';
   font-weight: 800;
 }
 
 .productCategory span {
+  font-family: 'Raleway';
   font-weight: 800;
 }
 
@@ -105,6 +110,10 @@
   align-items: center;
   font-size: 16px;
   cursor: pointer;
+}
+
+.checkboxContainer label {
+  margin-bottom: 0.5rem;
 }
 
 .checkbox {
@@ -153,63 +162,51 @@
 .deleteButton {
   background-color: transparent;
   border: none;
-  font-size: 1.2rem;
   cursor: pointer;
-  color: #ff0000;
   position: absolute;
   top: 10px;
   right: 10px;
-  transition: color 0.3s ease;
 }
 
 .deleteButton:hover {
-  color: #cc0000;
+  transform: scale(1.05);
 }
 
 .modifyButton {
   background-color: transparent;
   border: none;
-  font-size: 1.2rem;
   cursor: pointer;
-  color: #ff0000;
   position: absolute;
   top: 10px;
   left: 10px;
-  transition: color 0.3s ease;
 }
 
 .modifyButton:hover {
-  color: #cc0000;
-}
-
-.containerButton p {
-  margin-top: 0.5rem;
-  text-align: center;
+  transform: scale(1.05);
 }
 
 .addButton {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #F3BC9F;
-  color: white;
-  padding: 10px 20px;
-  margin: 20px auto;
+  gap: 1rem;
+  font-family: 'Quicksand';
+  margin: 20px 0 10px 0;
+  padding: 2rem;
+  background-color: #d5abc2;
   border: none;
-  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: 100;
+  border-radius: 2rem;
+  height: 50px;
+  width: 100%;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
 }
 
 .addButton:hover {
+  font-weight: bold;
   background-color: #c7c1dc;
-}
-
-.addButton p {
-  font-family: 'Quicksand';
-  font-weight: 400;
 }
 
 .categoryButtons {
@@ -219,16 +216,51 @@
 }
 
 .categoryButtons button {
-  padding: 10px 15px;
-  background-color: #f3bc9f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Quicksand';
+  margin: 20px 0 10px 0;
+  padding: 2.3rem;
+  background-color: #d5abc2;
   border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 100;
+  border-radius: 2rem;
+  height: 50px;
+  width: 100%;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
 }
 
 .categoryButtons button:hover {
-  background-color: #e89c7d;
+  font-weight: bold;
+  background-color: #c7c1dc;
+}
+
+.activeCategoryButton {
+  font-weight: bold !important;
+  background-color: #c7c1dc !important;
+}
+
+@media (max-width: 1100px) {
+  .categoryButtons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .categoryButtons button {
+    margin: auto;
+    width: 80%;
+  }
+}
+
+@media (max-width: 530px) {
+  .categoryButtons {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
 }
 
 .modal {
@@ -253,6 +285,10 @@
   width: 400px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modalContent h2 {
+  font-family: 'Raleway';
 }
 
 .close {
@@ -283,10 +319,16 @@
   border-color: #F3BC9F;
 }
 
+.input::placeholder {
+  font-family: 'Quicksand';
+}
+
 .submitButton {
+  font-family: 'Quicksand';
   background-color: #F3BC9F; 
   color: white;
-  padding: 10px 15px;
+  margin: 20px 0 10px 0;
+  padding: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -351,6 +393,54 @@
   width: auto;
   height: 60px;
   object-fit: contain;
+}
+
+.hiddenFileInput {
+  display: none;
+}
+
+.fileButton {
+  background-color: #F3BC9F;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.fileButton:hover {
+  background-color: #c7c1dc;
+}
+
+.fileButton p {
+  font-family: 'Quicksand';
+  color: #333;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantityInput {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.availableQuantity {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.quantityInput[type="number"]::-webkit-outer-spin-button,
+.quantityInput[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 

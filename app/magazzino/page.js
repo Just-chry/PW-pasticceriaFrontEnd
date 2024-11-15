@@ -1,7 +1,7 @@
 "use client";
 
-import {useRouter} from "next/navigation";
-import {useEffect, useState} from 'react';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -16,7 +16,7 @@ export default function Prodotti() {
     const [userRole, setUserRole] = useState(null);
     const [products, setProducts] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
-    const [editProductModal, setEditProductModal] = useState({isOpen: false, product: null});
+    const [editProductModal, setEditProductModal] = useState({ isOpen: false, product: null });
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [newProduct, setNewProduct] = useState({
         name: '',
@@ -72,7 +72,7 @@ export default function Prodotti() {
             const data = await response.json();
             const productsWithVisibility = data.map(product => ({
                 ...product,
-                isVisible: product.is_visible
+                isVisible: product.is_visible ? 1 : 0
             }));
             setProducts(productsWithVisibility);
         } catch (error) {
@@ -123,7 +123,7 @@ export default function Prodotti() {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setNewProduct((prevState) => ({...prevState, image: file, previewImage: reader.result}));
+                setNewProduct((prevState) => ({ ...prevState, image: file, previewImage: reader.result }));
             };
             reader.readAsDataURL(file);
         }
@@ -135,6 +135,20 @@ export default function Prodotti() {
 
 
     const handleAddProduct = async () => {
+        if (
+            !newProduct.name ||
+            !newProduct.image ||
+            !newProduct.price ||
+            isNaN(newProduct.price) ||
+            !newProduct.ingredients ||
+            !newProduct.description ||
+            !newProduct.category ||
+            !newProduct.quantity
+        ) {
+            alert('Per favore, compila tutti i campi e inserisci un prezzo valido.');
+            return;
+        }
+
         try {
             if (newProduct.image) {
                 const fileReader = new FileReader();
@@ -162,7 +176,7 @@ export default function Prodotti() {
                     });
 
                     if (!response.ok) {
-                        throw new Error('Errore durante laggiunta del prodotto. Riprova più tardi.');
+                        throw new Error('Errore durante l\'aggiunta del prodotto. Riprova più tardi.');
                     }
 
                     setNewProduct({
@@ -178,25 +192,25 @@ export default function Prodotti() {
                     setIsOpen(false);
 
                     await fetchProductsByCategory(selectedCategory);
-
                 };
 
                 fileReader.readAsDataURL(newProduct.image);
             } else {
-                alert('Seleziona unimmagine per il prodotto.');
+                alert('Seleziona un\'immagine per il prodotto.');
             }
         } catch (error) {
             console.error('Errore:', error.message);
-            alert(`Errore durante laggiunta del prodotto: ${error.message}`);
+            alert(`Errore durante l'aggiunta del prodotto: ${error.message}`);
         }
     };
 
+
     const handleModifyProduct = (product) => {
-        setEditProductModal({isOpen: true, product});
+        setEditProductModal({ isOpen: true, product });
     };
 
     const handleEditProductChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setEditProductModal(prevState => ({
             ...prevState,
             product: {
@@ -208,7 +222,7 @@ export default function Prodotti() {
 
     const handleEditProductSave = async () => {
         try {
-            const {product} = editProductModal;
+            const { product } = editProductModal;
 
             const updatedProductData = {
                 ...product,
@@ -233,7 +247,7 @@ export default function Prodotti() {
 
             await fetchProducts();
 
-            setEditProductModal({isOpen: false, product: null});
+            setEditProductModal({ isOpen: false, product: null });
         } catch (error) {
             console.error('Errore:', error.message);
             alert(`Errore durante la modifica del prodotto: ${error.message}`);
@@ -289,7 +303,7 @@ export default function Prodotti() {
             setProducts((prevProducts) =>
                 prevProducts.map(product =>
                     product.id === id
-                        ? {...product, quantity: product.quantity + increment}
+                        ? { ...product, quantity: product.quantity + increment }
                         : product
                 )
             );
@@ -307,7 +321,7 @@ export default function Prodotti() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ isVisible }), // Send correct boolean value as 1 or 0
+                body: JSON.stringify({ isVisible }),
             });
 
             if (!response.ok) {
@@ -316,7 +330,7 @@ export default function Prodotti() {
 
             setProducts((prevProducts) =>
                 prevProducts.map(product =>
-                    product.id === id ? {...product, isVisible: isVisible} : product
+                    product.id === id ? { ...product, isVisible: isVisible } : product
                 )
             );
 
@@ -326,21 +340,61 @@ export default function Prodotti() {
         }
     };
 
+    const handleNewProductQuantityChange = (increment) => {
+        setNewProduct((prevState) => {
+            const newQuantity = prevState.quantity + increment;
+            return {
+                ...prevState,
+                quantity: newQuantity >= 1 ? newQuantity : 1,
+            };
+        });
+    };
+
+
 
     return (
         <div>
-            <Hero/>
+            <Hero />
             <main className={styles.main}>
                 <h1 className={styles.title}>Il nostro magazzino</h1>
                 <div className={styles.categoryButtons}>
-                    <button onClick={() => handleCategoryChange('All')}>Tutti</button>
-                    <button onClick={() => handleCategoryChange('Macarons')}>Macarons</button>
-                    <button onClick={() => handleCategoryChange('Cookies')}>Cookies</button>
-                    <button onClick={() => handleCategoryChange('Jams')}>Jams</button>
-                    <button onClick={() => handleCategoryChange('Bars')}>Bars</button>
-                    <button onClick={() => handleCategoryChange('Cakes')}>Cakes</button>
+                    <button
+                        onClick={() => handleCategoryChange('All')}
+                        className={`${styles.categoryButton} ${selectedCategory === 'All' ? styles.activeCategoryButton : ''}`}
+                    >
+                        Tutti
+                    </button>
+                    <button
+                        onClick={() => handleCategoryChange('Macarons')}
+                        className={`${styles.categoryButton} ${selectedCategory === 'Macarons' ? styles.activeCategoryButton : ''}`}
+                    >
+                        Macarons
+                    </button>
+                    <button
+                        onClick={() => handleCategoryChange('Cookies')}
+                        className={`${styles.categoryButton} ${selectedCategory === 'Cookies' ? styles.activeCategoryButton : ''}`}
+                    >
+                        Biscotti
+                    </button>
+                    <button
+                        onClick={() => handleCategoryChange('Jams')}
+                        className={`${styles.categoryButton} ${selectedCategory === 'Jams' ? styles.activeCategoryButton : ''}`}
+                    >
+                        Confetture o Marmellate
+                    </button>
+                    <button
+                        onClick={() => handleCategoryChange('Bars')}
+                        className={`${styles.categoryButton} ${selectedCategory === 'Bars' ? styles.activeCategoryButton : ''}`}
+                    >
+                        Tavolette di Cioccolato
+                    </button>
+                    <button
+                        onClick={() => handleCategoryChange('Cakes')}
+                        className={`${styles.categoryButton} ${selectedCategory === 'Cakes' ? styles.activeCategoryButton : ''}`}
+                    >
+                        Torte
+                    </button>
                 </div>
-
 
                 <div className={styles.logoContainer}>
                     <Image
@@ -397,41 +451,56 @@ export default function Prodotti() {
                                 type="text"
                                 placeholder="Nome del Prodotto"
                                 value={newProduct.name}
-                                onChange={(e) => setNewProduct({...newProduct, name: e.target.value})}
+                                onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
                                 className={styles.input}
+                                required
                             />
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                className={styles.fileInput}
-                            />
+                            <div className={styles.fileInputContainer}>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                    className={styles.hiddenFileInput}
+                                    id="fileInput"
+                                />
+                                <button
+                                    onClick={() => document.getElementById('fileInput').click()}
+                                    className={styles.fileButton}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='24' height='24' fill="#000"><path d="M12 15H4v5h16v-5h-8z" fill="#F3BC9F"></path><path d="M20 15c-.55 0-1 .45-1 1v2.5c0 .28-.22.5-.5.5h-13c-.28 0-.5-.22-.5-.5V16c0-.55-.45-1-1-1s-1 .45-1 1v2.5A2.5 2.5 0 0 0 5.5 21h13a2.5 2.5 0 0 0 2.5-2.5V16c0-.55-.45-1-1-1ZM7.71 9.71 11 6.42v9.59c0 .55.45 1 1 1s1-.45 1-1v-9.6l3.29 3.29c.2.2.45.29.71.29s.51-.1.71-.29a1 1 0 0 0 0-1.41l-5-5a1 1 0 0 0-1.41 0l-5 5A1 1 0 1 0 7.71 9.7Z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width='24' height='24' fill="#000"><path d="m3 17 4-4 3.12 3L15 11l6.06 6-1 2H4l-1-2z" fill="#F3BC9F"></path><g><path d="M19.5 4h-15A2.5 2.5 0 0 0 2 6.5v11A2.5 2.5 0 0 0 4.5 20h15a2.5 2.5 0 0 0 2.5-2.5v-11A2.5 2.5 0 0 0 19.5 4Zm-15 2h15c.28 0 .5.22.5.5v8.09l-4.29-4.29a1 1 0 0 0-1.41 0l-4.29 4.29-2.29-2.29a1 1 0 0 0-1.41 0l-2.29 2.29V6.5c0-.28.22-.5.5-.5Zm15 12h-15a.5.5 0 0 1-.5-.5v-.09l3-3 2.29 2.29a1 1 0 0 0 1.41 0l4.29-4.29 5 5v.09a.5.5 0 0 1-.5.5Z"></path><circle cx="9.5" cy="9.5" r="2"></circle></g></svg>
+                                    <p> Carica immagine</p>
+                                </button>
+                            </div>
                             <input
                                 type="text"
                                 placeholder="Prezzo"
                                 value={newProduct.price}
-                                onChange={(e) => setNewProduct({...newProduct, price: e.target.value})}
+                                onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
                                 className={styles.input}
+                                required
                             />
                             <input
                                 type="text"
                                 placeholder="Ingredienti"
                                 value={newProduct.ingredients}
-                                onChange={(e) => setNewProduct({...newProduct, ingredients: e.target.value})}
+                                onChange={(e) => setNewProduct({ ...newProduct, ingredients: e.target.value })}
                                 className={styles.input}
+                                required
                             />
                             <input
                                 type="text"
                                 placeholder="Descrizione"
                                 value={newProduct.description}
-                                onChange={(e) => setNewProduct({...newProduct, description: e.target.value})}
+                                onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
                                 className={styles.input}
+                                required
                             />
-
                             <select
                                 value={newProduct.category}
-                                onChange={(e) => setNewProduct({...newProduct, category: e.target.value})}
+                                onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
                                 className={styles.input}
+                                required
                             >
                                 <option value="">Seleziona una categoria</option>
                                 <option value="Macarons">Macarons</option>
@@ -444,19 +513,32 @@ export default function Prodotti() {
                                 <input
                                     type="checkbox"
                                     checked={Boolean(newProduct.isVisible)}
-                                    onChange={() => setNewProduct({...newProduct, isVisible: !newProduct.isVisible})}
+                                    onChange={() => setNewProduct({ ...newProduct, isVisible: !newProduct.isVisible })}
                                     className={styles.checkbox}
                                 />
                                 <label>Rendi visibile il prodotto</label>
                             </div>
-                            <input
-                                type="number"
-                                placeholder="Quantità"
-                                value={newProduct.quantity}
-                                onChange={(e) => setNewProduct({...newProduct, quantity: parseInt(e.target.value, 10)})}
-                                className={styles.input}
-                            />
-
+                            <label className={styles.labelQuantity}>Quantità:</label>
+                            <div className={styles.quantityControls}>
+                                <button onClick={() => handleNewProductQuantityChange(-1)} className={styles.quantityButton}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#F3BC9F">
+                                        <path d="M20 11H4c-.55 0-1 .45-1 1s.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1Z"></path>
+                                    </svg>
+                                </button>
+                                <input
+                                    type="number"
+                                    placeholder="Quantità"
+                                    value={newProduct.quantity}
+                                    onChange={(e) => setNewProduct({ ...newProduct, quantity: parseInt(e.target.value, 10) })}
+                                    className={styles.quantityInput}
+                                    required
+                                />
+                                <button onClick={() => handleNewProductQuantityChange(1)} className={styles.quantityButton}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="20" height="20" fill="#F3BC9F">
+                                        <path d="M450 210H270V30a30 30 0 1 0-60 0v180H30a30 30 0 1 0 0 60h180v180a30 30 0 1 0 60 0V270h180a30 30 0 1 0 0-60Z"></path>
+                                    </svg>
+                                </button>
+                            </div>
                             {newProduct.previewImage ? (
                                 <Image
                                     src={newProduct.previewImage}
@@ -468,7 +550,6 @@ export default function Prodotti() {
                             ) : (
                                 <p>Seleziona un'immagine per vedere l'anteprima</p>
                             )}
-
                             <button onClick={handleAddProduct} className={styles.submitButton}>
                                 Aggiungi
                             </button>
@@ -480,7 +561,7 @@ export default function Prodotti() {
                     <div className={styles.modal}>
                         <div className={styles.modalContent}>
                             <span className={styles.close}
-                                  onClick={() => setEditProductModal({isOpen: false, product: null})}>
+                                onClick={() => setEditProductModal({ isOpen: false, product: null })}>
                                 &times;
                             </span>
                             <h2>Modifica Prodotto</h2>
@@ -488,7 +569,7 @@ export default function Prodotti() {
                                 <Image
                                     src={editProductModal.product.image}
                                     alt="Immagine del Prodotto"
-                                    width={100}
+                                    width={125}
                                     height={100}
                                     className={styles.imagePreviewImg}
                                 />
@@ -538,14 +619,6 @@ export default function Prodotti() {
                                 <option value="Bars">Bars</option>
                                 <option value="Cakes">Cakes</option>
                             </select>
-                            <input
-                                type="number"
-                                name="quantity"
-                                placeholder="Quantità"
-                                value={editProductModal.product.quantity}
-                                onChange={handleEditProductChange}
-                                className={styles.input}
-                            />
 
                             <button onClick={handleEditProductSave} className={styles.submitButton}>
                                 Salva Modifiche
@@ -555,13 +628,13 @@ export default function Prodotti() {
                 )}
             </main>
             <footer>
-                <Footer/>
+                <Footer />
             </footer>
         </div>
     );
 }
 
-function ProductCard({product, onModify, onDelete, onQuantityChange, onVisibilityChange}) {
+function ProductCard({ product, onModify, onDelete, onQuantityChange, onVisibilityChange }) {
     if (!product) {
         return null;
     }
