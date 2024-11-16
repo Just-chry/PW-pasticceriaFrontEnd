@@ -76,4 +76,38 @@
 .centerdText {
     display: flex;
     justify-content: center;
-  }
+}
+
+.userVerified {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #333; /* Colore del testo principale */
+    margin-bottom: 10px;
+}
+
+.userVerified span {
+    font-weight: bold; /* Evidenzia l'etichetta */
+    margin-right: 5px; /* Spazio tra l'etichetta e il contenuto */
+}
+
+.userVerified button {
+    margin-left: 15px; /* Spazio tra il testo e il pulsante */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745; /* Verde per i pulsanti di verifica */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.userVerified button:hover {
+    background-color: #218838; /* Verde più scuro per l'effetto hover */
+}
+
+.userVerified .verified-icon {
+    margin-left: 10px; /* Spazio tra il testo e l'icona */
+    color: #28a745; /* Colore verde per indicare la verifica */
+}
+
