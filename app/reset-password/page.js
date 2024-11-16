@@ -29,6 +29,12 @@ export default function ResetPassword() {
         setShowPassword((prevState) => !prevState);
     };
 
+    const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
+    const toggleShowPasswordConfirm = () => {
+        setShowPasswordConfirm((prevState) => !prevState);
+    };
+
     const handlePasswordChange = (e) => setPassword(e.target.value);
     const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
 
@@ -92,7 +98,7 @@ export default function ResetPassword() {
                         <label className={styles.label} htmlFor="confirmPassword">Conferma nuova password</label>
                         <div className={styles.inputForm}>
                             <input
-                                type={showPassword ? "text" : "password"}
+                                type={showPasswordConfirm ? "text" : "password"}
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 className={styles.input}
@@ -100,8 +106,8 @@ export default function ResetPassword() {
                                 onChange={handleConfirmPasswordChange}
                                 required
                             />
-                            <button type="button" onClick={toggleShowPassword} className={styles.showPasswordButton}>
-                                {showPassword ? <FaEye /> : <FaEyeSlash />}
+                            <button type="button" onClick={toggleShowPasswordConfirm} className={styles.showPasswordButton}>
+                                {showPasswordConfirm ? <FaEye /> : <FaEyeSlash />}
                             </button>
                         </div>
                         <button type="submit" className={styles.button}>Reset password</button>

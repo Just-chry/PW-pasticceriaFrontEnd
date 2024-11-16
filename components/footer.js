@@ -35,7 +35,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={styles.sectionLab}>
-                    <h3>Orari Laboratorio</h3>
+                    <h3>Orari laboratorio</h3>
                     <div className={styles.hoursContainerLab}>
                         <div className={styles.daysColumnLab}>
                             <p>Lunedì</p>

@@ -82,32 +82,29 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: #333; /* Colore del testo principale */
-    margin-bottom: 10px;
+    color: #333; 
 }
 
 .userVerified span {
-    font-weight: bold; /* Evidenzia l'etichetta */
-    margin-right: 5px; /* Spazio tra l'etichetta e il contenuto */
+    font-family: 'Raleway';
+    font-weight: bold;
+    margin-right: 5px;
 }
 
-.userVerified button {
-    margin-left: 15px; /* Spazio tra il testo e il pulsante */
-    padding: 5px 10px;
+.button {
+    font-family: 'Quicksand';
+    background-color: #d5abc2;
     border: none;
-    border-radius: 5px;
-    background-color: #28a745; /* Verde per i pulsanti di verifica */
-    color: #fff;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    width: 100%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.userVerified button:hover {
-    background-color: #218838; /* Verde più scuro per l'effetto hover */
+.button:hover {
+    font-weight: bold;
+    background-color: #c7c1dc;
 }
-
-.userVerified .verified-icon {
-    margin-left: 10px; /* Spazio tra il testo e l'icona */
-    color: #28a745; /* Colore verde per indicare la verifica */
-}
-

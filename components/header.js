@@ -67,7 +67,7 @@ export default function Header() {
             <Link href="/contacts" className={path === "/contacts" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Contatti</Link>
           </li>
           <li className={styles.mobileOnly}>
-            <Link href="/login" className={path === "/login" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Login</Link>
+            <Link href="/login" className={path === "/login" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Accedi</Link>
           </li>
           <li className={styles.mobileOnly}>
             <Link href="/register" className={path === "/register" ? `${styles.link} ${styles.active}` : styles.link} onClick={closeMenu}>Registrati</Link>
@@ -75,7 +75,7 @@ export default function Header() {
         </ul>
       </nav>
       <div className={`${styles.authButtons} ${menuOpen ? styles.hidden : ''}`}>
-        <button><Link href="/login" className={path === "/login" ? `${styles.link} ${styles.active}` : styles.link}>Login</Link></button>
+        <button><Link href="/login" className={path === "/login" ? `${styles.link} ${styles.active}` : styles.link}>Accedi</Link></button>
         <button><Link href="/register" className={path === "/register" ? `${styles.link} ${styles.active}` : styles.link}>Registrati</Link></button>
       </div>
     </header>

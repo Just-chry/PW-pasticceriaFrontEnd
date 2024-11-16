@@ -104,7 +104,7 @@ export default function Products() {
                 <FaClock className={styles.featureIcon} />
               </div>
               <h3>DATA E ORARIO</h3>
-              <p>Dopo aver selezionato il prodotto, scegli la data e l'orario per il ritiro presso il nostro negozio.</p>
+              <p>Dopo aver riempito il tuo carrello, scegli la data e l'orario per il ritiro presso il nostro negozio.</p>
             </div>
             <div className={styles.feature}>
               <FaHandHoldingUsd className={styles.featureIcon} />

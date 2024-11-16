@@ -7,7 +7,7 @@ import format from 'date-fns/format';
 import addMinutes from 'date-fns/addMinutes';
 import isBefore from 'date-fns/isBefore';
 import isToday from 'date-fns/isToday';
-import getDay from 'date-fns/getDay'; 
+import getDay from 'date-fns/getDay';
 
 import Hero from '@/components/hero';
 
@@ -23,7 +23,7 @@ export default function Cart() {
     const [orarioRitiro, setOrarioRitiro] = useState("");
     const [orariDisponibili, setOrariDisponibili] = useState([]);
     const [comments, setComments] = useState("");
-    const [dayOfWeek, setDayOfWeek] = useState(null);  
+    const [dayOfWeek, setDayOfWeek] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -97,7 +97,7 @@ export default function Cart() {
                     const availableSlots = await response.json();
 
                     const now = new Date();
-                    const oneHourFromNow = addMinutes(now, 60);
+                    const tenMinutesFromNow = addMinutes(now, 10);
                     const selectedDate = new Date(dataRitiro);
 
                     const convertedSlots = availableSlots
@@ -110,7 +110,7 @@ export default function Cart() {
                             date.setMilliseconds(0);
                             return date;
                         })
-                        .filter(slot => !isToday(selectedDate) || isBefore(oneHourFromNow, slot));
+                        .filter(slot => !isToday(selectedDate) || isBefore(tenMinutesFromNow, slot));
 
                     setOrariDisponibili(convertedSlots);
                 } catch (error) {
@@ -232,7 +232,7 @@ export default function Cart() {
                                     className={styles.ritiroDate}
                                     min={format(new Date(), 'yyyy-MM-dd')}
                                 />
-    
+
                                 {dataRitiro && orariDisponibili.length > 0 ? (
                                     <>
                                         <label className={styles.ritiroLabel}>Seleziona orario di ritiro:</label>
@@ -254,7 +254,7 @@ export default function Cart() {
                                         Il negozio è chiuso il lunedì. Seleziona un altro giorno.
                                     </p>
                                 ) : null}
-    
+
                                 <label className={styles.ritiroLabel}>Commenti:</label>
                                 <textarea
                                     value={comments}
@@ -267,7 +267,11 @@ export default function Cart() {
                             </div>
                         </div>
                     ) : (
-                        <p className={styles.centerdText}>Il tuo carrello è vuoto.</p>
+                        <p className={styles.centerdText}>Il tuo carrello è vuoto.
+                            <a href='productsCategory'>
+                                <button className={styles.buttonSubmit}>Inizia a riempire</button>
+                            </a>
+                        </p>
                     )
                 )}
             </main>

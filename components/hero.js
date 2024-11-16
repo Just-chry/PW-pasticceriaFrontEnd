@@ -5,6 +5,7 @@ import logoImage from '@/public/images/logoPasticceria.png';
 import styles from '@/components/hero.module.css';
 
 export default function Hero() {
+
   return (
     <div className={styles.heroContainer}>
       <div className={styles.heroBackground}>

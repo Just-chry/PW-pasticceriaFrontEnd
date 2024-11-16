@@ -190,5 +190,27 @@
 
 .centerdText {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.buttonSubmit {
+  font-family: 'Quicksand';
+    margin: 20px 0 10px 0;
+    background-color: #d5abc2;
+    border: none;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 100;
+    border-radius: 2rem;
+    height: 50px;
+    cursor: pointer;
+}
+
+.buttonSubmit:hover {
+    font-weight: bold;
+    background-color: #c7c1dc;
 }

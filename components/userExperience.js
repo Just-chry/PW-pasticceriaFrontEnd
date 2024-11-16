@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect } from "react";
-import { FaArrowLeft, FaSearch, FaUser, FaConciergeBell, FaShoppingCart, FaStore, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaSearch, FaUser, FaShoppingCart, FaStore, FaArrowRight } from "react-icons/fa";
+import { GiCupcake } from "react-icons/gi";
 
 import styles from "@/components/userExperience.module.css";
 
@@ -48,11 +49,11 @@ export default function UserExperience() {
       </div>
       <div className={styles.step}>
         <FaUser className={styles.icon} />
-        <p className={styles.stepText}>Effettua la login/registrazione</p>
+        <p className={styles.stepText}>Effettua l'accesso o la registrazione</p>
       </div>
       <div className={styles.step}>
-        <FaConciergeBell className={styles.icon} />
-        <p className={styles.stepText}>Scegli il servizio</p>
+        <GiCupcake  className={styles.icon} />
+        <p className={styles.stepText}>Scegli il prodotto</p>
       </div>
       <div className={styles.step}>
         <FaShoppingCart className={styles.icon} />

@@ -22,6 +22,12 @@
   background-attachment: fixed;
 }
 
+@supports (-webkit-touch-callout: none) {
+  .heroBackground {
+    background-attachment: scroll; 
+  }
+}
+
 .logoContainer {
   z-index: 1;
   text-align: center;
@@ -31,8 +37,3 @@
   width: 300px;
   height: auto;
 }
-
-/* @media (max-width: 768px) {
-  .heroBackground {
-  }
-} */

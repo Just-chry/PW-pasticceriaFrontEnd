@@ -133,33 +133,25 @@ function UserCard({ user, onVerificationSuccess }) {
             <div className={styles.containerDetails}>
                 <h2 className={styles.userName}>{user.name} {user.surname}</h2>
 
-                {/* Mostra il campo email se presente */}
                 {user.email && (
                     <>
                         <p className={styles.userEmail}><span>Email:</span> {user.email}</p>
                         <p className={styles.userVerified}>
                             <span>Email Verificata:</span> {user.emailVerified ? 'Sì' : 'No'}
                             {!user.emailVerified && (
-                                <button onClick={() => handleVerify('email')}>Verifica</button>
-                            )}
-                            {user.emailVerified && (
-                                <i className="verified-icon">✔️</i>
+                                <button className={styles.button} onClick={() => handleVerify('email')}>Verifica</button>
                             )}
                         </p>
                     </>
                 )}
 
-                {/* Mostra il campo telefono se presente */}
                 {user.phone && (
                     <>
                         <p className={styles.userPhone}><span>Telefono:</span> {user.phone}</p>
                         <p className={styles.userVerified}>
                             <span>Telefono Verificato:</span> {user.phoneVerified ? 'Sì' : 'No'}
                             {!user.phoneVerified && (
-                                <button onClick={() => handleVerify('phone')}>Verifica</button>
-                            )}
-                            {user.phoneVerified && (
-                                <i className="verified-icon">✔️</i>
+                                <button className={styles.button} onClick={() => handleVerify('phone')}>Verifica</button>
                             )}
                         </p>
                     </>
